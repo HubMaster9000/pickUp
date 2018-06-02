@@ -28,6 +28,8 @@ public class Login extends AppCompatActivity {
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                    // Toasts if email isn't entered
                     if (emailString == null) {
 
                         Context context = getApplicationContext();
@@ -38,6 +40,7 @@ public class Login extends AppCompatActivity {
                         toast.show();
                         return;
                     }
+                    // Toasts if password isn't entered
                     if (passwordString == null) {
 
                         Context context = getApplicationContext();
