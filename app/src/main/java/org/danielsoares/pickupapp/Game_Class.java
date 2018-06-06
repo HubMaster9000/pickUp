@@ -3,31 +3,39 @@ package org.danielsoares.pickupapp;
 import android.location.Location;
 
 import java.util.Calendar;
-import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class Game_Class implements Comparable<Game_Class> {
     private String sport;
     private String host;
-    private Location location;    // Change class later
-    private Calendar startTime;      // Change class later
-    private Calendar endTime;        // Change class later
-    private Queue<Player_Class> players;
-
+    private Location location;
+    private Calendar startTime;
+    private Calendar endTime;
+    private Queue<Player_Class> players;     // infinite list of people in/coming to the game
+    private int maxSize;                     // Game could be set to unlimited size, then set this
+                                             // to Integer_Max
     // Initialize class
     public Game_Class(String sportPlay, String hostStart, Location gameLocation,
-                      Calendar timebegin, Calendar timeEnd) {
+                      Calendar timebegin, Calendar timeEnd, int max) {
         sport = sportPlay;
         host = hostStart;
         location = gameLocation;
         startTime = timebegin;
         endTime = timeEnd;
+        players = new LinkedList<Player_Class>();
+        maxSize = max;
     }
 
     // Add a player to the game
-    public void add(Player_Class player) {
-        players.add(player);
-        return;
+    // returns True if below max capcity, False otherwise
+    public boolean add(Player_Class player) {
+        // If below the maximum size
+        if (size() < maxSize) {
+            players.add(player);
+            return true;
+        }
+        else return false;
     }
 
     // Current number of people playing
@@ -39,6 +47,7 @@ public class Game_Class implements Comparable<Game_Class> {
     public Location location() {
         return location;
     }
+
     // List of all players playing
     public Iterable<Player_Class> players() {
         return players;
@@ -62,7 +71,9 @@ public class Game_Class implements Comparable<Game_Class> {
         return endTime;
     }
 
+    // Allows us to sort by starting time
+    // When sorted, games ALWAYS sort by starting time
     public int compareTo(Game_Class game) {
-        return compareTo(startTime(), game.startTime());
+        return startTime.compareTo(game.startTime());
     }
 }

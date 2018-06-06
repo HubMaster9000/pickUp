@@ -24,37 +24,38 @@ public class Login extends AppCompatActivity {
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
 
-        // Turns entry into strings
-        final String emailString = email.getText().toString();
-        final String passwordString = password.getText().toString();
-
         // When button is clicked
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                    // Toasts if email isn't entered
-                    if (emailString == null) {
+                // Turns entry into strings
+                final String emailString = email.getText().toString();
+                final String passwordString = password.getText().toString();
 
-                        Context context = getApplicationContext();
-                        CharSequence text = "Please Enter Email First";
-                        int duration = Toast.LENGTH_LONG;
+                // Toasts if email isn't entered
+                if (emailString == null) {
 
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                        return;
-                    }
+                    Context context = getApplicationContext();
+                    CharSequence text = "Please Enter Email";
+                    int duration = Toast.LENGTH_SHORT;
 
-                    // Toasts if password isn't entered
-                    if (passwordString == null) {
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
 
-                        Context context = getApplicationContext();
-                        CharSequence text = "Please Enter Password First";
-                        int duration = Toast.LENGTH_LONG;
+                // Toasts if password isn't entered
+                if (passwordString == null) {
 
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                        return;
-                    }
+                    Context context = getApplicationContext();
+                    CharSequence text = "Please Enter Password";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    return;
+                }
+
                 // Log in. Go to another activity and sends info to server
 
             }
