@@ -5,4 +5,8 @@
     <string name="login">Login</string>
     <string name="please_login">Please Login</string>
     <string name="title_activity_home">Home</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="google_login">Login with Google</string>
+    <string name="no_account">Don\'t have an account?</string>
 </resources>

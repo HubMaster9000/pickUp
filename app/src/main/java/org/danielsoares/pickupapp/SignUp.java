@@ -13,7 +13,7 @@ public class Login extends AppCompatActivity {
     private Button loginButton;
     private EditText email;
     private EditText password;
-    private EditText googleLoginButton;
+    private EditText confirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,8 @@ public class Login extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.loginButton);
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
-        googleLoginButton = (EditText) findViewById(R.id.googleLoginButton);
+        confirmPassword = (EditText) findViewById(R.id.confirmPassword);
+
 
         // When button is clicked
         loginButton.setOnClickListener(new View.OnClickListener() {
