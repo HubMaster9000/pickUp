@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">PickUpApp</string>
     <string name="email">Email</string>
-    <string name="enter_email_here">Enter Email Here</string>
     <string name="password">Password</string>
-    <string name="enter_password_here">Enter Password here</string>
     <string name="login">Login</string>
     <string name="please_login">Please Login</string>
     <string name="title_activity_home">Home</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="google_login">Login with Google</string>
+    <string name="no_account">Don\'t have an account?</string>
 </resources>
