@@ -42,7 +42,7 @@ public class Login extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
-        googleLoginButton = (EditText) findViewById(R.id.googleLoginButton);
+        googleLoginButton = (SignInButton) findViewById(R.id.googleLoginButton);
 
         // Google Login Magic
         // Configure sign-in to request the user's ID, email address, and basic
@@ -54,7 +54,7 @@ public class Login extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         // Initialize login button
-        googleLoginButton = findViewById(R.id.googleLoginButton).setOnClickListener(this);
+        findViewById(R.id.googleLoginButton).setOnClickListener(this);
     }
 
     @Override
