@@ -15,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
@@ -25,7 +26,7 @@ public class Login extends AppCompatActivity {
     private Button loginButton;
     private EditText email;
     private EditText password;
-    private EditText googleLoginButton;
+    private SignInButton googleLoginButton;
 
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInClient mGoogleSignInClient;
@@ -38,6 +39,7 @@ public class Login extends AppCompatActivity {
 
         // Initializes Button and input texts
         loginButton = (Button) findViewById(R.id.loginButton);
+
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
         googleLoginButton = (EditText) findViewById(R.id.googleLoginButton);
@@ -50,6 +52,9 @@ public class Login extends AppCompatActivity {
                 .build();
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        // Initialize login button
+        googleLoginButton = findViewById(R.id.googleLoginButton).setOnClickListener(this);
     }
 
     @Override
