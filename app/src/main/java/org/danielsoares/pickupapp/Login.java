@@ -26,7 +26,7 @@ public class Login extends AppCompatActivity {
     private Button loginButton;
     private EditText email;
     private EditText password;
-    private SignInButton googleLoginButton;
+    private SignInButton googleSignInButton;
 
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInClient mGoogleSignInClient;
@@ -39,10 +39,13 @@ public class Login extends AppCompatActivity {
 
         // Initializes Button and input texts
         loginButton = (Button) findViewById(R.id.loginButton);
-
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // ADD LOGIN STUFF HERE. THE STUFF THAT HAPPENS WHEN LOGIN BUTTON IS PUSHED
+            }
+        });
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
-        googleLoginButton = (SignInButton) findViewById(R.id.googleLoginButton);
 
         // Google Login Magic
         // Configure sign-in to request the user's ID, email address, and basic
@@ -54,7 +57,7 @@ public class Login extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         // Initialize login button
-        findViewById(R.id.googleLoginButton).setOnClickListener(this);
+        findViewById(R.id.googleLoginButton).setOnClickListener(View.OnClickListener);
     }
 
     @Override
