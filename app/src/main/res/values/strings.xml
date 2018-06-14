@@ -9,4 +9,5 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="google_login">Login with Google</string>
     <string name="no_account">Don\'t have an account?</string>
+    <string name="title_activity_loading_screen">LoadingScreen</string>
 </resources>
