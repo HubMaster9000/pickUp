@@ -57,7 +57,7 @@ public class Login extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         // Initialize login button
-        findViewById(R.id.googleLoginButton).setOnClickListener(View.OnClickListener);
+        findViewById(R.id.googleLoginButton).setOnClickListener(this);
     }
 
     @Override
