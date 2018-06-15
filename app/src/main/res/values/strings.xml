@@ -12,20 +12,23 @@
     <string name="title_activity_loading_screen">LoadingScreen</string>
     <string name="title_activity_available__games">Available_Games</string>
     <string-array name="all_sports">
+        <item>Filter by Sport</item>
         <item>Soccer</item>
         <item>Football</item>
         <item>Ultimate Frisbee</item>
         <item>Basketball</item>
-        <item>Lacross</item>
+        <item>Lacrosse</item>
         <item>Volleyball</item>
     </string-array>
     <string-array name="all_distances">
+        <item>Filter by Distance</item>
         <item>0 - 1 miles</item>
         <item>1 - 3 miles</item>
         <item>3 - 10 miles</item>
         <item>10+ miles</item>
     </string-array>
     <string-array name="all_sizes">
+        <item>Filter by Game Size</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
