@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Context;
 import android.view.View;
@@ -31,7 +32,7 @@ public class Login extends AppCompatActivity {
 
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInClient mGoogleSignInClient;
-    private EditText signUp;
+    private TextView signUp;
 
 
     @Override
@@ -40,15 +41,15 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // Initializes Button and input texts
-        loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // ADD LOGIN STUFF HERE. THE STUFF THAT HAPPENS WHEN LOGIN BUTTON IS PUSHED
             }
         });
-        email = (EditText) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
-        signUp = (EditText) findViewById(R.id.signUp);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        signUp = findViewById(R.id.signUp);
 
         // Google Login Magic
         // Configure sign-in to request the user's ID, email address, and basic
@@ -61,6 +62,17 @@ public class Login extends AppCompatActivity {
 
         // Initialize login button
         // findViewById(R.id.googleLoginButton).setOnClickListener(this);
+
+        // Directs you to Sign Up page
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerIntent = new Intent(Login.this, SignUp.class);
+                Login.this.startActivity(registerIntent);
+            }
+
+        });
+
     }
 
     @Override
@@ -110,14 +122,6 @@ public class Login extends AppCompatActivity {
 
                 // Log in. Go to another activity and sends info to server
 
-                signUp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent signUpIntent = new Intent(Login.this, SignUp.class);
-                        Login.this.startActivity(signUpIntent);
-                    }
-
-                    });
 
             }
         });
