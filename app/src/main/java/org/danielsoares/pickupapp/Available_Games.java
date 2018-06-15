@@ -69,8 +69,6 @@ public class Available_Games extends AppCompatActivity implements AdapterView.On
     // Implements filters for spinners
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        /* Use the following switch-statement if you want to keep all spinner actions/callbacks together */
-        /* The same can be done to the onNothingSelected callback */
         switch(parent.getId()) {
             case R.id.sport_list:
                 // Do stuff for sport drop down menu...Filter Stuff
