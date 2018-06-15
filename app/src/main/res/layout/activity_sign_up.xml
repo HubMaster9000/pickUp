@@ -61,7 +61,7 @@
 
     <!-- Login Button -->
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/signUpButton"
         android:layout_width="213dp"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"

@@ -10,7 +10,7 @@ import android.view.View;
 
 public class SignUp extends AppCompatActivity {
 
-    private Button loginButton;
+    private Button signUpButton;
     private EditText email;
     private EditText password;
     private EditText confirmPassword;
@@ -20,49 +20,12 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initializes Button and input texts
-        loginButton = (Button) findViewById(R.id.loginButton);
+        // Initializes Button and input text variables
+        signUpButton = (Button) findViewById(R.id.signUpButton);
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
         confirmPassword = (EditText) findViewById(R.id.confirmPassword);
-
-
-        // When button is clicked
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                // Turns entry into strings
-                final String emailString = email.getText().toString();
-                final String passwordString = password.getText().toString();
-
-                // Toasts if email isn't entered
-                if (emailString == null) {
-
-                    Context context = getApplicationContext();
-                    CharSequence text = "Please Enter Email";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    return;
-                }
-
-                // Toasts if password isn't entered
-                if (passwordString == null) {
-
-                    Context context = getApplicationContext();
-                    CharSequence text = "Please Enter Password";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    return;
-                }
-
-                // Log in. Go to another activity and sends info to server
-
-            }
-        });
+        signUpButton = (Button) findViewById(R.id.signUpButton);
 
     }
 }

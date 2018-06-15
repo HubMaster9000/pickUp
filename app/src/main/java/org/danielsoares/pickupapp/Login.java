@@ -48,6 +48,7 @@ public class Login extends AppCompatActivity implements OnClickListener {
 
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInClient mGoogleSignInClient;
+    private EditText signUp;
 
 
     @Override
@@ -64,6 +65,7 @@ public class Login extends AppCompatActivity implements OnClickListener {
         });
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
+        signUp = (EditText) findViewById(R.id.signUp);
 
         // Google Login Magic
         // Configure sign-in to request the user's ID, email address, and basic
