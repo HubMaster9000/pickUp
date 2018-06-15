@@ -23,7 +23,25 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
-public class Login extends AppCompatActivity {
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+
+public class Login extends AppCompatActivity implements OnClickListener {
 
     private Button loginButton;
     private EditText email;
@@ -42,11 +60,6 @@ public class Login extends AppCompatActivity {
 
         // Initializes Button and input texts
         loginButton = findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // ADD LOGIN STUFF HERE. THE STUFF THAT HAPPENS WHEN LOGIN BUTTON IS PUSHED
-            }
-        });
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         signUp = findViewById(R.id.signUp);
@@ -125,5 +138,10 @@ public class Login extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        // Add what happens when google thingy is clicked
     }
 }
