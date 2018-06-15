@@ -1,5 +1,6 @@
 package org.danielsoares.pickupapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -59,7 +60,7 @@ public class Login extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         // Initialize login button
-        findViewById(R.id.googleLoginButton).setOnClickListener(this);
+        // findViewById(R.id.googleLoginButton).setOnClickListener(this);
     }
 
     @Override
@@ -67,8 +68,8 @@ public class Login extends AppCompatActivity {
         super.onStart();
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        updateUI(account);
+        //nGoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        // updateUI(account);
     }
 
     @Override
@@ -108,6 +109,15 @@ public class Login extends AppCompatActivity {
                 }
 
                 // Log in. Go to another activity and sends info to server
+
+                signUp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent signUpIntent = new Intent(Login.this, SignUp.class);
+                        Login.this.startActivity(signUpIntent);
+                    }
+
+                    });
 
             }
         });
