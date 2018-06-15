@@ -8,16 +8,5 @@
     tools:context=".Available_Games"
     tools:showIn="@layout/activity_available__games">
 
-    <Spinner
-        android:id="@+id/sport_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></Spinner>
-    <Spinner
-        android:id="@+id/distance_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></Spinner>
-    <Spinner
-        android:id="@+id/size_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></Spinner>
+
 </LinearLayout>
