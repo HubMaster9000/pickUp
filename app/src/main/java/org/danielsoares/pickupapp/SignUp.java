@@ -14,6 +14,7 @@ public class SignUp extends AppCompatActivity {
     private EditText email;
     private EditText password;
     private EditText confirmPassword;
+    private TextView login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,17 @@ public class SignUp extends AppCompatActivity {
         password = findViewById(R.id.password);
         confirmPassword = findViewById(R.id.confirmPassword);
         signUpButton = findViewById(R.id.signUpButton);
+        login = findViewById(R.id.login);
+
+        // Directs you to login page
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginIntent = new Intent(SignUp.this, Login.class);
+                SignUp.this.startActivity(loginIntent);
+            }
+
+        });
 
         }
 

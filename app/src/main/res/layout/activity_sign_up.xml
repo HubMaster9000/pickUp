@@ -71,4 +71,35 @@
         android:text="@string/sign_up"
         android:textColor="@android:color/background_light" />
 
+    <!-- Back to Login Page -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:gravity="bottom|center"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="85dp"
+            android:text="@string/already_have_account"
+            android:textColor="@android:color/holo_blue_bright"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="97dp"
+            android:text="@string/login"
+            android:textColor="#bef183"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
 </RelativeLayout>
