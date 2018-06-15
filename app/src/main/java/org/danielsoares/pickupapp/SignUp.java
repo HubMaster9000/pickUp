@@ -27,5 +27,7 @@ public class SignUp extends AppCompatActivity {
         confirmPassword = (EditText) findViewById(R.id.confirmPassword);
         signUpButton = (Button) findViewById(R.id.signUpButton);
 
-    }
+        }
+
+
 }

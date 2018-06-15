@@ -1,5 +1,6 @@
 package org.danielsoares.pickupapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -58,11 +59,6 @@ public class Login extends AppCompatActivity implements OnClickListener {
 
         // Initializes Button and input texts
         loginButton = (Button) findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // ADD LOGIN STUFF HERE. THE STUFF THAT HAPPENS WHEN LOGIN BUTTON IS PUSHED
-            }
-        });
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
         signUp = (EditText) findViewById(R.id.signUp);
@@ -77,7 +73,7 @@ public class Login extends AppCompatActivity implements OnClickListener {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         // Initialize login button
-        findViewById(R.id.googleLoginButton).setOnClickListener(this);
+        // findViewById(R.id.googleLoginButton).setOnClickListener(this);
     }
 
     @Override
@@ -85,7 +81,7 @@ public class Login extends AppCompatActivity implements OnClickListener {
         super.onStart();
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
-        // GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        //nGoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         // updateUI(account);
     }
 
@@ -126,6 +122,15 @@ public class Login extends AppCompatActivity implements OnClickListener {
                 }
 
                 // Log in. Go to another activity and sends info to server
+
+                signUp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent signUpIntent = new Intent(Login.this, SignUp.class);
+                        Login.this.startActivity(signUpIntent);
+                    }
+
+                    });
 
             }
         });
