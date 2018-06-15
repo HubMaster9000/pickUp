@@ -1,11 +1,11 @@
 package org.danielsoares.pickupapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-import android.content.Context;
+import android.widget.TextView;
 import android.view.View;
 
 public class SignUp extends AppCompatActivity {
@@ -14,18 +14,30 @@ public class SignUp extends AppCompatActivity {
     private EditText email;
     private EditText password;
     private EditText confirmPassword;
+    private TextView login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
 
         // Initializes Button and input text variables
-        signUpButton = (Button) findViewById(R.id.signUpButton);
-        email = (EditText) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
-        confirmPassword = (EditText) findViewById(R.id.confirmPassword);
-        signUpButton = (Button) findViewById(R.id.signUpButton);
+        signUpButton = findViewById(R.id.signUpButton);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        confirmPassword = findViewById(R.id.confirmPassword);
+        signUpButton = findViewById(R.id.signUpButton);
+        login = findViewById(R.id.login);
+
+        // Directs you to login page
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginIntent = new Intent(SignUp.this, Login.class);
+                SignUp.this.startActivity(loginIntent);
+            }
+
+        });
 
         }
 

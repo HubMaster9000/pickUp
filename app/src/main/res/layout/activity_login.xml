@@ -70,7 +70,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:gravity="bottom|center">
+        android:gravity="bottom|center"
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:layout_width="wrap_content"

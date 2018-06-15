@@ -22,11 +22,6 @@
         <activity android:name=".SignUp" />
         <activity android:name=".Home" />
         <activity
-            android:name=".LoadingScreen"
-            android:label="@string/title_activity_loading_screen"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".TestHomeActivity" />
-        <activity
             android:name=".Available_Games"
             android:label="@string/title_activity_available__games"
             android:theme="@style/AppTheme.NoActionBar"></activity>
