@@ -24,7 +24,11 @@
         <activity
             android:name=".Available_Games"
             android:label="@string/title_activity_available__games"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".profile_page"
+            android:label="@string/title_activity_profile_page"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

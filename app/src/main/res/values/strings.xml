@@ -42,4 +42,5 @@
         <item>10+</item>
     </string-array>
     <string name="already_have_account">Already have an account?</string>
+    <string name="title_activity_profile_page">profile_page</string>
 </resources>
