@@ -79,33 +79,23 @@
             android:layout_marginBottom="117dp" />
 
         <!-- Sign Up Link -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:gravity="bottom|center"
-            android:layout_marginBottom="5dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="85dp"
-                android:text="@string/no_account"
-                android:textColor="@android:color/holo_blue_bright"
-                android:textSize="13sp" />
+            android:layout_marginStart="85dp"
+            android:text="@string/no_account"
+            android:textColor="@android:color/holo_blue_bright"
+            android:textSize="13sp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/textViewLinkRegister"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:gravity="center"
                 android:text="@string/sign_up"
                 android:textSize="16dp" />
-        </RelativeLayout>
 
 
     </LinearLayout>

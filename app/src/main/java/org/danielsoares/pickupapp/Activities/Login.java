@@ -9,10 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -24,34 +21,56 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-public class Login extends AppCompatActivity implements OnClickListener {
 
-    private Button loginButton;
-    private EditText email;
-    private EditText password;
-    private SignInButton googleSignInButton;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatTextView;
+import android.util.Log;
+import android.view.View;
 
+import com.androidtutorialshub.loginregister.R;
+import com.androidtutorialshub.loginregister.helpers.InputValidation;
+import com.androidtutorialshub.loginregister.sql.DatabaseHelper;
+
+public class Login extends AppCompatActivity implements View.OnClickListener {
+    private final AppCompatActivity activity = Login.this;
+
+    private NestedScrollView nestedScrollView;
+
+    private TextInputLayout textInputLayoutEmail;
+    private TextInputLayout textInputLayoutPassword;
+
+    private TextInputEditText textInputEditTextEmail;
+    private TextInputEditText textInputEditTextPassword;
+
+    private AppCompatButton appCompatButtonLogin;
+
+    private AppCompatTextView textViewLinkRegister;
+
+    private InputValidation inputValidation;
+    private DatabaseHelper databaseHelper;
+
+    private SignInButton googleLoginButton;
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInClient mGoogleSignInClient;
     private TextView signUp;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
 
-        // Initializes Button and input texts
-        loginButton = findViewById(R.id.loginButton);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-        signUp = findViewById(R.id.signUp);
+        initViews();
+        initListeners();
+        initObjects();
 
-
-        // Initialize login button listener
-        findViewById(R.id.googleLoginButton).setOnClickListener(this);
 
         // Google Login Magic
         // [START configure_signin]
@@ -71,16 +90,111 @@ public class Login extends AppCompatActivity implements OnClickListener {
         signInButton.setColorScheme(SignInButton.COLOR_LIGHT);
         // [END customize_button]
 
-        // Directs you to Sign Up page
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent registerIntent = new Intent(Login.this, SignUp.class);
-                Login.this.startActivity(registerIntent);
-            }
+    }
 
-        });
+    /**
+     * Iinitializes views
+     */
+    private void initViews() {
 
+        nestedScrollView = findViewById(R.id.nestedScrollView);
+
+        textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail);
+        textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
+
+        textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
+        textInputEditTextPassword = findViewById(R.id.textInputEditTextPassword);
+
+        appCompatButtonLogin = findViewById(R.id.appCompatButtonLogin);
+        textViewLinkRegister = findViewById(R.id.textViewLinkRegister);
+        googleLoginButton = findViewById(R.id.googleLoginButton);
+
+    }
+
+    /**
+     * Initializes listeners
+     */
+    private void initListeners() {
+        // Waits for login button to be clicked
+        appCompatButtonLogin.setOnClickListener(this);
+        // Waits for sign in link to be clicked
+        textViewLinkRegister.setOnClickListener(this);
+        // Waits for google login button to be clicked
+        googleLoginButton.setOnClickListener(this);
+    }
+
+    /**
+     * Initialize objects to be used
+     */
+    private void initObjects() {
+        databaseHelper = new DatabaseHelper(activity);
+        inputValidation = new InputValidation(activity);
+
+    }
+
+    /**
+     * Listens the click on view
+     *
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            // Login
+            case R.id.appCompatButtonLogin:
+                verifyFromSQLite();
+                break;
+            // Directs you to Sign Up page
+            case R.id.textViewLinkRegister:
+                // Navigate to RegisterActivity
+                Intent intentRegister = new Intent(getApplicationContext(), SignUp.class);
+                startActivity(intentRegister);
+                break;
+            // Login with Google
+            case R.id.googleLoginButton:
+                signIn();
+                break;
+
+        }
+    }
+
+
+    /**
+     * This method is to validate the input text fields and verify login credentials from SQLite
+     */
+    private void verifyFromSQLite() {
+        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
+            return;
+        }
+        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
+            return;
+        }
+        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_email))) {
+            return;
+        }
+
+        if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim()
+                , textInputEditTextPassword.getText().toString().trim())) {
+
+
+            Intent accountsIntent = new Intent(activity, UsersListActivity.class);
+            accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
+            emptyInputEditText();
+            startActivity(accountsIntent);
+
+
+        } else {
+            // Snack Bar to show success message that record is wrong
+            Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * This method is to empty all input edit text
+     */
+    private void emptyInputEditText() {
+        textInputEditTextEmail.setText(null);
+        textInputEditTextPassword.setText(null);
     }
 
     // [START onActivityResult]
@@ -132,48 +246,7 @@ public class Login extends AppCompatActivity implements OnClickListener {
         // [END on_start_sign_in]
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-        // When button is clicked
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                // Turns entry into strings
-                final String emailString = email.getText().toString();
-                final String passwordString = password.getText().toString();
-
-                // Toasts if email isn't entered
-                if (emailString == null) {
-
-                    Context context = getApplicationContext();
-                    CharSequence text = "Please Enter Email";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    return;
-                }
-
-                // Toasts if password isn't entered
-                if (passwordString == null) {
-
-                    Context context = getApplicationContext();
-                    CharSequence text = "Please Enter Password";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    return;
-                }
-
-                // Log in. Go to another activity and sends info to server
-
-
-            }
-        });
-    }
 
     // [START revokeAccess]
     private void revokeAccess() {
@@ -191,18 +264,9 @@ public class Login extends AppCompatActivity implements OnClickListener {
 
     private void updateUI(@Nullable GoogleSignInAccount account) {
         if (account != null) {
-            findViewById(R.id.googleLoginButton).setVisibility(View.GONE);
+            googleLoginButton.setVisibility(View.GONE);
         } else {
-            findViewById(R.id.googleLoginButton).setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.googleLoginButton:
-                signIn();
-                break;
+            googleLoginButton.setVisibility(View.VISIBLE);
         }
     }
 
