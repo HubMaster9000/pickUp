@@ -132,31 +132,31 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    /**
-     * Listens the click on view
-     *
-     * @param v
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            // Login
-            case R.id.appCompatButtonLogin:
-                verifyFromSQLite();
-                break;
-            // Directs you to Sign Up page
-            case R.id.textViewLinkRegister:
-                // Navigate to RegisterActivity
-                Intent intentRegister = new Intent(getApplicationContext(), SignUp.class);
-                startActivity(intentRegister);
-                break;
-            // Login with Google
-            case R.id.googleLoginButton:
-                signIn();
-                break;
+        /**
+         * Listens the click on view
+         *
+         * @param v
+         */
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                // Login
+                case R.id.appCompatButtonLogin:
+                    verifyFromSQLite();
+                    break;
+                // Directs you to Sign Up page
+                case R.id.textViewLinkRegister:
+                    // Navigate to RegisterActivity
+                    Intent intentRegister = new Intent(getApplicationContext(), SignUp.class);
+                    startActivity(intentRegister);
+                    break;
+                // Login with Google
+                case R.id.googleLoginButton:
+                    signIn();
+                    break;
 
+            }
         }
-    }
 
 
     /**
