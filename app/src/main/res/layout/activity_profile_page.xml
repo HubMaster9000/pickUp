@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile_page"
+    tools:context=".Profile_Page"
     android:background="@color/graylight"
     android:orientation="vertical">
 
@@ -14,18 +14,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
             android:background="@drawable/gradientbackground"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/youngtiger" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageview_account_profile"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                android:paddingTop="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/youngtiger"
+                app:civ_border_color="#FFFFFF"
+                app:civ_border_width="2dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,7 +41,7 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="65dp"
+            android:layout_height="90dp"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
@@ -134,8 +135,24 @@
         android:layout_width="360dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp">
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <Button
+                android:textColor="#fff"
+                android:background="@drawable/buttongradient"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Follow Me">
+            </Button>
+        </LinearLayout>
+
         <LinearLayout
             android:orientation="horizontal"
             android:paddingLeft="25dp"
@@ -155,7 +172,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
             android:layout_width="match_parent"
@@ -174,7 +191,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
             android:layout_width="match_parent"
@@ -193,7 +210,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
             android:layout_width="match_parent"
@@ -212,16 +229,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
+                android:id="@+id/edit_info_button"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/ic_edit_black_24dp"/>
             <TextView
+                android:id="@+id/edit_info_text"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
@@ -229,15 +248,5 @@
                 android:paddingLeft="10dp"
                 android:text="Edit Info"/>
         </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-
-    <Button
-        android:textColor="#fff"
-        android:background="@drawable/buttongradient"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Follow Me"/>
-
-</LinearLayout>

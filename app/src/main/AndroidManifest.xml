@@ -26,8 +26,12 @@
             android:label="@string/title_activity_available__games"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".profile_page"
+            android:name=".Profile_Page"
             android:label="@string/title_activity_profile_page"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".edit_profile"
+            android:label="@string/title_activity_edit_profile"
             android:theme="@style/AppTheme"></activity>
     </application>
 
