@@ -11,6 +11,7 @@ import android.view.View;
 public class SignUp extends AppCompatActivity {
 
     private Button signUpButton;
+    private EditText name;
     private EditText email;
     private EditText password;
     private EditText confirmPassword;
@@ -23,6 +24,7 @@ public class SignUp extends AppCompatActivity {
 
         // Initializes Button and input text variables
         signUpButton = findViewById(R.id.signUpButton);
+        name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         confirmPassword = findViewById(R.id.confirmPassword);
