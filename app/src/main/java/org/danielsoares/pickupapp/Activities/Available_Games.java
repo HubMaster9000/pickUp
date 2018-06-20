@@ -11,6 +11,8 @@ import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import org.danielsoares.pickupapp.R;
+
 public class Available_Games extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Spinner sportsDropDown;

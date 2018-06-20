@@ -1,15 +1,18 @@
 package org.danielsoares.pickupapp.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -24,22 +27,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import org.danielsoares.pickupapp.Helpers.InputValidation;
+import org.danielsoares.pickupapp.R;
+import org.danielsoares.pickupapp.SQL.DatabaseHelper;
 
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatTextView;
-import android.util.Log;
-import android.view.View;
-
-import com.androidtutorialshub.loginregister.R;
-import com.androidtutorialshub.loginregister.helpers.InputValidation;
-import com.androidtutorialshub.loginregister.sql.DatabaseHelper;
-
-public class Login extends AppCompatActivity implements View.OnClickListener,   GoogleApiClient.OnConnectionFailedListener  {
+public class Login extends AppCompatActivity implements View.OnClickListener,  GoogleApiClient.OnConnectionFailedListener  {
     private final AppCompatActivity activity = Login.this;
 
     private NestedScrollView nestedScrollView;
@@ -55,12 +47,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener,   
     private AppCompatTextView textViewLinkRegister;
 
     private InputValidation inputValidation;
-    private DatabaseHelper databaseHelper;
+    public DatabaseHelper databaseHelper;
 
     private SignInButton googleLoginButton;
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInClient mGoogleSignInClient;
-    private TextView signUp;
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -110,7 +101,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener,   
     }
 
     /**
-     * Iinitializes views
+     * Initializes views
      */
     private void initViews() {
 
@@ -194,10 +185,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener,   
                 , textInputEditTextPassword.getText().toString().trim())) {
 
 
-            Intent accountsIntent = new Intent(activity, UsersListActivity.class);
-            accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
+            Intent MainActivityIntent = new Intent(activity, MainActivity.class);
+            MainActivityIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
             emptyInputEditText();
-            startActivity(accountsIntent);
+            startActivity(MainActivityIntent);
 
 
         } else {

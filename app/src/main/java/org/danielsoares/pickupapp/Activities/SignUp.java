@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
 
+import org.danielsoares.pickupapp.R;
+
 public class SignUp extends AppCompatActivity {
 
     private Button signUpButton;

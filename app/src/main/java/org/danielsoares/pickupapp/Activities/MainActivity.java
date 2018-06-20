@@ -6,6 +6,8 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.danielsoares.pickupapp.R;
+
 public class MainActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
