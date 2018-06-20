@@ -3,7 +3,6 @@ package org.danielsoares.pickupapp.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -11,27 +10,23 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
-import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 import org.danielsoares.pickupapp.Helpers.InputValidation;
 import org.danielsoares.pickupapp.R;
 import org.danielsoares.pickupapp.SQL.DatabaseHelper;
 
-public class Login extends AppCompatActivity implements View.OnClickListener{
+public class Login extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     private final AppCompatActivity activity = Login.this;
 
     private NestedScrollView nestedScrollView;
@@ -96,7 +91,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        updateUI(account);
         // [END on_start_sign_in]
     }
 
@@ -211,10 +205,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             String name = account.getDisplayName();
             String email = account.getEmail();
             String img_URL = account.getPhotoUrl().toString();
-            updateUI(true) ;
         }
         else {
-            updateUI(false);
         }
     }
 
@@ -225,10 +217,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     }
     // [END signIn]
 
-    private void updateUI(boolean isLogin) {
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -236,6 +224,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleResult(result);
         }
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }
