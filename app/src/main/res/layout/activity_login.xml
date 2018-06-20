@@ -72,7 +72,7 @@
         <!-- Google Login Button -->
         <com.google.android.gms.common.SignInButton
             android:id="@+id/googleLoginButton"
-            android:layout_widt h="213dp"
+            android:layout_width="213dp"
             android:layout_height="38dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
@@ -82,9 +82,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="85dp"
             android:text="@string/no_account"
             android:textColor="@android:color/holo_blue_bright"
             android:textSize="13sp" />

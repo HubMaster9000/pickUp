@@ -1,4 +1,4 @@
-package org.danielsoares.pickupapp.Activities;
+package org.danielsoares.pickupapp;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
