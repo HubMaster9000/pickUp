@@ -1,4 +1,4 @@
-package org.danielsoares.pickupapp;
+package org.danielsoares.pickupapp.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
