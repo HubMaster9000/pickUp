@@ -107,7 +107,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
         nestedScrollView = findViewById(R.id.nestedScrollView);
 
-        textInputLay outEmail = findViewById(R.id.textInputLayoutEmail);
+        textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail);
         textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
 
         textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
