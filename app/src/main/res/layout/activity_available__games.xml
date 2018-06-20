@@ -7,7 +7,7 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:orientation="horizontal"
-    tools:context=".Available_Games">
+    tools:context=".Activities.Available_Games">
 
     <LinearLayout
         android:layout_width="match_parent"
