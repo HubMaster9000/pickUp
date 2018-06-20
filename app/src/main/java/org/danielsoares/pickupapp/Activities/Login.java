@@ -20,6 +20,7 @@ import com.androidtutorialshub.loginregister.helpers.InputValidation;
 import com.androidtutorialshub.loginregister.sql.DatabaseHelper;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
@@ -30,7 +31,7 @@ import com.google.android.gms.tasks.Task;
 
 import org.danielsoares.pickupapp.R;
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener,   GoogleApiClient.OnConnectionFailedListener  {
     private final AppCompatActivity activity = Login.this;
 
     private NestedScrollView nestedScrollView;
@@ -52,6 +53,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInClient mGoogleSignInClient;
     private TextView signUp;
+
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
