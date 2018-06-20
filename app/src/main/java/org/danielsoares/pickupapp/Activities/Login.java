@@ -31,7 +31,7 @@ import org.danielsoares.pickupapp.Helpers.InputValidation;
 import org.danielsoares.pickupapp.R;
 import org.danielsoares.pickupapp.SQL.DatabaseHelper;
 
-public class Login extends AppCompatActivity implements View.OnClickListener,  GoogleApiClient.OnConnectionFailedListener  {
+public class Login extends AppCompatActivity implements View.OnClickListener{
     private final AppCompatActivity activity = Login.this;
 
     private NestedScrollView nestedScrollView;
