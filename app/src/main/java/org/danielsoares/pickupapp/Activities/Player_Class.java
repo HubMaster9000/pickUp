@@ -1,4 +1,4 @@
-package org.danielsoares.pickupapp;
+package org.danielsoares.pickupapp.Activities;
 
 // Each account is made into a player class. Right now it's most a collection of Strings, but in the
 // future we could use this as the foundation of a player profile, adding new variables like height,

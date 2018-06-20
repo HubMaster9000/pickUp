@@ -1,4 +1,4 @@
-package org.danielsoares.pickupapp;
+package org.danielsoares.pickupapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,16 +23,13 @@ public class Profile_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
 
-        initViews();
-        // initListeners();
-        // initObjects();
-
         editInfoButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Profile_Page.this, Edit_Profile.class);
-                startActivity(intent);
+                intent.putExtra("key",value);
+                Profile_Page.this.startActivity(intent);
             }
         });
 
@@ -41,46 +38,9 @@ public class Profile_Page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Profile_Page.this, Edit_Profile.class);
-                startActivity(intent);
-            }
-        });
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Profile_Page.this.startActivity(intent);
             }
         });
     }
-
-    /**
-     * Iinitializes views
-     */
-    private void initViews() {
-        editInfoButton = findViewById(R.id.edit_info_button);
-        editInfoText = findViewById(R.id.edit_info_text);
-    }
-
-    /**
-     * Initializes listeners
-     */
-    /* private void initListeners() {
-        // Waits for editInfo button to be clicked
-        editInfoButton.setOnClickListener(this);
-        // Waits for editInfo text to be clicked
-        editInfoText.setOnClickListener(this);
-    } */
-
-    /**
-     * Initialize objects to be used
-     */
-    /* private void initObjects() {
-        editInfoButton = new EditInfoButton(activity);
-        editInfoText = new InputValidation(activity);
-
-    } */
 
 }
