@@ -143,6 +143,7 @@
             android:layout_height="wrap_content"
             android:gravity="center">
             <Button
+                android:id="@+id/follow_me_button"
                 android:textColor="#fff"
                 android:background="@drawable/buttongradient"
                 android:layout_marginTop="10dp"
