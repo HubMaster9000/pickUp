@@ -21,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -31,7 +32,7 @@ import org.danielsoares.pickupapp.Helpers.InputValidation;
 import org.danielsoares.pickupapp.R;
 import org.danielsoares.pickupapp.SQL.DatabaseHelper;
 
-public class Login extends AppCompatActivity implements View.OnClickListener{
+public class Login extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     private final AppCompatActivity activity = Login.this;
 
     private NestedScrollView nestedScrollView;
@@ -96,7 +97,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        updateUI(account);
         // [END on_start_sign_in]
     }
 
@@ -211,10 +211,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             String name = account.getDisplayName();
             String email = account.getEmail();
             String img_URL = account.getPhotoUrl().toString();
-            updateUI(true) ;
         }
         else {
-            updateUI(false);
         }
     }
 
@@ -225,10 +223,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     }
     // [END signIn]
 
-    private void updateUI(boolean isLogin) {
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -236,6 +230,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleResult(result);
         }
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }
