@@ -1,4 +1,4 @@
-package org.danielsoares.pickupapp;
+package org.danielsoares.pickupapp.Activities;
 
 import android.content.Context;
 import android.content.Intent;
