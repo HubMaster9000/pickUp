@@ -71,6 +71,11 @@ public class Game_Class implements Comparable<Game_Class> {
         return endTime;
     }
 
+    // Distance from game to player
+    public double distanceTo(Location player) {
+        return 0.0;
+    }
+
     // Allows us to sort by starting time
     // When sorted, games ALWAYS sort by starting time
     public int compareTo(Game_Class game) {

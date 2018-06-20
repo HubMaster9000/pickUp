@@ -11,7 +11,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/account_Pic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/youngtiger"
+            app:civ_border_color="#FFFFFF"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/account_Name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="40dp"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
         android:weightSum="3">
 
         <Spinner

@@ -199,23 +199,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         textInputEditTextPassword.setText(null);
     }
 
+    // What to do if login successful or failed
     private void handleResult(GoogleSignInResult result) {
+        // If login is successful, change activity, send account info to next activity
         if (result.isSuccess()) {
             GoogleSignInAccount account = result.getSignInAccount();
-            String name = account.getDisplayName();
-            String email = account.getEmail();
-            String img_URL = account.getPhotoUrl().toString();
+            Intent signin = new Intent(getApplicationContext(), Available_Games.class);
+            getIntent().putExtra("Account", account);
+            startActivity(signin);
         }
         else {
         }
     }
 
-    // [START signIn]
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-    // [END signIn]
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

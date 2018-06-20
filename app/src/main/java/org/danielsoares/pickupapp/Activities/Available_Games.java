@@ -1,17 +1,22 @@
 package org.danielsoares.pickupapp.Activities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Spinner;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 import org.danielsoares.pickupapp.R;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Available_Games extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -35,6 +40,30 @@ public class Available_Games extends AppCompatActivity implements AdapterView.On
             }
         });
 
+        // Initialize Spinners
+        initialSpinners();
+
+        // Initialize views in xml
+        TextView prof_name = (TextView) findViewById(R.id.account_Name);
+        CircleImageView prof_pic = (CircleImageView) findViewById(R.id.account_Pic);
+
+        // Pull Google account info
+        GoogleSignInAccount account = (GoogleSignInAccount) getIntent().getParcelableExtra("Account");
+        if (account == null) {
+            // Take info from non-google login
+        }
+        else {
+            // Google Login info
+            String name = account.getDisplayName();
+            String img_URL = account.getPhotoUrl().toString();
+
+            // Put info into xml
+            prof_name.setText(name);
+            prof_pic.setImageURI(Uri.parse(img_URL));
+        }
+    }
+
+    private void initialSpinners() {
         // Initialize Spinner for Sports
         sportsDropDown = (Spinner) findViewById(R.id.sport_list);
         sportsDropDown.setOnItemSelectedListener(this);
