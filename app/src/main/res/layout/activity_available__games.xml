@@ -28,7 +28,6 @@
             android:id="@+id/account_Name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="40dp"
             />
 
     </LinearLayout>
@@ -58,7 +57,7 @@
             android:layout_weight="1"></Spinner>
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/new_Game_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

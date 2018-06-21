@@ -33,6 +33,7 @@
             android:name=".Activities.Edit_Profile"
             android:label="@string/title_activity_edit_profile"
             android:theme="@style/AppTheme" />
+        <activity android:name=".Activities.Make_A_New_Game"></activity>
     </application>
 
 </manifest>

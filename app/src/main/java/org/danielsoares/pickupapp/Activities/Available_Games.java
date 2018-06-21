@@ -1,9 +1,9 @@
 package org.danielsoares.pickupapp.Activities;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +23,7 @@ public class Available_Games extends AppCompatActivity implements AdapterView.On
     private Spinner sportsDropDown;
     private Spinner distanceDropDown;
     private Spinner sizeDropDown;
+    private FloatingActionButton newGameButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +32,9 @@ public class Available_Games extends AppCompatActivity implements AdapterView.On
         /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar); */
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        // Initialize Stuff
+        initialize();
 
-        // Initialize Spinners
-        initialSpinners();
 
         // Initialize views in xml
         TextView prof_name = (TextView) findViewById(R.id.account_Name);
@@ -63,7 +56,7 @@ public class Available_Games extends AppCompatActivity implements AdapterView.On
         }
     }
 
-    private void initialSpinners() {
+    private void initialize() {
         // Initialize Spinner for Sports
         sportsDropDown = (Spinner) findViewById(R.id.sport_list);
         sportsDropDown.setOnItemSelectedListener(this);
@@ -96,6 +89,14 @@ public class Available_Games extends AppCompatActivity implements AdapterView.On
         adapterSizes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         sizeDropDown.setAdapter(adapterSizes);
+
+        // When button is clicked, go to page to make new game
+        newGameButton = (FloatingActionButton) findViewById(R.id.new_Game_button);
+        newGameButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent newGame = new Intent(getApplicationContext(), Make_A_New_Game.class);
+                startActivity(newGame);            }
+        });
     }
     // Implements filters for spinners
     @Override
