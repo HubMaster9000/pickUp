@@ -146,8 +146,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             // Snack Bar to show success message that record saved successfully
             Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
             emptyInputEditText();
-            // Go to home page
-            Intent registered = new Intent(SignUp.this, Home.class);
+            // Go to Available Games page
+            Intent registered = new Intent(SignUp.this, Available_Games.class);
             SignUp.this.startActivity(registered);
 
 
