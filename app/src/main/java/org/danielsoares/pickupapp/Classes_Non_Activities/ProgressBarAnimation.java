@@ -1,4 +1,4 @@
-package org.danielsoares.pickupapp.Activities;
+package org.danielsoares.pickupapp.Classes_Non_Activities;
 
 import android.content.Context;
 import android.view.animation.Animation;
@@ -6,6 +6,8 @@ import android.view.animation.Transformation;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.content.Intent;
+
+import org.danielsoares.pickupapp.Activities.Login;
 
 public class ProgressBarAnimation extends Animation {
 
