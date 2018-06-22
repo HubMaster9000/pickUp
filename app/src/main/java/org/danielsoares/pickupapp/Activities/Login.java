@@ -207,7 +207,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             GoogleSignInAccount accountGoogle = result.getSignInAccount();
             Player_Class account = new Player_Class(accountGoogle);
             Intent signin = new Intent(getApplicationContext(), Available_Games.class);
-            getIntent().putExtra("Account", account);
+            signin.putExtra("Account", account);
             startActivity(signin);
         }
         else {

@@ -18,9 +18,11 @@ public class User {
         photo = playerPhoto;
     }
     // Constructor without photo
-    public User(String playerName, String playerEmail, String playerPassword) {
+    public User(String playerName, String playerEmail) {
         name = playerName;
         email = playerEmail;
+    }
+    public User() {
     }
 
     public int getId() {

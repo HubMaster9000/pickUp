@@ -4,8 +4,10 @@ import android.net.Uri;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
+import java.io.Serializable;
+
 // Each account is made into a player class using either the custom login or google account
-public class Player_Class {
+public class Player_Class implements Serializable{
 
     private User customLogin;
     private GoogleSignInAccount googleAccount;
@@ -26,17 +28,14 @@ public class Player_Class {
 
     public String getName() {
         if (accountType == CUSTOM) return customLogin.getName();
-        if (accountType == GOOGLE) return googleAccount.getDisplayName();
+        else if (accountType == GOOGLE) return googleAccount.getDisplayName();
+        else return null;
     }
 
     public Uri getPhoto() {
         // if (accountType == CUSTOM) return
         if (accountType == GOOGLE) return googleAccount.getPhotoUrl();
-    }
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(firstName + " " + lastName + "/n");
-        return sb.toString();
+        else return null;
     }
 
 }
