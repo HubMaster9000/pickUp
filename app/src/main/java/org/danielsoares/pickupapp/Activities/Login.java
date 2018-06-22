@@ -177,7 +177,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim()
                 , textInputEditTextPassword.getText().toString().trim())) {
 
-            
+
             // Go to Available Games page
             Intent Available_GamesIntent = new Intent(activity, Available_Games.class);
             Available_GamesIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
