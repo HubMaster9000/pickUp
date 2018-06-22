@@ -23,6 +23,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.danielsoares.pickupapp.Helpers.InputValidation;
+import org.danielsoares.pickupapp.Models.Player_Class;
 import org.danielsoares.pickupapp.R;
 import org.danielsoares.pickupapp.SQL.DatabaseHelper;
 
@@ -203,9 +204,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     private void handleResult(GoogleSignInResult result) {
         // If login is successful, change activity, send account info to next activity
         if (result.isSuccess()) {
-            GoogleSignInAccount account = result.getSignInAccount();
+            GoogleSignInAccount accountGoogle = result.getSignInAccount();
+            Player_Class account = new Player_Class(accountGoogle);
             Intent signin = new Intent(getApplicationContext(), Available_Games.class);
-            getIntent().putExtra("Account", account);
+            signin.putExtra("Account", account);
             startActivity(signin);
         }
         else {

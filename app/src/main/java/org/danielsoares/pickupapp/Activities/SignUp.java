@@ -12,6 +12,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import org.danielsoares.pickupapp.Helpers.InputValidation;
+import org.danielsoares.pickupapp.Models.Player_Class;
 import org.danielsoares.pickupapp.R;
 import org.danielsoares.pickupapp.SQL.DatabaseHelper;
 
@@ -137,17 +138,24 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
         if (!databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim())) {
 
-            user.setName(textInputEditTextName.getText().toString().trim());
-            user.setEmail(textInputEditTextEmail.getText().toString().trim());
-            user.setPassword(textInputEditTextPassword.getText().toString().trim());
-
+            String name = textInputEditTextName.getText().toString().trim();
+            String email = textInputEditTextEmail.getText().toString().trim();
+            String password = textInputEditTextPassword.getText().toString().trim();
+            user.setName(name);
+            user.setEmail(email);
+            user.setPassword(password);
             databaseHelper.addUser(user);
+
+            // Makes player with given info
+            User user = new User (name, email);
+            Player_Class player = new Player_Class(user);
 
             // Snack Bar to show success message that record saved successfully
             Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
             emptyInputEditText();
             // Go to Available Games page
             Intent registered = new Intent(SignUp.this, Available_Games.class);
+            registered.putExtra("Account", player);
             SignUp.this.startActivity(registered);
 
 

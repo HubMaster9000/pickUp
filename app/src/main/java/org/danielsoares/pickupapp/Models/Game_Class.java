@@ -1,4 +1,4 @@
-package org.danielsoares.pickupapp.Classes_Non_Activities;
+package org.danielsoares.pickupapp.Models;
 
 import android.location.Location;
 

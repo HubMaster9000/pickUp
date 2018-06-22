@@ -12,8 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-
+import org.danielsoares.pickupapp.Models.Player_Class;
 import org.danielsoares.pickupapp.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -41,19 +40,15 @@ public class Available_Games extends AppCompatActivity implements AdapterView.On
         CircleImageView prof_pic = (CircleImageView) findViewById(R.id.account_Pic);
 
         // Pull Google account info
-        GoogleSignInAccount account = (GoogleSignInAccount) getIntent().getParcelableExtra("Account");
-        if (account == null) {
-            // Take info from non-google login
-        }
-        else {
-            // Google Login info
-            String name = account.getDisplayName();
-            String img_URL = account.getPhotoUrl().toString();
+        Player_Class account = (Player_Class) getIntent().getParcelableExtra("Account");
 
-            // Put info into xml
-            prof_name.setText(name);
-            prof_pic.setImageURI(Uri.parse(img_URL));
-        }
+        // Google Login info
+        String name = account.getName();
+        String img_URL = account.getPhoto().toString();
+
+        // Put info into xml
+        prof_name.setText(name);
+        prof_pic.setImageURI(Uri.parse(img_URL));
     }
 
     private void initialize() {

@@ -1,11 +1,29 @@
 package org.danielsoares.pickupapp.Models;
 
+import android.net.Uri;
+
 public class User {
 
     private int id;
     private String name;
     private String email;
     private String password;
+    private Uri photo;
+
+    // Constuctor with photo
+    public User(int iD, String playerName, String playerEmail, String playerPassword, Uri playerPhoto) {
+        id = iD;
+        name = playerName;
+        email = playerEmail;
+        photo = playerPhoto;
+    }
+    // Constructor without photo
+    public User(String playerName, String playerEmail) {
+        name = playerName;
+        email = playerEmail;
+    }
+    public User() {
+    }
 
     public int getId() {
         return id;
