@@ -1,13 +1,17 @@
 package org.danielsoares.pickupapp.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.danielsoares.pickupapp.R;
@@ -15,6 +19,9 @@ import org.danielsoares.pickupapp.R;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Button submitButton;
+    private Marker marker;
+    private LatLng location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +31,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        initial();
     }
 
+    private void initial() {
+        submitButton = (Button) findViewById(R.id.submitButton);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (marker == null) {
+                    Toast.makeText(MapsActivity.this,
+                            "Select a location first", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent sendLocation = new Intent(getApplicationContext(), Make_A_New_Game.class);
+                    sendLocation.putExtra("Location", location);
+                    startActivity(sendLocation);
+                }
+            }
+        });
+    }
 
     /**
      * Manipulates the map once available.
@@ -40,9 +65,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Adds marker at touched point
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng point) {
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(point)
+                        .title("New Game"));
+                marker.setVisible(true);
+                location = point;
+            }
+        });
+
     }
 }
