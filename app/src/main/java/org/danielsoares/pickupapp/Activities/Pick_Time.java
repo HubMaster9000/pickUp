@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import org.danielsoares.pickupapp.R;
 
@@ -25,6 +24,7 @@ public class Pick_Time extends AppCompatActivity {
         setContentView(R.layout.timepickdialogue);
 
         btnEventDateTime = ((Button) findViewById(R.id.set_date));
+        resultTime = (EditText) findViewById(R.id.result_time);
         custom = new CustomDateTimePicker(this,
                 new CustomDateTimePicker.ICustomDateTimeListener() {
 
