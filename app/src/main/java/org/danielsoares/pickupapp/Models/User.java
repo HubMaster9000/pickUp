@@ -25,6 +25,14 @@ public class User {
     public User() {
     }
 
+    public void setPhoto(Uri pic) {
+        photo = pic;
+    }
+
+    public Uri getPhoto() {
+        return photo;
+    }
+
     public int getId() {
         return id;
     }
