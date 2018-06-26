@@ -42,7 +42,7 @@
             android:theme="@style/AppTheme" />
 
         <activity android:name=".Activities.Make_A_New_Game" />
-        <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".Activities.Time_Pick" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

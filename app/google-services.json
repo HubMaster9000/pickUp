@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "887608161531",
+    "firebase_url": "https://sports-a67bd.firebaseio.com",
+    "project_id": "sports-a67bd",
+    "storage_bucket": "sports-a67bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887608161531:android:25651ae9461394ea",
+        "android_client_info": {
+          "package_name": "org.danielsoares.pickupapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "887608161531-6qhoa2v143ggji2dcrk4pi02f4c37t3a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.danielsoares.pickupapp",
+            "certificate_hash": "f071cc81477addb531ea850b8335289ebf7caceb"
+          }
+        },
+        {
+          "client_id": "887608161531-lnhji6bonnv086ukiijku0dtl0glrh2l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXqdcOcPiMsxD6uHhNvDPxO8db1GiIwmY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "887608161531-lnhji6bonnv086ukiijku0dtl0glrh2l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
