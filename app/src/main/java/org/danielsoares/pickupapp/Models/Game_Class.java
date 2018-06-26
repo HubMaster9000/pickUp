@@ -23,7 +23,7 @@ public class Game_Class implements Comparable<Game_Class> {
         location = gameLocation;
         startTime = timebegin;
         endTime = timeEnd;
-        players = new LinkedList<Player_Class>();
+        players = new LinkedList<>();
         maxSize = max;
     }
 
