@@ -136,7 +136,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             return;
         }
 
-        if (!databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim())) {
+        if (!databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim(), textInputEditTextPassword.getText().toString().trim())) {
 
             String name = textInputEditTextName.getText().toString().trim();
             String email = textInputEditTextEmail.getText().toString().trim();

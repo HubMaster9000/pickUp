@@ -6,7 +6,7 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.danielsoares.pickupapp.Classes_Non_Activities.ProgressBarAnimation;
+import org.danielsoares.pickupapp.Activities.ProgressBarAnimation;
 import org.danielsoares.pickupapp.R;
 
 public class MainActivity extends AppCompatActivity {

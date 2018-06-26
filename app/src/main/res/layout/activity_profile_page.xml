@@ -36,7 +36,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:text="Dumb Taiga"
-                android:textColor="#fff"
+                android:textColor="@color/titleGreen"
                 android:textSize="21sp"
                 android:textStyle="bold" />
         </LinearLayout>
