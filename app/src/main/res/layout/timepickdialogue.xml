@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="50dp"
-    android:background="@drawable/light_blue_background"
     tools:context=".Activities.Pick_Time">
 
     <Button
@@ -17,9 +16,9 @@
         android:background="@drawable/buttongradient"
         android:text="Set Date and Time"
         android:textSize="30sp"
-        android:textColor="#fff"></Button>
+        android:textColor="#fff" />
 
-    <TextView
+    <EditText
         android:id="@+id/result_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +26,6 @@
         android:layout_marginBottom="50dp"
         android:text="Result"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="#fff"/>
+        android:textStyle="bold" />
 
 </LinearLayout>

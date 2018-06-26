@@ -17,7 +17,7 @@ public class Pick_Time extends AppCompatActivity {
 
     CustomDateTimePicker custom;
     Button btnEventDateTime;
-    TextView resultTime;
+    EditText resultTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
