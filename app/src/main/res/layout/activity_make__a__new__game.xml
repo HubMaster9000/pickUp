@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Start A New Game"
-        android:textSize="38sp" />
+        android:textSize="38sp"
+        android:textColor="@color/titleGreen"/>
 
     <TextView
         android:layout_width="match_parent"

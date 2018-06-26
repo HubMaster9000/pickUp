@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.Time_Pick">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,6 +40,7 @@
             android:name=".Activities.Edit_Profile"
             android:label="@string/title_activity_edit_profile"
             android:theme="@style/AppTheme" />
+
         <activity android:name=".Activities.Make_A_New_Game" />
         <activity android:name=".Activities.MainActivity" />
         <!--
