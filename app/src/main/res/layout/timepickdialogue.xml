@@ -17,16 +17,21 @@
             android:textStyle="bold"
             android:layout_gravity="center"/>
 
-        <TimePicker
+        <TextView
+            android:id="@+id/set_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:numbersBackgroundColor="@color/startblue"
-            android:numbersTextColor="@color/graylight"/>
+            android:text="Date"
+            android:textSize="30sp"
+            android:textColor="@color/startblue"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
 
         <TextView
-            android:id="@+id/time_result"
+            android:id="@+id/set_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Time"
             android:textSize="30sp"
             android:textColor="@color/startblue"
             android:textStyle="bold"
