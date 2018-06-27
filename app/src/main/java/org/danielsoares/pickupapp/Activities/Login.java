@@ -10,7 +10,9 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -21,6 +23,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.danielsoares.pickupapp.Helpers.InputValidation;
 import org.danielsoares.pickupapp.Models.Player_Class;
@@ -35,8 +43,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutPassword;
 
-    private TextInputEditText textInputEditTextEmail;
-    private TextInputEditText textInputEditTextPassword;
+    private TextInputEditText email;
+    private TextInputEditText password;
 
     private AppCompatButton appCompatButtonLogin;
 
@@ -51,15 +59,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mAuth = FirebaseAuth.getInstance();
 
         initViews();
         initListeners();
         initObjects();
+
+        // Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
 
 
         // Google Login Magic
@@ -82,6 +98,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         signInButton.setColorScheme(SignInButton.COLOR_LIGHT);
         // [END customize_button]
 
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
+
     }
 
     @Override
@@ -92,6 +114,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         // [END on_start_sign_in]
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
     }
 
     /**
@@ -104,8 +130,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail);
         textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
 
-        textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
-        textInputEditTextPassword = findViewById(R.id.textInputEditTextPassword);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
 
         appCompatButtonLogin = findViewById(R.id.appCompatButtonLogin);
         textViewLinkRegister = findViewById(R.id.textViewLinkRegister);
@@ -160,46 +186,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         }
     }
 
-
-    /**
-     * This method is to validate the input text fields and verify login credentials from SQLite
-     */
-    private void verifyFromSQLite() {
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
-            return;
-        }
-        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
-            return;
-        }
-        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_email))) {
-            return;
-        }
-
-        if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim()
-                , textInputEditTextPassword.getText().toString().trim())) {
-
-
-            // Go to Available Games page
-            Intent Available_GamesIntent = new Intent(activity, Available_Games.class);
-            Available_GamesIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
-            emptyInputEditText();
-            startActivity(Available_GamesIntent);
-
-
-        } else {
-            // Snack Bar to show success message that record is wrong
-            Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
-        }
-    }
-
-    /**
-     * This method is to empty all input edit text
-     */
-    private void emptyInputEditText() {
-        textInputEditTextEmail.setText(null);
-        textInputEditTextPassword.setText(null);
-    }
-
     // What to do if login successful or failed
     private void handleResult(GoogleSignInResult result) {
         // If login is successful, change activity, send account info to next activity
@@ -233,4 +219,28 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+    /**
+     * Sign in with email and password
+     */
+    mAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        @Override
+        public void onComplete(@NonNull Task<AuthResult> task) {
+            if (task.isSuccessful()) {
+                // Sign in success, update UI with the signed-in user's information
+                Log.d(TAG, "signInWithEmail:success");
+                FirebaseUser user = mAuth.getCurrentUser();
+                updateUI(user);
+            } else {
+                // If sign in fails, display a message to the user.
+                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show();
+                updateUI(null);
+            }
+
+            // ...
+        }
+    });
 }

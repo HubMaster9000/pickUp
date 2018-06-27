@@ -11,6 +11,8 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import org.danielsoares.pickupapp.Helpers.InputValidation;
 import org.danielsoares.pickupapp.Models.Player_Class;
 import org.danielsoares.pickupapp.R;
@@ -30,8 +32,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private TextInputLayout textInputLayoutConfirmPassword;
 
     private TextInputEditText textInputEditTextName;
-    private TextInputEditText textInputEditTextEmail;
-    private TextInputEditText textInputEditTextPassword;
+    private TextInputEditText email;
+    private TextInputEditText password;
     private TextInputEditText textInputEditTextConfirmPassword;
 
     private AppCompatButton appCompatButtonRegister;
@@ -40,11 +42,13 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private InputValidation inputValidation;
     private DatabaseHelper databaseHelper;
     private User user;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        mAuth = FirebaseAuth.getInstance();
 
         initViews();
         initListeners();
@@ -64,8 +68,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         textInputLayoutConfirmPassword = findViewById(R.id.textInputLayoutConfirmPassword);
 
         textInputEditTextName = findViewById(R.id.textInputEditTextName);
-        textInputEditTextEmail = findViewById(R.id.textInputEditTextEmail);
-        textInputEditTextPassword = findViewById(R.id.textInputEditTextPassword);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
         textInputEditTextConfirmPassword = findViewById(R.id.textInputEditTextConfirmPassword);
 
         appCompatButtonRegister = findViewById(R.id.appCompatButtonRegister);
@@ -176,6 +180,30 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         textInputEditTextPassword.setText(null);
         textInputEditTextConfirmPassword.setText(null);
     }
+
+    /**
+     * This method creates a new user with their email and password
+     */
+    mAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        @Override
+        public void onComplete(@NonNull Task<AuthResult> task) {
+            if (task.isSuccessful()) {
+                // Sign in success, update UI with the signed-in user's information
+                Log.d(TAG, "createUserWithEmail:success");
+                FirebaseUser user = mAuth.getCurrentUser();
+                updateUI(user);
+            } else {
+                // If sign in fails, display a message to the user.
+                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show();
+                updateUI(null);
+            }
+
+            // ...
+        }
+    });
 
 
 }
