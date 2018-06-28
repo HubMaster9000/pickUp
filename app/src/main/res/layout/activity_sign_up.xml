@@ -27,23 +27,6 @@
             android:textColor="@color/titleGreen"
             android:textSize="38sp" />
 
-        <!-- Enter name here -->
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/textInputEditTextName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/name"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textColor="@android:color/holo_blue_bright" />
-        </android.support.design.widget.TextInputLayout>
-
         <!-- Enter email here -->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayoutEmail"
@@ -51,8 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/textInputEditTextEmail"
+            <EditText
+                android:id="@+id/field_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
@@ -68,8 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/textInputEditTextPassword"
+            <EditText
+                android:id="@+id/field_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
@@ -79,26 +62,9 @@
         </android.support.design.widget.TextInputLayout>
 
 
-        <!-- Confirm Password -->
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutConfirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/textInputEditTextConfirmPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/confirm_password"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:textColor="@android:color/holo_blue_bright" />
-        </android.support.design.widget.TextInputLayout>
-
         <!-- Sign Up Button -->
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/appCompatButtonRegister"
+        <Button
+            android:id="@+id/email_create_account_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
