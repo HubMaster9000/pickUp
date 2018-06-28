@@ -3,15 +3,12 @@ package org.danielsoares.pickupapp.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -24,42 +21,26 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import org.danielsoares.pickupapp.Helpers.InputValidation;
 import org.danielsoares.pickupapp.Models.Player_Class;
 import org.danielsoares.pickupapp.R;
-import org.danielsoares.pickupapp.SQL.DatabaseHelper;
 
 public class Login extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
-    private final AppCompatActivity activity = Login.this;
-
-    private NestedScrollView nestedScrollView;
-
-    private TextInputLayout textInputLayoutEmail;
-    private TextInputLayout textInputLayoutPassword;
-
-    private TextInputEditText email;
-    private TextInputEditText password;
-
-    private AppCompatButton appCompatButtonLogin;
 
     private AppCompatTextView textViewLinkRegister;
-
-    private InputValidation inputValidation;
-    public DatabaseHelper databaseHelper;
 
     private SignInButton googleLoginButton;
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInClient mGoogleSignInClient;
 
-    private static final String TAG = "SignInActivity";
+    private static final String TAG = "Login";
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
+    private EditText mEmailField;
+    private EditText mPasswordField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,23 +50,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
         initViews();
         initListeners();
-        initObjects();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-
-
-        // Google Login Magic
-        // [START configure_signin]
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        // [END configure_signin]
+        // [END configure_signIn]
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
@@ -98,12 +69,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         signInButton.setColorScheme(SignInButton.COLOR_LIGHT);
         // [END customize_button]
 
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
-
     }
 
     @Override
@@ -115,9 +80,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         // [END on_start_sign_in]
 
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
     }
 
     /**
@@ -125,17 +87,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
      */
     private void initViews() {
 
-        nestedScrollView = findViewById(R.id.nestedScrollView);
-
-        textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail);
-        textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword);
-
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-
-        appCompatButtonLogin = findViewById(R.id.appCompatButtonLogin);
         textViewLinkRegister = findViewById(R.id.textViewLinkRegister);
         googleLoginButton = findViewById(R.id.googleLoginButton);
+
+        mEmailField = findViewById(R.id.field_email);
+        mPasswordField = findViewById(R.id.field_password);
 
     }
 
@@ -143,34 +99,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
      * Initializes listeners
      */
     private void initListeners() {
-        // Waits for login button to be clicked
-        appCompatButtonLogin.setOnClickListener(this);
         // Waits for sign in link to be clicked
         textViewLinkRegister.setOnClickListener(this);
         // Waits for google login button to be clicked
         googleLoginButton.setOnClickListener(this);
-    }
-
-    /**
-     * Initialize objects to be used
-     */
-    private void initObjects() {
-        databaseHelper = new DatabaseHelper(activity);
-        inputValidation = new InputValidation(activity);
-
+        // Buttons
+        findViewById(R.id.email_sign_in_button).setOnClickListener(this);
     }
 
     /**
      * Listens the click on view
-     *
-     * @param v
      */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             // Login
-            case R.id.appCompatButtonLogin:
-                verifyFromSQLite();
+            case R.id.email_sign_in_button:
+                signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
                 break;
             // Directs you to Sign Up page
             case R.id.textViewLinkRegister:
@@ -180,7 +125,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                 break;
             // Login with Google
             case R.id.googleLoginButton:
-                signIn();
+                signInWithGoogle();
                 break;
 
         }
@@ -192,15 +137,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         if (result.isSuccess()) {
             GoogleSignInAccount accountGoogle = result.getSignInAccount();
             Player_Class account = new Player_Class(accountGoogle);
-            Intent signin = new Intent(getApplicationContext(), Available_Games.class);
-            signin.putExtra("Account", account);
-            startActivity(signin);
+            Intent signIn = new Intent(getApplicationContext(), Available_Games.class);
+            signIn.putExtra("Account", account);
+            startActivity(signIn);
         }
         else {
         }
     }
 
-    private void signIn() {
+    private void signInWithGoogle() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -223,24 +168,53 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     /**
      * Sign in with email and password
      */
-    mAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-        @Override
-        public void onComplete(@NonNull Task<AuthResult> task) {
-            if (task.isSuccessful()) {
-                // Sign in success, update UI with the signed-in user's information
-                Log.d(TAG, "signInWithEmail:success");
-                FirebaseUser user = mAuth.getCurrentUser();
-                updateUI(user);
-            } else {
-                // If sign in fails, display a message to the user.
-                Log.w(TAG, "signInWithEmail:failure", task.getException());
-                Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show();
-                updateUI(null);
-            }
-
-            // ...
+    private void signIn(String email, String password) {
+        Log.d(TAG, "signIn:" + email);
+        if (!validateForm()) {
+            return;
         }
-    });
+
+        // [START sign_in_with_email]
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(Login.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        // [END sign_in_with_email]
+    }
+
+    /**
+     * Validate form
+     */
+    private boolean validateForm() {
+        boolean valid = true;
+
+        String email = mEmailField.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            mEmailField.setError("Required.");
+            valid = false;
+        } else {
+            mEmailField.setError(null);
+        }
+
+        String password = mPasswordField.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            mPasswordField.setError("Required.");
+            valid = false;
+        } else {
+            mPasswordField.setError(null);
+        }
+
+        return valid;
+    }
 }
