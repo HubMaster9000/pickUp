@@ -7,6 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.quickstart.database.models.Post;
+import com.google.firebase.quickstart.database.models.User;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import org.danielsoares.pickupapp.R;
@@ -17,6 +25,8 @@ public class Make_A_New_Game extends AppCompatActivity {
     private Button locationButton;
 
     private LatLng location;
+
+    private DatabaseReference database;
 
 
     @Override
