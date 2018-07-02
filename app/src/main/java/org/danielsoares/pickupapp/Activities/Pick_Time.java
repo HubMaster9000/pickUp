@@ -23,8 +23,8 @@ public class Pick_Time extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timepickdialogue);
 
-        btnEventDateTime = ((Button) findViewById(R.id.set_date));
-        resultTime = (EditText) findViewById(R.id.result_time);
+        btnEventDateTime = (findViewById(R.id.set_date));
+        resultTime = findViewById(R.id.result_time);
         custom = new CustomDateTimePicker(this,
                 new CustomDateTimePicker.ICustomDateTimeListener() {
 
