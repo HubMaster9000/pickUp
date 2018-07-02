@@ -45,7 +45,7 @@ public class Profile_Page extends AppCompatActivity {
             }
         });
 
-        //Access firebase user
+        //Access Firebase user
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Name, email address, and profile photo Url
