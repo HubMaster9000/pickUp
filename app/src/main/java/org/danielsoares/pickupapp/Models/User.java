@@ -10,7 +10,7 @@ public class User {
     private String password;
     private Uri photo;
 
-    // Constuctor with photo
+    // Constructor with photo
     public User(int iD, String playerName, String playerEmail, String playerPassword, Uri playerPhoto) {
         id = iD;
         name = playerName;

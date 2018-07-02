@@ -237,13 +237,13 @@ public class CustomDateTimePicker implements View.OnClickListener {
     }
 
     public interface ICustomDateTimeListener {
-        public void onSet(Dialog dialog, Calendar calendarSelected,
+        void onSet(Dialog dialog, Calendar calendarSelected,
                           Date dateSelected, int year, String monthFullName,
                           String monthShortName, int monthNumber, int date,
                           String weekDayFullName, String weekDayShortName, int hour24,
                           int hour12, int min, int sec, String AM_PM);
 
-        public void onCancel();
+        void onCancel();
     }
 
     @Override
@@ -341,9 +341,8 @@ public class CustomDateTimePicker implements View.OnClickListener {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM");
         simpleDateFormat.setCalendar(calendar);
-        String monthName = simpleDateFormat.format(calendar.getTime());
 
-        return monthName;
+        return simpleDateFormat.format(calendar.getTime());;
     }
 
     private String getWeekDayFullName(int weekDayNumber) {
@@ -352,9 +351,8 @@ public class CustomDateTimePicker implements View.OnClickListener {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
         simpleDateFormat.setCalendar(calendar);
-        String weekName = simpleDateFormat.format(calendar.getTime());
 
-        return weekName;
+        return simpleDateFormat.format(calendar.getTime());;
     }
 
     private String getWeekDayShortName(int weekDayNumber) {
@@ -363,9 +361,8 @@ public class CustomDateTimePicker implements View.OnClickListener {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EE");
         simpleDateFormat.setCalendar(calendar);
-        String weekName = simpleDateFormat.format(calendar.getTime());
 
-        return weekName;
+        return simpleDateFormat.format(calendar.getTime());;
     }
 
     private int getHourIn12Format(int hour24) {
@@ -382,9 +379,8 @@ public class CustomDateTimePicker implements View.OnClickListener {
     }
 
     private String getAMPM(Calendar calendar) {
-        String ampm = (calendar.get(Calendar.AM_PM) == (Calendar.AM)) ? "AM"
-                : "PM";
-        return ampm;
+        return (calendar.get(Calendar.AM_PM) == (Calendar.AM)) ? "AM"
+                : "PM";;
     }
 
     private void resetData() {

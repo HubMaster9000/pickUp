@@ -19,20 +19,20 @@ public class Game_Class implements Comparable<Game_Class> {
                                              // to Integer_Max
     // Initialize class
     public Game_Class(String sportPlay, String hostStart, Location gameLocation,
-                      Calendar timebegin, Calendar timeEnd, int max) {
+                      Calendar timeBegin, Calendar timeEnd, int max) {
         sport = sportPlay;
         host = hostStart;
         location = gameLocation;
-        startTime = timebegin;
+        startTime = timeBegin;
         endTime = timeEnd;
         players = new LinkedList<>();
         maxSize = max;
     }
 
-    public Game_Class() {};
+    public Game_Class() {}
 
     // Add a player to the game
-    // returns True if below max capcity, False otherwise
+    // returns True if below max capacity, False otherwise
     public boolean add(Player_Class player) {
         // If below the maximum size
         if (players.size() < maxSize) {
@@ -42,7 +42,7 @@ public class Game_Class implements Comparable<Game_Class> {
         else return false;
     }
 
-    // Change later for convinence
+    // Change later for convenience
     // Prints out game info
     public String toString() {
         StringBuilder sb = new StringBuilder();

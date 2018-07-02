@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:maxLines="1"
             android:textColor="@android:color/white" />
     </android.support.design.widget.TextInputLayout>
@@ -68,8 +68,6 @@
         android:id="@+id/googleLoginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
 
     <LinearLayout
@@ -82,11 +80,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left"
-            android:layout_marginRight="10dp"
+            android:layout_gravity="bottom|start"
+            android:layout_marginEnd="10dp"
             android:text="@string/no_account"
             android:textColor="@android:color/holo_blue_bright"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_marginRight="10dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/textViewLinkRegister"

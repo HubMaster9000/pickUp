@@ -14,9 +14,9 @@ import java.util.Date;
 
 public class Pick_Time extends AppCompatActivity {
 
-    CustomDateTimePicker custom;
-    Button btnEventDateTime;
-    EditText resultTime;
+    private CustomDateTimePicker custom;
+    private Button btnEventDateTime;
+    private EditText resultTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

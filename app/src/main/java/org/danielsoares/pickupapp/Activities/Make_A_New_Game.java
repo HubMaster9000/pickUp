@@ -32,7 +32,7 @@ public class Make_A_New_Game extends AppCompatActivity {
     private String sportPlay;
     private String hostStart;
     private Location gameLocation;
-    private Calendar timebegin;
+    private Calendar timeBegin;
     private Calendar timeEnd;
     private int max;
 
@@ -85,7 +85,7 @@ public class Make_A_New_Game extends AppCompatActivity {
 
         String key = ref.push().getKey();
         Game_Class newGame = new Game_Class(sportPlay, hostStart, gameLocation,
-                timebegin, timeEnd, max);
+                timeBegin, timeEnd, max);
         Map<String, Object> postValues = newGame.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
