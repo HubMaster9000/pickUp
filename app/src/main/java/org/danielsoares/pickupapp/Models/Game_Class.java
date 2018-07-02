@@ -72,5 +72,6 @@ public class Game_Class implements Comparable<Game_Class> {
         values.put("End Time", endTime);
         values.put("Players", players);
         values.put("Capacity", maxSize);
+        return values;
     }
 }
