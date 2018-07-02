@@ -10,8 +10,8 @@ import org.danielsoares.pickupapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    ProgressBar progressBar;
-    TextView textView;
+    private ProgressBar progressBar;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         progressAnimation();
     }
 
-    public void progressAnimation() {
+    private void progressAnimation() {
         ProgressBarAnimation anim = new ProgressBarAnimation( MainActivity.this, progressBar, textView, 0f, 100f);
         anim.setDuration(8000);
         progressBar.setAnimation(anim);

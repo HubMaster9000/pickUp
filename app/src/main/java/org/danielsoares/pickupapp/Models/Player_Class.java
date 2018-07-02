@@ -16,7 +16,7 @@ public class Player_Class implements Serializable{
     private final int CUSTOM = 0;
     private final int GOOGLE = 1;
 
-    // Constuctors
+    // Constructors
     public Player_Class(User custom) {
         customLogin = custom;
         accountType = CUSTOM;

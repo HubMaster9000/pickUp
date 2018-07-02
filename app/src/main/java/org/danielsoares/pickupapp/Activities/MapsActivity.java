@@ -37,7 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void initial() {
-        submitButton = (Button) findViewById(R.id.submitButton);
+        submitButton = findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (marker == null) {

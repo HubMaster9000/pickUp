@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:maxLines="1"
             android:textColor="@android:color/holo_blue_bright" />
     </android.support.design.widget.TextInputLayout>
@@ -74,17 +74,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left"
-            android:layout_marginRight="10dp"
+            android:layout_gravity="bottom|start"
+            android:layout_marginEnd="10dp"
             android:text="@string/already_have_account"
             android:textColor="@android:color/holo_blue_bright"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_marginRight="10dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/appCompatTextViewLoginLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|end"
             android:text="@string/login"
             android:textColor="@color/titleGreen"
             android:textSize="16sp" />
