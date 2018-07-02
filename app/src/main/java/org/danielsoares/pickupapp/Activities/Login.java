@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth .getInstance();
 
         initViews();
         initListeners();
