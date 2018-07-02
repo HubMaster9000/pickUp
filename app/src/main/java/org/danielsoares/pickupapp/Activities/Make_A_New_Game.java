@@ -16,6 +16,8 @@ import org.danielsoares.pickupapp.Models.Game_Class;
 import org.danielsoares.pickupapp.R;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Make_A_New_Game extends AppCompatActivity {
 
@@ -24,7 +26,7 @@ public class Make_A_New_Game extends AppCompatActivity {
 
     private LatLng location;
 
-    private DatabaseReference database;
+    private DatabaseReference ref;
 
     // Game info
     private String sportPlay;
@@ -68,7 +70,8 @@ public class Make_A_New_Game extends AppCompatActivity {
         });
 
         // Firebase reference
-        database = FirebaseDatabase.getInstance().getReference();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        ref = database.getReference("firestore/data~2FGames");
     }
 
     // Pulls info about time or location. null otherwise
@@ -80,9 +83,14 @@ public class Make_A_New_Game extends AppCompatActivity {
 
     private void writeNewGame() {
 
+        String key = ref.push().getKey();
         Game_Class newGame = new Game_Class(sportPlay, hostStart, gameLocation,
                 timebegin, timeEnd, max);
+        Map<String, Object> postValues = newGame.toMap();
 
-        database.child("Games").setValue(newGame);
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put(key, postValues);
+
+        ref.updateChildren(childUpdates);
     }
 }

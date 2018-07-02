@@ -3,7 +3,9 @@ package org.danielsoares.pickupapp.Models;
 import android.location.Location;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 public class Game_Class implements Comparable<Game_Class> {
@@ -33,26 +35,11 @@ public class Game_Class implements Comparable<Game_Class> {
     // returns True if below max capcity, False otherwise
     public boolean add(Player_Class player) {
         // If below the maximum size
-        if (size() < maxSize) {
+        if (players.size() < maxSize) {
             players.add(player);
             return true;
         }
         else return false;
-    }
-
-    // Current number of people playing
-    public int size() {
-        return players.size();
-    }
-
-    // Get location of game
-    public Location location() {
-        return location;
-    }
-
-    // List of all players playing
-    public Iterable<Player_Class> players() {
-        return players;
     }
 
     // Change later for convinence
@@ -65,14 +52,6 @@ public class Game_Class implements Comparable<Game_Class> {
         return sb.toString();
     }
 
-    // Get start and end time
-    public Calendar startTime() {
-        return startTime;
-    }
-    public Calendar endTime() {
-        return endTime;
-    }
-
     // Distance from game to player
     public double distanceTo(Location player) {
         return 0.0;
@@ -81,6 +60,17 @@ public class Game_Class implements Comparable<Game_Class> {
     // Allows us to sort by starting time
     // When sorted, games ALWAYS sort by starting time
     public int compareTo(Game_Class game) {
-        return startTime.compareTo(game.startTime());
+        return startTime.compareTo((Calendar) game.toMap().get("Start Time"));
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> values = new HashMap<>();
+        values.put("Sport", sport);
+        values.put("Host", host);
+        values.put("Location", location);
+        values.put("Start Time", startTime);
+        values.put("End Time", endTime);
+        values.put("Players", players);
+        values.put("Capacity", maxSize);
     }
 }
