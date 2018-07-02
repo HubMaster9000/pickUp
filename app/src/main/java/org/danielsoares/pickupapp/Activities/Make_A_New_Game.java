@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -86,11 +85,4 @@ public class Make_A_New_Game extends AppCompatActivity {
 
         database.child("Games").setValue(newGame);
     }
-
-    // Get id of user
-    public String getUid() {
-        return FirebaseAuth.getInstance().getCurrentUser().getUid();
-    }
-
-
 }
