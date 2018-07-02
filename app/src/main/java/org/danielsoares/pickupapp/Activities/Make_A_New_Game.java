@@ -23,6 +23,7 @@ public class Make_A_New_Game extends AppCompatActivity {
 
     private Button selectTimeButton;
     private Button locationButton;
+    private Button newGameButton;
 
     private LatLng location;
 
@@ -57,7 +58,7 @@ public class Make_A_New_Game extends AppCompatActivity {
         selectTimeButton = findViewById(R.id.SelectTimeButton);
         selectTimeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Creates Dialogue Fragment
+                // C reates Dialogue Fragment
                             }
         });
 
@@ -66,6 +67,15 @@ public class Make_A_New_Game extends AppCompatActivity {
             public void onClick(View v) {
                 Intent map = new Intent(getApplicationContext(), MapsActivity.class);
                 startActivity(map);
+            }
+        });
+
+        newGameButton = findViewById(R.id.new_Game_button);
+        newGameButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                writeNewGame();
+                Intent submit = new Intent(getApplicationContext(), Available_Games.class);
+                startActivity(submit);
             }
         });
 
