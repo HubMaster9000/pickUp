@@ -2,22 +2,21 @@ package org.danielsoares.pickupapp.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.quickstart.database.models.Post;
-import com.google.firebase.quickstart.database.models.User;
 
-import com.google.android.gms.maps.model.LatLng;
-
+import org.danielsoares.pickupapp.Models.Game_Class;
 import org.danielsoares.pickupapp.R;
+
+import java.util.Calendar;
 
 public class Make_A_New_Game extends AppCompatActivity {
 
@@ -27,6 +26,14 @@ public class Make_A_New_Game extends AppCompatActivity {
     private LatLng location;
 
     private DatabaseReference database;
+
+    // Game info
+    private String sportPlay;
+    private String hostStart;
+    private Location gameLocation;
+    private Calendar timebegin;
+    private Calendar timeEnd;
+    private int max;
 
 
     @Override
@@ -60,6 +67,9 @@ public class Make_A_New_Game extends AppCompatActivity {
                 startActivity(map);
             }
         });
+
+        // Firebase reference
+        database = FirebaseDatabase.getInstance().getReference();
     }
 
     // Pulls info about time or location. null otherwise
@@ -67,6 +77,19 @@ public class Make_A_New_Game extends AppCompatActivity {
         if (getIntent().getParcelableExtra("Location") != null)
             location = (LatLng) getIntent().getParcelableExtra("Location");
 
+    }
+
+    private void writeNewGame() {
+
+        Game_Class newGame = new Game_Class(sportPlay, hostStart, gameLocation,
+                timebegin, timeEnd, max);
+
+        database.child("Games").setValue(newGame);
+    }
+
+    // Get id of user
+    public String getUid() {
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
 

@@ -27,6 +27,8 @@ public class Game_Class implements Comparable<Game_Class> {
         maxSize = max;
     }
 
+    public Game_Class() {};
+
     // Add a player to the game
     // returns True if below max capcity, False otherwise
     public boolean add(Player_Class player) {
