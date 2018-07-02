@@ -79,7 +79,7 @@ public class Available_Games extends AppCompatActivity implements AdapterView.On
         distanceDropDown.setAdapter(adapterDistances);
 
         // Initialize Spinner for Size
-        sizeDropDown = findViewById(R.id.distance_list);
+        sizeDropDown = findViewById(R.id.size_list);
         sizeDropDown.setOnItemSelectedListener(this);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapterSizes = ArrayAdapter.createFromResource(this,

@@ -95,7 +95,7 @@
             android:layout_gravity="bottom"
             android:text="@string/sign_up"
             android:textColor="@color/titleGreen"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
     </LinearLayout>
 
 </LinearLayout>

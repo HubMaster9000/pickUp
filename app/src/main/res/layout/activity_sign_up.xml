@@ -87,6 +87,6 @@
             android:layout_gravity="bottom|right"
             android:text="@string/login"
             android:textColor="@color/titleGreen"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>
