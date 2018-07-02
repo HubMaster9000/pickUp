@@ -1,7 +1,9 @@
-package org.danielsoares.pickupapp;
+package org.danielsoares.pickupapp.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import org.danielsoares.pickupapp.R;
 
 public class Home extends AppCompatActivity {
 

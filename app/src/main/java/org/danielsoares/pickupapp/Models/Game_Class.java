@@ -1,4 +1,4 @@
-package org.danielsoares.pickupapp;
+package org.danielsoares.pickupapp.Models;
 
 import android.location.Location;
 
@@ -23,9 +23,11 @@ public class Game_Class implements Comparable<Game_Class> {
         location = gameLocation;
         startTime = timebegin;
         endTime = timeEnd;
-        players = new LinkedList<Player_Class>();
+        players = new LinkedList<>();
         maxSize = max;
     }
+
+    public Game_Class() {};
 
     // Add a player to the game
     // returns True if below max capcity, False otherwise
@@ -69,6 +71,11 @@ public class Game_Class implements Comparable<Game_Class> {
     }
     public Calendar endTime() {
         return endTime;
+    }
+
+    // Distance from game to player
+    public double distanceTo(Location player) {
+        return 0.0;
     }
 
     // Allows us to sort by starting time

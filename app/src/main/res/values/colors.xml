@@ -8,4 +8,6 @@
     <color name="startblue">#09c6df</color>
     <color name="endblue">#0bcce6</color>
     <color name="colorAccent2">#FF4081</color>
+    <color name="loginGreen">#8bc34a</color>
+    <color name="titleGreen">#bef183</color>
 </resources>

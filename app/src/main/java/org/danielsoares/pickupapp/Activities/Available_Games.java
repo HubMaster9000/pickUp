@@ -1,21 +1,32 @@
-package org.danielsoares.pickupapp;
+package org.danielsoares.pickupapp.Activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Spinner;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.danielsoares.pickupapp.Models.Player_Class;
+import org.danielsoares.pickupapp.R;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Available_Games extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Spinner sportsDropDown;
     private Spinner distanceDropDown;
     private Spinner sizeDropDown;
+    private FloatingActionButton newGameButton;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,17 +35,29 @@ public class Available_Games extends AppCompatActivity implements AdapterView.On
         /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar); */
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        // Initialize Stuff
+        initialize();
 
+
+        // Initialize views in xml
+        TextView prof_name = findViewById(R.id.account_Name);
+        CircleImageView prof_pic = findViewById(R.id.account_Pic);
+
+        // Pull Google account info
+        Player_Class account = getIntent().getParcelableExtra("Account");
+
+        // Google Login info
+        String name = account.getName();
+        String img_URL = account.getPhoto().toString();
+
+        // Put info into xml
+        prof_name.setText(name);
+        prof_pic.setImageURI(Uri.parse(img_URL));
+    }
+
+    private void initialize() {
         // Initialize Spinner for Sports
-        sportsDropDown = (Spinner) findViewById(R.id.sport_list);
+        sportsDropDown = findViewById(R.id.sport_list);
         sportsDropDown.setOnItemSelectedListener(this);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapterSports = ArrayAdapter.createFromResource(this,
@@ -45,7 +68,7 @@ public class Available_Games extends AppCompatActivity implements AdapterView.On
         sportsDropDown.setAdapter(adapterSports);
 
         // Initialize Spinner for Distance
-        distanceDropDown = (Spinner) findViewById(R.id.distance_list);
+        distanceDropDown = findViewById(R.id.distance_list);
         distanceDropDown.setOnItemSelectedListener(this);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapterDistances = ArrayAdapter.createFromResource(this,
@@ -56,7 +79,7 @@ public class Available_Games extends AppCompatActivity implements AdapterView.On
         distanceDropDown.setAdapter(adapterDistances);
 
         // Initialize Spinner for Size
-        sizeDropDown = (Spinner) findViewById(R.id.distance_list);
+        sizeDropDown = findViewById(R.id.distance_list);
         sizeDropDown.setOnItemSelectedListener(this);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapterSizes = ArrayAdapter.createFromResource(this,
@@ -65,6 +88,16 @@ public class Available_Games extends AppCompatActivity implements AdapterView.On
         adapterSizes.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         sizeDropDown.setAdapter(adapterSizes);
+
+        // When button is clicked, go to page to make new game
+        newGameButton = findViewById(R.id.new_Game_button);
+        newGameButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent newGame = new Intent(getApplicationContext(), Make_A_New_Game.class);
+                startActivity(newGame);            }
+        });
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
     // Implements filters for spinners
     @Override

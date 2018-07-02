@@ -1,11 +1,11 @@
-package org.danielsoares.pickupapp;
+package org.danielsoares.pickupapp.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.content.Intent;
 
 public class ProgressBarAnimation extends Animation {
 
