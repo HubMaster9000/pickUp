@@ -341,8 +341,9 @@ public class CustomDateTimePicker implements View.OnClickListener {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM");
         simpleDateFormat.setCalendar(calendar);
+        String monthName = simpleDateFormat.format(calendar.getTime());
 
-        return simpleDateFormat.format(calendar.getTime());;
+        return monthName;
     }
 
     private String getWeekDayFullName(int weekDayNumber) {
@@ -351,8 +352,9 @@ public class CustomDateTimePicker implements View.OnClickListener {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
         simpleDateFormat.setCalendar(calendar);
+        String weekName = simpleDateFormat.format(calendar.getTime());
 
-        return simpleDateFormat.format(calendar.getTime());;
+        return weekName;
     }
 
     private String getWeekDayShortName(int weekDayNumber) {
@@ -361,8 +363,9 @@ public class CustomDateTimePicker implements View.OnClickListener {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EE");
         simpleDateFormat.setCalendar(calendar);
+        String weekName = simpleDateFormat.format(calendar.getTime());
 
-        return simpleDateFormat.format(calendar.getTime());;
+        return weekName;
     }
 
     private int getHourIn12Format(int hour24) {
@@ -379,8 +382,9 @@ public class CustomDateTimePicker implements View.OnClickListener {
     }
 
     private String getAMPM(Calendar calendar) {
-        return (calendar.get(Calendar.AM_PM) == (Calendar.AM)) ? "AM"
-                : "PM";;
+        String ampm = (calendar.get(Calendar.AM_PM) == (Calendar.AM)) ? "AM"
+                : "PM";
+        return ampm;
     }
 
     private void resetData() {
