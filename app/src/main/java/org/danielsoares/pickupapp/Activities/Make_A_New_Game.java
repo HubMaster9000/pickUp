@@ -69,6 +69,7 @@ public class Make_A_New_Game extends AppCompatActivity {
 
         // Firebase reference
         database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = database.getReference("server/saving-data/fireblog");
     }
 
     // Pulls info about time or location. null otherwise
