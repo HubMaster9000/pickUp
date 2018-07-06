@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.danielsoares.pickupapp.Models.Game_Class;
@@ -27,7 +27,7 @@ public class Make_A_New_Game extends AppCompatActivity {
 
     private LatLng location;
 
-    private DatabaseReference ref = FirebaseFirestore.getInstance().document("Games");
+    private DocumentReference ref = FirebaseFirestore.getInstance().document("Games");
 
     // Game info
     private String sportPlay;
