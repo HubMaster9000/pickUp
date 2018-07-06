@@ -58,7 +58,7 @@ public class Make_A_New_Game extends AppCompatActivity {
         selectTimeButton = findViewById(R.id.SelectTimeButton);
         selectTimeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // C reates Dialogue Fragment
+                // Creates Dialogue Fragment
                             }
         });
 
