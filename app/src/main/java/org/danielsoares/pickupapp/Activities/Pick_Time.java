@@ -11,12 +11,15 @@ import org.danielsoares.pickupapp.R;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Pick_Time extends AppCompatActivity {
 
     private CustomDateTimePicker custom;
     private Button btnEventDateTime;
     private EditText resultTime;
+    private int setDay, setMonth, setYear, setHour, setMinute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,12 @@ public class Pick_Time extends AppCompatActivity {
                                 + "-" + (monthNumber + 1) + "-" + calendarSelected.get(Calendar.DAY_OF_MONTH)
                                 + " " + hour24 + ":" + min
                                 + ":" + sec);
+
+                        setDay = date;
+                        setMonth = monthNumber;
+                        setYear = year;
+                        setMinute = min;
+                        setHour = hour24;
                     }
 
                     @Override
@@ -68,5 +77,14 @@ public class Pick_Time extends AppCompatActivity {
                 });
     }
 
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> values = new HashMap<>();
+        values.put("Day", setDay);
+        values.put("Month", setMonth);
+        values.put("Year", setYear);
+        values.put("Hour", setHour);
+        values.put("Minute", setMinute);
+        return values;
+    }
 
 }

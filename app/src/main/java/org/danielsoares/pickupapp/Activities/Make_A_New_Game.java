@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.danielsoares.pickupapp.Models.Game_Class;
 import org.danielsoares.pickupapp.R;
@@ -27,7 +27,7 @@ public class Make_A_New_Game extends AppCompatActivity {
 
     private LatLng location;
 
-    private DatabaseReference ref;
+    private DatabaseReference ref = FirebaseFirestore.getInstance().document("Games");
 
     // Game info
     private String sportPlay;
@@ -58,7 +58,7 @@ public class Make_A_New_Game extends AppCompatActivity {
         selectTimeButton = findViewById(R.id.SelectTimeButton);
         selectTimeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // C reates Dialogue Fragment
+                // Creates Dialogue Fragment
                             }
         });
 
@@ -78,10 +78,6 @@ public class Make_A_New_Game extends AppCompatActivity {
                 startActivity(submit);
             }
         });
-
-        // Firebase reference
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        ref = database.getReference("firestore/data~2FGames");
     }
 
     // Pulls info about time or location. null otherwise
@@ -92,15 +88,15 @@ public class Make_A_New_Game extends AppCompatActivity {
     }
 
     private void writeNewGame() {
-
+        // Unique Key for game
         String key = ref.push().getKey();
         Game_Class newGame = new Game_Class(sportPlay, hostStart, gameLocation,
                 timeBegin, timeEnd, max);
         Map<String, Object> postValues = newGame.toMap();
 
-        Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put(key, postValues);
+        Map<String, Object> games = new HashMap<>();   // Map of all games
+        games.put(key, postValues);
 
-        ref.updateChildren(childUpdates);
+        ref.updateChildren(games);
     }
 }

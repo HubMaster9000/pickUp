@@ -18,8 +18,8 @@ public class Game_Class implements Comparable<Game_Class> {
     private int maxSize;                     // Game could be set to unlimited size, then set this
                                              // to Integer_Max
     // Initialize class
-    public Game_Class(String sportPlay, String hostStart, Location gameLocation,
-                      Calendar timeBegin, Calendar timeEnd, int max) {
+    public Game_Class(String sportPlay, String hostStart, Location gameLocation, Calendar timeBegin, Calendar timeEnd,
+                      int max) {
         sport = sportPlay;
         host = hostStart;
         location = gameLocation;
