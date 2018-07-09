@@ -8,7 +8,9 @@ import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -30,7 +32,7 @@ import org.danielsoares.pickupapp.R;
 
 public class Login extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
-    private AppCompatTextView textViewLinkRegister;
+    private TextView textViewLinkRegister;
 
     private SignInButton googleLoginButton;
     private GoogleApiClient mGoogleApiClient;
@@ -41,6 +43,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     private FirebaseAuth mAuth;
     private EditText mEmailField;
     private EditText mPasswordField;
+    private Button emailSignInButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
         mEmailField = findViewById(R.id.field_email);
         mPasswordField = findViewById(R.id.field_password);
+        emailSignInButton = findViewById(R.id.emailSignInButton);
 
     }
 
@@ -104,7 +108,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         // Waits for google login button to be clicked
         googleLoginButton.setOnClickListener(this);
         // Buttons
-        findViewById(R.id.email_sign_in_button).setOnClickListener(this);
+        emailSignInButton.setOnClickListener(this);
     }
 
     /**
@@ -114,7 +118,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     public void onClick(View v) {
         switch (v.getId()) {
             // Login
-            case R.id.email_sign_in_button:
+            case R.id.emailSignInButton:
                 signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
                 break;
             // Directs you to Sign Up page
@@ -140,8 +144,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             Intent signIn = new Intent(getApplicationContext(), Available_Games.class);
             signIn.putExtra("Account", account);
             startActivity(signIn);
+            Toast.makeText(Login.this,
+                    "Google Sign in Successful",
+                    Toast.LENGTH_SHORT).show();
         }
         else {
+            Toast.makeText(Login.this,
+                    "Google Sign in Failed",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 

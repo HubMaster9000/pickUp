@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,12 +22,13 @@ import org.danielsoares.pickupapp.R;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
-    private AppCompatTextView appCompatTextViewLoginLink;
+    private TextView TextViewLoginLink;
 
     private FirebaseAuth mAuth;
     private EditText mEmailField;
     private EditText mPasswordField;
     private static final String TAG = "SignUp";
+    private boolean Created;
 
 
     @Override
@@ -45,7 +47,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
      */
     private void initViews() {
 
-        appCompatTextViewLoginLink = findViewById(R.id.appCompatTextViewLoginLink);
+        TextViewLoginLink = findViewById(R.id.TextViewLoginLink);
         mEmailField = findViewById(R.id.field_email);
         mPasswordField = findViewById(R.id.field_password);
 
@@ -55,7 +57,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
      * This method is to initialize listeners
      */
     private void initListeners() {
-        appCompatTextViewLoginLink.setOnClickListener(this);
+        TextViewLoginLink.setOnClickListener(this);
         // Buttons
         findViewById(R.id.email_create_account_button).setOnClickListener(this);
     }
@@ -72,7 +74,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
                 break;
             // Directs you to login page
-            case R.id.textViewLinkRegister:
+            case R.id.TextViewLoginLink:
                 // Navigate to LoginActivity
                 Intent loginIntent = new Intent(getApplicationContext(), Login.class);
                 startActivity(loginIntent);
@@ -96,41 +98,53 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+                            // User creation success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
+                            Created = true;
                         } else {
-                            // If sign in fails, display a message to the user.
+                            // If creation fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(SignUp.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            Created = false;
                         }
                     }
                 });
         // [END create_user_with_email]
 
-        // Send verification email
-        // [START send_email_verification]
-        final FirebaseUser user = mAuth.getCurrentUser();
-        user.sendEmailVerification()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // [START_EXCLUDE]
 
-                        if (task.isSuccessful()) {
-                            Toast.makeText(SignUp.this,
-                                    "Verification email sent to " + user.getEmail(),
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Log.e(TAG, "sendEmailVerification", task.getException());
-                            Toast.makeText(SignUp.this,
-                                    "Failed to send verification email.",
-                                    Toast.LENGTH_SHORT).show();
+        // Send verification email
+        if (Created) {
+            // [START send_email_verification]
+            final FirebaseUser user = mAuth.getCurrentUser();
+            user.sendEmailVerification()
+                    .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            // [START_EXCLUDE]
+
+                            if (task.isSuccessful()) {
+                                Toast.makeText(SignUp.this,
+                                        "Verification email sent to " + user.getEmail(),
+                                        Toast.LENGTH_SHORT).show();
+                                Intent signInIntent = new Intent(getApplicationContext(), Available_Games.class);
+                                startActivity(signInIntent);
+                            } else {
+                                Log.e(TAG, "sendEmailVerification", task.getException());
+                                Toast.makeText(SignUp.this,
+                                        "Failed to send verification email.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            // [END_EXCLUDE]
                         }
-                        // [END_EXCLUDE]
-                    }
-                });
-        // [END send_email_verification]
+                    });
+            // [END send_email_verification]
+        } else {
+            Toast.makeText(SignUp.this,
+                    "Please try again.",
+                    Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
