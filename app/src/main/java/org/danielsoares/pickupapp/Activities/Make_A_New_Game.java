@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -27,7 +28,7 @@ public class Make_A_New_Game extends AppCompatActivity {
 
     private LatLng location;
 
-    private DocumentReference ref = FirebaseFirestore.getInstance().document("Games");
+    private DocumentReference ref = FirebaseFirestore.getInstance().document("Games/");
 
     // Game info
     private String sportPlay;
@@ -89,14 +90,10 @@ public class Make_A_New_Game extends AppCompatActivity {
 
     private void writeNewGame() {
         // Unique Key for game
-        String key = ref.push().getKey();
         Game_Class newGame = new Game_Class(sportPlay, hostStart, gameLocation,
                 timeBegin, timeEnd, max);
         Map<String, Object> postValues = newGame.toMap();
 
-        Map<String, Object> games = new HashMap<>();   // Map of all games
-        games.put(key, postValues);
-
-        ref.updateChildren(games);
+        ref.set(postValues);
     }
 }
