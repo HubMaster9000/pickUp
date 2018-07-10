@@ -83,7 +83,7 @@ public class Make_A_New_Game extends AppCompatActivity {
          * Pass Directly current time format it will return AM and PM if you set
          * false
          */
-        custom.set24HourFormat(true);
+        custom.set24HourFormat(false);
         /**
          * Pass Directly current data and time to show when it pop up
          */
