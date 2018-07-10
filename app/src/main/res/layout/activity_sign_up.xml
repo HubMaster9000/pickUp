@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/light_blue_background"
     android:paddingBottom="20dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="20dp"
+    android:background="@android:color/holo_blue_bright"
     tools:context=".Activities.SignUp"
     android:orientation="vertical">
 
@@ -32,8 +32,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:textColor="@android:color/holo_blue_bright" />
+            android:textColor="@color/white"
+            android:maxLines="1"/>
     </android.support.design.widget.TextInputLayout>
 
     <!-- Enter Password here -->
@@ -49,8 +49,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:maxLines="1"
-            android:textColor="@android:color/holo_blue_bright" />
+            android:textColor="@color/white"
+            android:maxLines="1"/>
     </android.support.design.widget.TextInputLayout>
 
 
@@ -60,15 +60,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:background="#8bc34a"
+        android:background="@color/loginGreen"
         android:text="@string/sign_up"
         android:textColor="@android:color/background_light" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_marginTop="10dp">
         <!-- Login Link -->
         <TextView
@@ -77,12 +77,11 @@
             android:layout_gravity="bottom|start"
             android:layout_marginEnd="10dp"
             android:text="@string/already_have_account"
-            android:textColor="@android:color/holo_blue_bright"
             android:textSize="16sp"
             android:layout_marginRight="10dp" />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/appCompatTextViewLoginLink"
+        <TextView
+            android:id="@+id/TextViewLoginLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

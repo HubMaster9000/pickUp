@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/holo_blue_bright"
     tools:context=".Activities.Edit_Profile">
 
     <View
@@ -62,7 +63,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Please Enter Username"
+                            android:hint="@string/username"
                             android:inputType="text"
                             android:imeOptions="actionNext"
                             android:textColorHint="@color/startBlue" />
@@ -76,7 +77,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Please Enter Location"
+                            android:hint="@string/location"
                             android:inputType="text"
                             android:imeOptions="actionNext"
                             android:textColorHint="@color/startBlue" />
@@ -90,7 +91,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Please Enter Email Address"
+                            android:hint="@string/email"
                             android:imeOptions="actionNext"
                             android:inputType="textEmailAddress"
                             android:textColorHint="@color/startBlue" />
@@ -104,7 +105,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Please Enter Password"
+                            android:hint="@string/password"
                             android:imeOptions="actionNext"
                             android:inputType="textPassword"
                             android:textColorHint="@color/startBlue" />
@@ -117,7 +118,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/buttongradient"
-                        android:text="Save Edit"
+                        android:text="@string/save"
                         android:textColor="#fff" />
                 </LinearLayout>
             </LinearLayout>

@@ -3,6 +3,8 @@ package org.danielsoares.pickupapp.Activities;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -141,6 +143,7 @@ public class CustomDateTimePicker implements View.OnClickListener {
         return linear_main;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void showDialog() {
         if (!dialog.isShowing()) {
             if (calendar_date == null)
@@ -150,8 +153,8 @@ public class CustomDateTimePicker implements View.OnClickListener {
             selectedMinute = calendar_date.get(Calendar.MINUTE);
 
             timePicker.setIs24HourView(is24HourView);
-            timePicker.setCurrentHour(selectedHour);
-            timePicker.setCurrentMinute(selectedMinute);
+            timePicker.setHour(selectedHour);
+            timePicker.setMinute(selectedMinute);
 
             datePicker.updateDate(calendar_date.get(Calendar.YEAR),
                     calendar_date.get(Calendar.MONTH),
