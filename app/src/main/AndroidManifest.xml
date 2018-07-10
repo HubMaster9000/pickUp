@@ -42,7 +42,6 @@
             android:name=".Activities.Edit_Profile"
             android:label="@string/title_activity_edit_profile"
             android:theme="@style/AppTheme" />
-
         <activity android:name=".Activities.Make_A_New_Game" />
         <activity android:name=".Activities.Pick_Time" />
         <!--
@@ -56,14 +55,15 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAjBS7QEhuNIMMt-6C7STU2fZBe8v7FRzw" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity
             android:name=".Activities.MapsActivity"
-            android:label="@string/title_activity_maps"/>
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".Activities.View_Game" />
+        <activity android:name=".Activities.My_Games"></activity>
     </application>
 
 </manifest>

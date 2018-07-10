@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -119,7 +118,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         switch (v.getId()) {
             // Login
             case R.id.emailSignInButton:
-                signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
+                emailSignIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
                 break;
             // Directs you to Sign Up page
             case R.id.textViewLinkRegister:
@@ -178,7 +177,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     /**
      * Sign in with email and password
      */
-    private void signIn(String email, String password) {
+    private void emailSignIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
         if (!validateForm()) {
             return;
