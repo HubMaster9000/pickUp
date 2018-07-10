@@ -27,7 +27,7 @@ public class Make_A_New_Game extends AppCompatActivity {
 
     private LatLng location;
 
-    private DocumentReference ref = FirebaseFirestore.getInstance().document("Games");
+    private DocumentReference ref = FirebaseFire  store.getInstance().document("Games");
 
     // Game info
     private String sportPlay;
