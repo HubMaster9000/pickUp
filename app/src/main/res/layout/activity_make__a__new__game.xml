@@ -16,52 +16,68 @@
         android:layout_height="wrap_content"
         android:text="@string/create_game"
         android:textSize="38sp"
+        android:layout_marginBottom="30dp"
         android:textColor="@color/titleGreen"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/select_sport"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
     <Spinner
         android:id="@+id/sport_list"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="20dp">
+        android:layout_height="40dp">
     </Spinner>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/start_time"
-        android:textSize="16sp"
-        />
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"/>
 
     <Button
-        android:id="@+id/SelectTimeButton"
+        android:id="@+id/selectTimeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_start_time" />
+        android:layout_marginTop="10dp"
+        android:background="@color/loginGreen"
+        android:text="@string/select_start_time"
+        android:textSize="16sp"
+        android:textColor="@android:color/background_light" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:text="@string/location"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/mapButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/loginGreen"
+        android:text="@string/select_location"
         android:textSize="16sp"
-        />
+        android:textColor="@android:color/background_light" />
 
-    <Button
-        android:id="@+id/MapButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/select_location" />
-
-    <Button
-        android:id="@+id/New_Game_Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_game" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+        <Button
+            android:id="@+id/newGameButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@color/loginGreen"
+            android:text="@string/add_game"
+            android:textColor="@android:color/background_light"
+            android:textSize="16sp" />
+    </RelativeLayout>
 
 </LinearLayout>

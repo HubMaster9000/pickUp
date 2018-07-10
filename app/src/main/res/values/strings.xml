@@ -72,4 +72,9 @@
     <string name="games">Games</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="sport">Sport</string>
+    <string name="join_game">Join Game</string>
+    <string name="leave_game">Leave Game</string>
+    <string name="follow">Follow</string>
+    <string name="host">Host</string>
 </resources>

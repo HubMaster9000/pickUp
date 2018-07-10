@@ -146,14 +146,14 @@
             android:layout_height="wrap_content"
             android:gravity="center">
             <Button
-                android:id="@+id/follow_me_button"
+                android:id="@+id/follow_button"
                 android:textColor="#fff"
                 android:background="@drawable/buttongradient"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Follow Me">
+                android:text="@string/follow">
             </Button>
         </LinearLayout>
 
@@ -270,7 +270,7 @@
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Edit Info"/>
+                android:text="@string/edit_profile"/>
         </LinearLayout>
         </LinearLayout>
     </LinearLayout>
