@@ -102,7 +102,7 @@ public class Make_A_New_Game extends AppCompatActivity {
     }
 
     private void initialize() {
-        selectTimeButton = findViewById(R.id.SelectTimeButton);
+        selectTimeButton = findViewById(R.id.selectTimeButton);
         selectTimeButton.setOnClickListener(
                 new View.OnClickListener() {
 
@@ -113,7 +113,7 @@ public class Make_A_New_Game extends AppCompatActivity {
                     }
                 });
 
-        locationButton = findViewById(R.id.MapButton);
+        locationButton = findViewById(R.id.mapButton);
         selectTimeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent map = new Intent(getApplicationContext(), MapsActivity.class);
