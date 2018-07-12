@@ -14,7 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import org.danielsoares.pickupapp.R;
 
 
-public class AvailableGames extends AppCompatActivity {
+public class AvailableGames extends AppCompatActivity implements View.OnClickListener {
 
     private Spinner sportsDropDown;
     private Spinner distanceDropDown;
@@ -26,7 +26,6 @@ public class AvailableGames extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_available_games);
-        mAuth = FirebaseAuth.getInstance();
 
         initViews();
         initListeners();

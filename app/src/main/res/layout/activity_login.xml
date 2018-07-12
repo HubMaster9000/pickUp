@@ -22,27 +22,39 @@
 
 
     <!-- Enter email here -->
-    <EditText
-        android:id="@+id/field_email"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/white"
-        android:maxLines="1"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:id="@+id/field_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:maxLines="1"/>
+    </android.support.design.widget.TextInputLayout>
 
 
     <!-- Enter Password here -->
-    <EditText
-        android:id="@+id/field_password"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:textColor="@color/white"
-        android:maxLines="1"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:id="@+id/field_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:maxLines="1"/>
+    </android.support.design.widget.TextInputLayout>
 
 
     <!-- Login Button -->

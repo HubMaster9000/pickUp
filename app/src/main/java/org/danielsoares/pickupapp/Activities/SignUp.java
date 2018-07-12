@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -39,7 +40,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         initViews();
         initListeners();
 
-        }
+    }
 
     /**
      * Initializes views
@@ -78,7 +79,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 Intent loginIntent = new Intent(getApplicationContext(), Login.class);
                 startActivity(loginIntent);
                 break;
-            }
+        }
     }
 
 
@@ -102,9 +103,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                             Created = true;
                         } else {
                             // If creation fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUp.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
                             Created = false;
                         }
                     }
@@ -140,7 +138,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             // [END send_email_verification]
         } else {
             Toast.makeText(SignUp.this,
-                    "Please try again.",
+                    "Authentication failed.",
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -150,29 +148,26 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     /**
      * Validate form
      */
-        private boolean validateForm() {
-            boolean valid = true;
+    private boolean validateForm() {
+        boolean valid = true;
 
-            String email = mEmailField.getText().toString();
-            if (TextUtils.isEmpty(email)) {
-                mEmailField.setError("Required.");
-                valid = false;
-            } else {
-                mEmailField.setError(null);
-            }
-
-            String password = mPasswordField.getText().toString();
-            if (TextUtils.isEmpty(password)) {
-                mPasswordField.setError("Required.");
-                valid = false;
-            } else {
-                mPasswordField.setError(null);
-            }
-
-            return valid;
+        String email = mEmailField.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            mEmailField.setError("Required.");
+            valid = false;
+        } else {
+            mEmailField.setError(null);
         }
 
+        String password = mPasswordField.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            mPasswordField.setError("Required.");
+            valid = false;
+        } else {
+            mPasswordField.setError(null);
+        }
+
+        return valid;
+    }
+
 }
-
-
-

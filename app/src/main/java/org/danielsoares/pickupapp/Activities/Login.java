@@ -125,6 +125,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                 // Navigate to RegisterActivity
                 Intent intentRegister = new Intent(getApplicationContext(), SignUp.class);
                 startActivity(intentRegister);
+                finish();
                 break;
             // Login with Google
             case R.id.googleLoginButton:

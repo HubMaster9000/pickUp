@@ -137,7 +137,7 @@ public class MakeANewGame extends AppCompatActivity {
             }
         });
 
-        newGameButton = findViewById(R.id.new_Game_button);
+        newGameButton = findViewById(R.id.newGameButton);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 writeNewGame();
