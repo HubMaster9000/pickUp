@@ -45,7 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             "Select a location first", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Intent sendLocation = new Intent(getApplicationContext(), Make_A_New_Game.class);
+                    Intent sendLocation = new Intent(getApplicationContext(), MakeANewGame.class);
                     sendLocation.putExtra("Location", location);
                     startActivity(sendLocation);
                 }

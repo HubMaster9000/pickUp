@@ -125,6 +125,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                 // Navigate to RegisterActivity
                 Intent intentRegister = new Intent(getApplicationContext(), SignUp.class);
                 startActivity(intentRegister);
+                finish();
                 break;
             // Login with Google
             case R.id.googleLoginButton:
@@ -140,7 +141,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         if (result.isSuccess()) {
             GoogleSignInAccount accountGoogle = result.getSignInAccount();
             Player_Class account = new Player_Class(accountGoogle);
-            Intent signIn = new Intent(getApplicationContext(), Available_Games.class);
+            Intent signIn = new Intent(getApplicationContext(), AvailableGames.class);
             signIn.putExtra("Account", account);
             startActivity(signIn);
             Toast.makeText(Login.this,
@@ -189,8 +190,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
+                            // Sign in success, go to Available Games
+                            Intent loginIntent = new Intent(getApplicationContext(), AvailableGames.class);
+                            startActivity(loginIntent);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());

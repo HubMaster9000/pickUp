@@ -77,4 +77,6 @@
     <string name="leave_game">Leave Game</string>
     <string name="follow">Follow</string>
     <string name="host">Host</string>
+    <string name="remind_games">Remind me of games:</string>
+    <string name="my_games">My Games</string>
 </resources>

@@ -11,4 +11,6 @@
     <color name="loginGreen">#8bc34a</color>
     <color name="titleGreen">#bef183</color>
     <color name="white">#FFFFFF</color>
+    <color name="silver">#BEBEBE</color>
+    <color name="completedGreen">#2ABF52</color>
 </resources>

@@ -40,7 +40,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         initViews();
         initListeners();
 
-        }
+    }
 
     /**
      * Initializes views
@@ -79,7 +79,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 Intent loginIntent = new Intent(getApplicationContext(), Login.class);
                 startActivity(loginIntent);
                 break;
-            }
+        }
     }
 
 
@@ -103,9 +103,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                             Created = true;
                         } else {
                             // If creation fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUp.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
                             Created = false;
                         }
                     }
@@ -127,7 +124,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                                 Toast.makeText(SignUp.this,
                                         "Verification email sent to " + user.getEmail(),
                                         Toast.LENGTH_SHORT).show();
-                                Intent signInIntent = new Intent(getApplicationContext(), Available_Games.class);
+                                Intent signInIntent = new Intent(getApplicationContext(), AvailableGames.class);
                                 startActivity(signInIntent);
                             } else {
                                 Log.e(TAG, "sendEmailVerification", task.getException());
@@ -141,7 +138,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             // [END send_email_verification]
         } else {
             Toast.makeText(SignUp.this,
-                    "Please try again.",
+                    "Authentication failed.",
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -151,29 +148,26 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     /**
      * Validate form
      */
-        private boolean validateForm() {
-            boolean valid = true;
+    private boolean validateForm() {
+        boolean valid = true;
 
-            String email = mEmailField.getText().toString();
-            if (TextUtils.isEmpty(email)) {
-                mEmailField.setError("Required.");
-                valid = false;
-            } else {
-                mEmailField.setError(null);
-            }
-
-            String password = mPasswordField.getText().toString();
-            if (TextUtils.isEmpty(password)) {
-                mPasswordField.setError("Required.");
-                valid = false;
-            } else {
-                mPasswordField.setError(null);
-            }
-
-            return valid;
+        String email = mEmailField.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            mEmailField.setError("Required.");
+            valid = false;
+        } else {
+            mEmailField.setError(null);
         }
 
+        String password = mPasswordField.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            mPasswordField.setError("Required.");
+            valid = false;
+        } else {
+            mPasswordField.setError(null);
+        }
+
+        return valid;
+    }
+
 }
-
-
-
