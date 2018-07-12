@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/holo_blue_bright"
-    tools:context=".Activities.Edit_Profile">
+    tools:context=".Activities.EditProfile">
 
     <ScrollView
         android:id="@+id/scrollView_account"

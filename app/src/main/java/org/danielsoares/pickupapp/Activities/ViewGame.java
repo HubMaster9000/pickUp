@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import org.danielsoares.pickupapp.R;
 
-public class View_Game extends AppCompatActivity {
+public class ViewGame extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view__game);
+        setContentView(R.layout.activity_view_game);
     }
 }

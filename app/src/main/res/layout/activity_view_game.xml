@@ -8,86 +8,92 @@
     android:paddingRight="20dp"
     android:paddingTop="20dp"
     android:background="@android:color/holo_blue_bright"
-    tools:context=".Activities.View_Game"
+    tools:context=".Activities.ViewGame"
     android:orientation="vertical">
 
 
-    <!-- Title -->
+    <!-- Sport Name -->
     <TextView
+        android:id="@+id/gameName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_game"
+        android:text="Name of Game"
         android:textSize="38sp"
         android:layout_marginBottom="30dp"
         android:textColor="@color/titleGreen"/>
 
 
-    <!-- Select Sport -->
+    <!-- Sport -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_sport"
+        android:text="@string/sport"
         android:textSize="18sp" />
 
-    <Spinner
-        android:id="@+id/sport_list"
+    <TextView
+        android:id="@+id/sportName"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
-    </Spinner>
+        android:layout_height="wrap_content"
+        android:text="name of sport"/>
 
 
-    <!-- Select Start Time -->
+    <!-- Host -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/host"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/hostName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="name of host"/>
+
+
+    <!-- Start Time -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/start_time"
         android:textSize="18sp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="15dp"/>
 
-    <Button
-        android:id="@+id/selectTimeButton"
+    <TextView
+        android:id="@+id/startTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/silver"
-        android:text="@string/select_start_time"
-        android:textSize="16sp"
-        android:textColor="@android:color/background_light" />
+        android:text="time game starts" />
 
 
-    <!-- Select Location -->
+    <!-- Location -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:text="@string/location"
         android:textSize="18sp"/>
 
-    <Button
-        android:id="@+id/mapButton"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/gameOnMap"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/silver"
-        android:text="@string/select_location"
-        android:textSize="16sp"
-        android:textColor="@android:color/background_light" />
+        android:layout_height="wrap_content"/>
 
 
-    <!-- Add Game -->
+    <!-- Join Game -->
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom">
         <Button
-            android:id="@+id/newGameButton"
+            android:id="@+id/joinGame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:background="@color/silver"
-            android:text="@string/add_game"
-            android:textColor="@android:color/background_light"
-            android:textSize="16sp" />
+            android:background="@color/loginGreen"
+            android:text="@string/join_game"
+            android:textColor="@android:color/background_light" />
     </RelativeLayout>
 
 </LinearLayout>

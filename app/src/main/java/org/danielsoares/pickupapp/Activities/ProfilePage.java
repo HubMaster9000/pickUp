@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.danielsoares.pickupapp.R;
 
-public class Profile_Page extends AppCompatActivity {
+public class ProfilePage extends AppCompatActivity {
 
     private ImageView editInfoButton = findViewById(R.id.edit_info_button);
     private TextView editInfoText = findViewById(R.id.edit_info_text);
@@ -30,9 +30,9 @@ public class Profile_Page extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Profile_Page.this, Edit_Profile.class);
+                Intent intent = new Intent(ProfilePage.this, EditProfile.class);
                 // intent.putExtra("key",value);
-                Profile_Page.this.startActivity(intent);
+                ProfilePage.this.startActivity(intent);
             }
         });
 
@@ -40,8 +40,8 @@ public class Profile_Page extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Profile_Page.this, Edit_Profile.class);
-                Profile_Page.this.startActivity(intent);
+                Intent intent = new Intent(ProfilePage.this, EditProfile.class);
+                ProfilePage.this.startActivity(intent);
             }
         });
 

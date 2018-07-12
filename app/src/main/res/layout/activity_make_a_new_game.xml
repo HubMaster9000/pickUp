@@ -8,92 +8,86 @@
     android:paddingRight="20dp"
     android:paddingTop="20dp"
     android:background="@android:color/holo_blue_bright"
-    tools:context=".Activities.View_Game"
+    tools:context=".Activities.ViewGame"
     android:orientation="vertical">
 
 
-    <!-- Sport Name -->
+    <!-- Title -->
     <TextView
-        android:id="@+id/gameName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name of Game"
+        android:text="@string/create_game"
         android:textSize="38sp"
         android:layout_marginBottom="30dp"
         android:textColor="@color/titleGreen"/>
 
 
-    <!-- Sport -->
+    <!-- Select Sport -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sport"
+        android:text="@string/select_sport"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/sportName"
+    <Spinner
+        android:id="@+id/sport_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="name of sport"/>
+        android:layout_height="40dp">
+    </Spinner>
 
 
-    <!-- Host -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/host"
-        android:textSize="18sp"
-        android:layout_marginTop="15dp"/>
-
-    <TextView
-        android:id="@+id/hostName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="name of host"/>
-
-
-    <!-- Start Time -->
+    <!-- Select Start Time -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/start_time"
         android:textSize="18sp"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:id="@+id/startTime"
+    <Button
+        android:id="@+id/selectTimeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="time game starts" />
+        android:layout_marginTop="10dp"
+        android:background="@color/silver"
+        android:text="@string/select_start_time"
+        android:textSize="16sp"
+        android:textColor="@android:color/background_light" />
 
 
-    <!-- Location -->
+    <!-- Select Location -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:text="@string/location"
         android:textSize="18sp"/>
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/gameOnMap"
+    <Button
+        android:id="@+id/mapButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/silver"
+        android:text="@string/select_location"
+        android:textSize="16sp"
+        android:textColor="@android:color/background_light" />
 
 
-    <!-- Join Game -->
+    <!-- Add Game -->
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="bottom">
         <Button
-            android:id="@+id/joinGame"
+            android:id="@+id/newGameButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:background="@color/loginGreen"
-            android:text="@string/join_game"
-            android:textColor="@android:color/background_light" />
+            android:background="@color/silver"
+            android:text="@string/add_game"
+            android:textColor="@android:color/background_light"
+            android:textSize="16sp" />
     </RelativeLayout>
 
 </LinearLayout>

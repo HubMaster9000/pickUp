@@ -22,7 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-public class Make_A_New_Game extends AppCompatActivity {
+public class MakeANewGame extends AppCompatActivity {
 
     private Button selectTimeButton;
     private Button locationButton;
@@ -49,7 +49,7 @@ public class Make_A_New_Game extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_make__a__new__game);
+        setContentView(R.layout.activity_make_a_new_game);
 
         custom = new CustomDateTimePicker(this,
                 new CustomDateTimePicker.ICustomDateTimeListener() {
@@ -141,7 +141,7 @@ public class Make_A_New_Game extends AppCompatActivity {
         newGameButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 writeNewGame();
-                Intent submit = new Intent(getApplicationContext(), Available_Games.class);
+                Intent submit = new Intent(getApplicationContext(), AvailableGames.class);
                 startActivity(submit);
             }
         });
