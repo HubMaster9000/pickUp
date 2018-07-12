@@ -9,6 +9,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activities.MainActivity">
 
+
+    <!-- Logo -->
     <ImageView
         android:layout_width="500dp"
         android:layout_height="500dp"

@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp">
 
+        <!-- Profile Picture -->
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/account_Pic"
             android:layout_width="40dp"
@@ -31,6 +32,8 @@
             />
 
     </LinearLayout>
+
+    <!-- Game Filters -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -56,6 +59,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
     </LinearLayout>
+
+    <!-- Add Game -->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/new_Game_button"
         android:layout_width="wrap_content"

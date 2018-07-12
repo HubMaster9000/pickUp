@@ -20,6 +20,7 @@
             android:background="@drawable/gradientbackground"
             android:orientation="vertical">
 
+            <!-- Profile Picture -->
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageView_account_profile"
                 android:layout_width="150dp"
@@ -30,6 +31,7 @@
                 app:civ_border_color="#FFFFFF"
                 app:civ_border_width="2dp" />
 
+            <!-- Username -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,6 +43,8 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
+
+        <!-- Social Info -->
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="90dp"
@@ -56,6 +60,7 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
+                <!-- Games -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -80,6 +85,7 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
+                <!-- Followers -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -104,6 +110,7 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
+                <!-- Following -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -134,17 +141,20 @@
 
     </RelativeLayout>
 
+    <!-- Body -->
     <LinearLayout
         android:layout_width="360dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center">
 
+        <!-- Follow -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_marginTop="10dp">
             <Button
                 android:id="@+id/follow_button"
                 android:textColor="#fff"
@@ -157,6 +167,8 @@
             </Button>
         </LinearLayout>
 
+
+        <!-- Email -->
         <LinearLayout
             android:orientation="horizontal"
             android:paddingStart="25dp"
@@ -179,6 +191,8 @@
                 android:paddingLeft="20dp" />
         </LinearLayout>
 
+
+        <!-- Location -->
         <LinearLayout
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
@@ -202,6 +216,8 @@
                 android:paddingLeft="20dp" />
         </LinearLayout>
 
+
+        <!-- Add to Group -->
         <LinearLayout
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
@@ -225,6 +241,8 @@
                 android:text="Add To Group"/>
         </LinearLayout>
 
+
+        <!-- Show Comments -->
         <LinearLayout
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
@@ -248,6 +266,8 @@
                 android:text="Show All Comments"/>
         </LinearLayout>
 
+
+        <!-- Edit Profile -->
         <LinearLayout
             android:layout_marginTop="10dp"
             android:orientation="horizontal"

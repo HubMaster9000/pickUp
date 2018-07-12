@@ -12,6 +12,7 @@
     tools:context=".Activities.Login"
     android:orientation="vertical">
 
+
     <!-- Logo -->
     <ImageView
         android:layout_width="160dp"
@@ -19,39 +20,30 @@
         android:layout_gravity="center_horizontal"
         android:src="@drawable/transparent_app_icon" />
 
+
     <!-- Enter email here -->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayoutEmail"
+    <EditText
+        android:id="@+id/field_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp">
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:layout_marginTop="40dp"/>
 
-        <EditText
-            android:id="@+id/field_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/white"
-            android:maxLines="1"/>
-    </android.support.design.widget.TextInputLayout>
 
     <!-- Enter Password here -->
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayoutPassword"
+    <EditText
+        android:id="@+id/field_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:layout_marginTop="20dp"/>
 
-        <EditText
-            android:id="@+id/field_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:textColor="@color/white"
-            android:maxLines="1"/>
-    </android.support.design.widget.TextInputLayout>
 
     <!-- Login Button -->
     <Button
@@ -63,6 +55,7 @@
         android:text="@string/login"
         android:textColor="@android:color/background_light"
         android:textSize="16sp" />
+
 
     <!-- Google Login Button -->
     <com.google.android.gms.common.SignInButton

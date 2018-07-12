@@ -9,16 +9,6 @@
     android:background="@android:color/holo_blue_bright"
     tools:context=".Activities.Edit_Profile">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="50dp"
-        android:background="@color/startBlue"
-        android:layout_alignParentLeft="true" />
-
     <ScrollView
         android:id="@+id/scrollView_account"
         android:layout_width="match_parent"
@@ -27,109 +17,22 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true">
 
-        <RelativeLayout
-            android:id="@+id/linear_account"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="100dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="100dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/edit_profile"
-                        android:textSize="30sp"
-                        android:textStyle="bold" />
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/startBlue">
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/username"
-                            android:inputType="text"
-                            android:imeOptions="actionNext"
-                            android:textColorHint="@color/startBlue" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/startBlue">
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/location"
-                            android:inputType="text"
-                            android:imeOptions="actionNext"
-                            android:textColorHint="@color/startBlue" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/startBlue">
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/email"
-                            android:imeOptions="actionNext"
-                            android:inputType="textEmailAddress"
-                            android:textColorHint="@color/startBlue" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/startBlue">
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/password"
-                            android:imeOptions="actionNext"
-                            android:inputType="textPassword"
-                            android:textColorHint="@color/startBlue" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <Button
-                        android:id="@+id/save_edit_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/buttongradient"
-                        android:text="@string/save"
-                        android:textColor="#fff" />
-                </LinearLayout>
-            </LinearLayout>
+            android:orientation="vertical"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true">
+                android:layout_marginBottom="20dp">
 
+                <!-- Profile Picture -->
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imageView_account_profile"
                     android:layout_width="150dp"
@@ -138,8 +41,12 @@
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/youngtiger"
                     app:civ_border_color="#FFFFFF"
-                    app:civ_border_width="2dp" />
+                    app:civ_border_width="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"/>
 
+
+                <!-- Edit Profile Picture -->
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/floatingActionButton"
                     android:layout_width="wrap_content"
@@ -149,8 +56,86 @@
                     android:layout_alignRight="@+id/imageView_account_profile"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/ic_edit_black_24dp" />
-
             </RelativeLayout>
-        </RelativeLayout>
+
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/edit_profile"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
+
+            <!-- Edit Username -->
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/username"
+                android:inputType="text"
+                android:imeOptions="actionNext"
+                android:textColorHint="@color/startBlue" />
+
+
+            <!-- Edit Location -->
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/location"
+                android:inputType="text"
+                android:imeOptions="actionNext"
+                android:textColorHint="@color/startBlue" />
+
+
+            <!-- Edit Email -->
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/startBlue" />
+
+
+            <!-- Edit Password -->
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:textColorHint="@color/startBlue" />
+
+
+            <!-- Game Reminder -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/remind_games"/>
+                <Spinner
+                    android:id="@+id/gameReminder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/remind_games" />
+            </LinearLayout>
+
+
+            <!-- Save -->
+            <Button
+                android:id="@+id/save_edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/buttongradient"
+                android:backgroundTint="@color/loginGreen"
+                android:text="@string/save"
+                android:textColor="@color/white" />
+        </LinearLayout>
     </ScrollView>
 </RelativeLayout>
