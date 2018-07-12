@@ -12,13 +12,13 @@ public class Game_Class implements Comparable<Game_Class> {
     private String sport;
     private String host;
     private Location location;
-    private Calendar startTime;
-    private Calendar endTime;
+    private Time startTime;
+    private Time endTime;
     private Queue<Player_Class> players;     // infinite list of people in/coming to the game
     private int maxSize;                     // Game could be set to unlimited size, then set this
                                              // to Integer_Max
     // Initialize class
-    public Game_Class(String sportPlay, String hostStart, Location gameLocation, Calendar timeBegin, Calendar timeEnd,
+    public Game_Class(String sportPlay, String hostStart, Location gameLocation, Time timeBegin, Time timeEnd,
                       int max) {
         sport = sportPlay;
         host = hostStart;
@@ -60,7 +60,7 @@ public class Game_Class implements Comparable<Game_Class> {
     // Allows us to sort by starting time
     // When sorted, games ALWAYS sort by starting time
     public int compareTo(Game_Class game) {
-        return startTime.compareTo((Calendar) game.toMap().get("Start Time"));
+        return startTime.compareTo((Time) game.toMap().get("Start Time"));
     }
 
     public Map<String, Object> toMap() {

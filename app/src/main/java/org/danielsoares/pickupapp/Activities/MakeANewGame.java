@@ -16,6 +16,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.danielsoares.pickupapp.Models.Game_Class;
+import org.danielsoares.pickupapp.Models.Time;
 import org.danielsoares.pickupapp.R;
 
 import java.util.Calendar;
@@ -41,8 +42,8 @@ public class MakeANewGame extends AppCompatActivity {
     private String sportPlay;
     private String hostStart;
     private Location gameLocation;
-    private Calendar timeBegin;
-    private Calendar timeEnd;
+    private Time timeBegin;
+    private Time timeEnd;
     private int max;
 
 
@@ -81,6 +82,7 @@ public class MakeANewGame extends AppCompatActivity {
                             setYear = year;
                             setMinute = min;
                             setHour = hour24;
+
                         } else
                             ;
                     }
