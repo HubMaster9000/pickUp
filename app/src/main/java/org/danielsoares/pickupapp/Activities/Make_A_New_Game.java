@@ -34,7 +34,7 @@ public class Make_A_New_Game extends AppCompatActivity {
     private int setDay, setMonth, setYear, setHour, setMinute;
 
     private DocumentReference ref = FirebaseFirestore.getInstance().document("Games/");
-    
+
     // Game info
     private String sportPlay;
     private String hostStart;
