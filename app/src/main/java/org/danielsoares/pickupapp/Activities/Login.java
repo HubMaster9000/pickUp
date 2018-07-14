@@ -52,9 +52,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth .getInstance();
 
-        initViews();
-        initListeners();
-
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.web_client_id))
@@ -65,14 +62,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
 
+        initViews();
 
         // [START customize_button]
         // Set the dimensions of the sign-in button.
-        SignInButton signInButton = findViewById(R.id.googleLoginButton);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
-        signInButton.setColorScheme(SignInButton.COLOR_LIGHT);
+        googleLoginButton.setSize(SignInButton.SIZE_STANDARD);
+        googleLoginButton.setColorScheme(SignInButton.COLOR_LIGHT);
         // [END customize_button]
 
+        initListeners();
     }
 
     @Override
@@ -139,6 +137,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
 
     private void signInWithGoogle() {
+        Log.d(TAG, "On signInWithGoogle step");
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -149,6 +148,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         if (requestCode == RC_SIGN_IN){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
+                Log.d(TAG, "On onActivityResult try step");
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
@@ -156,6 +156,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
+                Log.d(TAG, "On onActivityResult catch step");
             }
         }
 
@@ -163,6 +164,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+        Log.d(TAG, "On firebaseAuthWithGoogle step");
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
