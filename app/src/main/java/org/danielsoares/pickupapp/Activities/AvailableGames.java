@@ -37,9 +37,9 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
      */
     private void initViews() {
 
-        sportsDropDown = findViewById(R.id.sportsSpinner);
-        distanceDropDown = findViewById(R.id.distanceSpinner);
-        sizeDropDown = findViewById(R.id.sizeSpinner);
+      //  sportsDropDown = findViewById(R.id.sportsSpinner);
+      //  distanceDropDown = findViewById(R.id.distanceSpinner);
+      //  sizeDropDown = findViewById(R.id.sizeSpinner);
         newGameButton = findViewById(R.id.newGameButton);
 
     }
@@ -50,11 +50,11 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
      */
     private void initListeners() {
         // Sports Spinner
-        sportsDropDown.setOnClickListener(this);
+       // sportsDropDown.setOnClickListener(this);
         // Distance Spinner
-        distanceDropDown.setOnClickListener(this);
+      //  distanceDropDown.setOnClickListener(this);
         // Size Spinner
-        sizeDropDown.setOnClickListener(this);
+      //  sizeDropDown.setOnClickListener(this);
         // New Game
         newGameButton.setOnClickListener(this);
 
@@ -68,17 +68,17 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             // Sport Spinner
-            case R.id.sportsSpinner:
+          //  case R.id.sportsSpinner:
                 //Something with the spinner
-                break;
+          //      break;
             // Distance Spinner
-            case R.id.distanceSpinner:
+          //  case R.id.distanceSpinner:
                 //Something with the spinner
-                break;
+         //       break;
             // Size Spinner
-            case R.id.sizeSpinner:
+         //   case R.id.sizeSpinner:
                 //Something with the spinner
-                break;
+          //      break;
             // New Game
             case R.id.newGameButton:
                 // Make a new Game

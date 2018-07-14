@@ -8,7 +8,7 @@
     android:paddingRight="20dp"
     android:paddingTop="20dp"
     android:background="@android:color/holo_blue_bright"
-    tools:context=".Activities.ViewGame"
+    tools:context=".Activities.MakeANewGame"
     android:orientation="vertical">
 
 
