@@ -15,7 +15,7 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".Activities.MapsActivity" />
+            tools:context=".Activities.AvailableGames$MapsActivity" />
 
         <Button
             android:id="@+id/submitButton"
