@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "887608161531-6qhoa2v143ggji2dcrk4pi02f4c37t3a.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "org.danielsoares.pickupapp",
-            "certificate_hash": "f071cc81477addb531ea850b8335289ebf7caceb"
-          }
-        },
-        {
           "client_id": "887608161531-lnhji6bonnv086ukiijku0dtl0glrh2l.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "887608161531-lnhji6bonnv086ukiijku0dtl0glrh2l.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
