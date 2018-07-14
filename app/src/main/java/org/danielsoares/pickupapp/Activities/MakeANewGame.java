@@ -7,6 +7,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +26,7 @@ import java.util.Map;
 
 public class MakeANewGame extends AppCompatActivity {
 
-    private Button selectTimeButton;
+    private Button selectStartTimeButton;
     private Button locationButton;
     private Button newGameButton;
 
@@ -71,14 +72,14 @@ public class MakeANewGame extends AppCompatActivity {
                             allowTime = false;
 
                         if (allowTime = true) {
-                            selectTimeButton.setText("");
-                            selectTimeButton.setText(monthFullName + " " + calendarSelected.get(Calendar.DAY_OF_MONTH)
+                            selectStartTimeButton.setText("");
+                            selectStartTimeButton.setText(monthFullName + " " + calendarSelected.get(Calendar.DAY_OF_MONTH)
                                     + ", " + hour12 + ":" + min
                                     + " " + AM_PM);
-                            selectTimeButton.setBackgroundColor(getResources().getColor(R.color.completedGreen));
+                            selectStartTimeButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.completedGreen));
 
                             setDay = date;
-                            setMonth = monthNumber;
+                            setMonth = monthNumber +1;
                             setYear = year;
                             setMinute = min;
                             setHour = hour24;
@@ -120,8 +121,8 @@ public class MakeANewGame extends AppCompatActivity {
     }
 
     private void initialize() {
-        selectTimeButton = findViewById(R.id.selectTimeButton);
-        selectTimeButton.setOnClickListener(
+        selectStartTimeButton = findViewById(R.id.SelectStartTimeButton);
+        selectStartTimeButton.setOnClickListener(
                 new View.OnClickListener() {
 
                     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -134,7 +135,7 @@ public class MakeANewGame extends AppCompatActivity {
         locationButton = findViewById(R.id.mapButton);
         locationButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent map = new Intent(getApplicationContext(), MapsActivity.class);
+                Intent map = new Intent(getApplicationContext(), AvailableGames.MapsActivity.class);
                 startActivity(map);
             }
         });

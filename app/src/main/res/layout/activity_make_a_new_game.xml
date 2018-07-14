@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:text="@string/create_game"
         android:textSize="38sp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:textColor="@color/titleGreen"/>
 
 
@@ -45,7 +45,25 @@
         android:layout_marginTop="20dp"/>
 
     <Button
-        android:id="@+id/selectTimeButton"
+        android:id="@+id/SelectStartTimeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/silver"
+        android:text="@string/select_start_time"
+        android:textSize="16sp"
+        android:textColor="@android:color/background_light" />
+
+    <!-- Select End Time -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/end_time"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/SelectEndTimeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
