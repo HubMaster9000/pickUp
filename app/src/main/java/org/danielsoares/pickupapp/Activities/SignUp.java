@@ -76,8 +76,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             // Directs you to login page
             case R.id.TextViewLoginLink:
                 // Navigate to LoginActivity
-                Intent loginIntent = new Intent(getApplicationContext(), Login.class);
-                startActivity(loginIntent);
+                Intent goToLoginIntent = new Intent(getApplicationContext(), Login.class);
+                startActivity(goToLoginIntent);
                 break;
         }
     }
@@ -100,48 +100,48 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             // User creation success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            Created = true;
+                            sendEmail();
                         } else {
                             // If creation fails, display a message to the user.
-                            Created = false;
+                            Toast.makeText(SignUp.this,
+                                    "User Creation failed.",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
         // [END create_user_with_email]
 
+    }
 
-        // Send verification email
-        if (Created) {
-            // [START send_email_verification]
-            final FirebaseUser user = mAuth.getCurrentUser();
-            user.sendEmailVerification()
-                    .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            // [START_EXCLUDE]
 
-                            if (task.isSuccessful()) {
-                                Toast.makeText(SignUp.this,
-                                        "Verification email sent to " + user.getEmail(),
-                                        Toast.LENGTH_SHORT).show();
-                                Intent signInIntent = new Intent(getApplicationContext(), AvailableGames.class);
-                                startActivity(signInIntent);
-                            } else {
-                                Log.e(TAG, "sendEmailVerification", task.getException());
-                                Toast.makeText(SignUp.this,
-                                        "Failed to send verification email.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                            // [END_EXCLUDE]
+    // Send verification email
+    private void sendEmail() {
+        // [START send_email_verification]
+        final FirebaseUser user = mAuth.getCurrentUser();
+        user.sendEmailVerification()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // [START_EXCLUDE]
+
+                        if (task.isSuccessful()) {
+                            Toast.makeText(SignUp.this,
+                                    "Verification email sent to " + user.getEmail(),
+                                    Toast.LENGTH_SHORT).show();
+                            // Sign up success, go to Available Games
+                            Intent goToGamesIntent = new Intent(getApplicationContext(), AvailableGames.class);
+                            startActivity(goToGamesIntent);
+                            finish();
+                        } else {
+                            Log.e(TAG, "sendEmailVerification", task.getException());
+                            Toast.makeText(SignUp.this,
+                                    "Failed to send verification email.",
+                                    Toast.LENGTH_SHORT).show();
                         }
-                    });
-            // [END send_email_verification]
-        } else if (Created = false) {
-            Toast.makeText(SignUp.this,
-                    "Authentication failed.",
-                    Toast.LENGTH_SHORT).show();
-        }
-
+                        // [END_EXCLUDE]
+                    }
+                });
+        // [END send_email_verification]
     }
 
 
