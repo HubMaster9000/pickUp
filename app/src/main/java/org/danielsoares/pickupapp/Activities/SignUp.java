@@ -28,7 +28,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private EditText mEmailField;
     private EditText mPasswordField;
     private static final String TAG = "SignUp";
-    private boolean Created;
+    private boolean Created = false;
 
 
     @Override
@@ -136,7 +136,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                         }
                     });
             // [END send_email_verification]
-        } else {
+        } else if (Created = false) {
             Toast.makeText(SignUp.this,
                     "Authentication failed.",
                     Toast.LENGTH_SHORT).show();
@@ -163,7 +163,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         if (TextUtils.isEmpty(password)) {
             mPasswordField.setError("Required.");
             valid = false;
-        } else {
+        } else if (password.length() < 6){
+            mPasswordField.setError("Password must be at least 6 characters.");
+            valid = false;
+        }
+        else {
             mPasswordField.setError(null);
         }
 
