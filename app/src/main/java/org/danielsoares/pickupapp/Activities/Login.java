@@ -150,7 +150,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
+                GoogleSignInAccount account = task. (ApiException.class);
                 firebaseAuthWithGoogle(account);
             }
             catch (ApiException e) {
