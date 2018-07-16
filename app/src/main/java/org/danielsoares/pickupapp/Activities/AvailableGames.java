@@ -89,6 +89,8 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
             // New Game
             case R.id.newGameButton:
                 // Make a new Game
+                Intent makeNewGameIntent = new Intent(getApplicationContext(), MakeANewGame.class);
+                startActivity(makeNewGameIntent);
                 break;
 
         }

@@ -76,4 +76,5 @@
     <string name="host">Hôte</string>
     <string name="remind_games">Rappelez-moi des jeux:</string>
     <string name="my_games">Mes Jeux</string>
+    <string name="cancel">Annuler</string>
 </resources>

@@ -24,11 +24,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-public class MakeANewGame extends AppCompatActivity {
+public class MakeANewGame extends AppCompatActivity implements View.OnClickListener {
 
     private Button selectStartTimeButton;
     private Button locationButton;
-    private Button newGameButton;
+    private Button createGameButton;
+    private Button cancelGameButton;
 
     private LatLng location;
 
@@ -52,6 +53,9 @@ public class MakeANewGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_a_new_game);
+
+        initViews();
+        initListeners();
 
         custom = new CustomDateTimePicker(this,
                 new CustomDateTimePicker.ICustomDateTimeListener() {
@@ -110,7 +114,6 @@ public class MakeANewGame extends AppCompatActivity {
         currentMinute = Calendar.MINUTE;
 
 
-        initialize();
         pullTimeLocation();
 
         // If location is already selected
@@ -120,9 +123,36 @@ public class MakeANewGame extends AppCompatActivity {
         }
     }
 
-    private void initialize() {
+    /**
+     * Initializes views
+     */
+    private void initViews() {
         selectStartTimeButton = findViewById(R.id.SelectStartTimeButton);
-        selectStartTimeButton.setOnClickListener(
+        locationButton = findViewById(R.id.locationButton);
+        createGameButton = findViewById(R.id.createGameButton);
+        cancelGameButton = findViewById(R.id.cancelGameButton);
+
+    }
+
+    /**
+     * Initializes listeners
+     */
+    private void initListeners() {
+        selectStartTimeButton.setOnClickListener(this);
+        locationButton.setOnClickListener(this);
+        createGameButton.setOnClickListener(this);
+        cancelGameButton.setOnClickListener(this);
+
+    }
+
+    /**
+     * Listens the click on view
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.SelectStartTimeButton:
+                // Select Start Time
                 new View.OnClickListener() {
 
                     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -130,24 +160,28 @@ public class MakeANewGame extends AppCompatActivity {
                     public void onClick(View v) {
                         custom.showDialog();
                     }
-                });
-
-        locationButton = findViewById(R.id.mapButton);
-        locationButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+                };
+                break;
+            case R.id.locationButton:
+                // Select a location
                 Intent map = new Intent(getApplicationContext(), AvailableGames.MapsActivity.class);
                 startActivity(map);
-            }
-        });
-
-        newGameButton = findViewById(R.id.newGameButton);
-        newGameButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+                break;
+            case R.id.createGameButton:
+                // Make a new Game
                 writeNewGame();
-                Intent submit = new Intent(getApplicationContext(), AvailableGames.class);
-                startActivity(submit);
-            }
-        });
+                Intent submitGame = new Intent(getApplicationContext(), AvailableGames.class);
+                startActivity(submitGame);
+                finish();
+                break;
+            case R.id.cancelGameButton:
+                // Make a new Game
+                Intent cancelGame = new Intent(getApplicationContext(), AvailableGames.class);
+                startActivity(cancelGame);
+                finish();
+                break;
+
+        }
     }
 
     // Pulls info about time or location. null otherwise

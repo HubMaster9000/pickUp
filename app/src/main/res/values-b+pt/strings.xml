@@ -4,7 +4,7 @@
     <string name="email">Email</string>
     <string name="password">Senha</string>
     <string name="login">Entrar</string>
-    <string name="title_activity_home">Inicial</string>
+    <string name="title_activity_home">Inicio</string>
     <string name="sign_up">Registrar</string>
     <string name="no_account">Não tem uma conta?</string>
     <string name="title_activity_available__games">Available_Games</string>
@@ -76,4 +76,5 @@
     <string name="host">Anfitrião</string>
     <string name="remind_games">Lembre-me de jogos:</string>
     <string name="my_games">Meus Jogos</string>
+    <string name="cancel">Cancelar</string>
 </resources>
