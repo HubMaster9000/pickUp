@@ -2,6 +2,7 @@ package org.danielsoares.pickupapp.Activities;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
@@ -10,7 +11,10 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.DocumentReference;
@@ -24,20 +28,23 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-public class MakeANewGame extends AppCompatActivity {
+public class MakeANewGame extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Button selectStartTimeButton;
     private Button locationButton;
     private Button newGameButton;
+    private Spinner selectSports;
+    private Spinner selectSize;
 
     private LatLng location;
 
     private CustomDateTimePicker custom;
-    private int setDay, setMonth, setYear, setHour, setMinute;
     private int currentDay, currentMonth, currentYear, currentHour, currentMinute;
     boolean allowTime;
 
     private DocumentReference ref = FirebaseFirestore.getInstance().document("Games/");
+
+    private String[] sports, sizes;
 
     // Game info
     private String sportPlay;
@@ -53,6 +60,36 @@ public class MakeANewGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_a_new_game);
 
+        setStartTime();
+        // TODO: Victor: Make setEndTime() method. Refer to setStartTime(). Optimally: we just have one method: setTime, and we add a boolean to determine whether it is start or end time
+
+        /**
+         * Pass Directly current time format it will return AM and PM if you set
+         * false
+         */
+        custom.set24HourFormat(false);
+        /**
+         * Pass Directly current data and time to show when it pop up
+         */
+        custom.setDate(Calendar.getInstance());
+        currentYear = Calendar.YEAR;
+        currentMonth = Calendar.MONTH;
+        currentDay = Calendar.DAY_OF_MONTH;
+        currentHour = Calendar.HOUR;
+        currentMinute = Calendar.MINUTE;
+
+
+        initialize();
+        pullLocation();
+
+        // If location is already selected
+        if (location != null) {
+            locationButton.setBackgroundColor(Color.GREEN);
+            locationButton.setText("Location Selected");
+        }
+    }
+
+    private void setStartTime() {
         custom = new CustomDateTimePicker(this,
                 new CustomDateTimePicker.ICustomDateTimeListener() {
 
@@ -78,12 +115,14 @@ public class MakeANewGame extends AppCompatActivity {
                                     + " " + AM_PM);
                             selectStartTimeButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.completedGreen));
 
-                            setDay = date;
-                            setMonth = monthNumber +1;
-                            setYear = year;
-                            setMinute = min;
-                            setHour = hour24;
+                            int setDay = date;
+                            int setMonth = monthNumber + 1;
+                            int setYear = year;
+                            int setMinute = min;
+                            int setHour = hour24;
 
+                            // Notice this is timeBegin. Change to timeEnd for setEndTime
+                            timeBegin = new Time(setYear, setMonth, setDay, setHour, setMinute);
                         } else
                             ;
                     }
@@ -93,39 +132,12 @@ public class MakeANewGame extends AppCompatActivity {
 
                     }
                 });
-
-        /**
-         * Pass Directly current time format it will return AM and PM if you set
-         * false
-         */
-        custom.set24HourFormat(false);
-        /**
-         * Pass Directly current data and time to show when it pop up
-         */
-        custom.setDate(Calendar.getInstance());
-        currentYear = Calendar.YEAR;
-        currentMonth = Calendar.MONTH;
-        currentDay = Calendar.DAY_OF_MONTH;
-        currentHour = Calendar.HOUR;
-        currentMinute = Calendar.MINUTE;
-
-
-        initialize();
-        pullTimeLocation();
-
-        // If location is already selected
-        if (location != null) {
-            locationButton.setBackgroundColor(Color.GREEN);
-            locationButton.setText("Location Selected");
-        }
     }
 
     private void initialize() {
         selectStartTimeButton = findViewById(R.id.SelectStartTimeButton);
         selectStartTimeButton.setOnClickListener(
                 new View.OnClickListener() {
-
-                    @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void onClick(View v) {
                         custom.showDialog();
@@ -148,15 +160,32 @@ public class MakeANewGame extends AppCompatActivity {
                 startActivity(submit);
             }
         });
+
+        selectSports = findViewById(R.id.sport_list);
+        ArrayAdapter<CharSequence> adapterSports = ArrayAdapter.createFromResource(this,
+                R.array.all_sports, android.R.layout.simple_spinner_item);
+        adapterSports.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selectSports.setAdapter(adapterSports);
+
+        selectSize = findViewById(R.id.size_list);
+        ArrayAdapter<CharSequence> adapterSize = ArrayAdapter.createFromResource(this,
+                R.array.all_sizes, android.R.layout.simple_spinner_item);
+        adapterSize.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selectSize.setAdapter(adapterSize);
+
+        Resources res = getResources();
+        sports = res.getStringArray(R.array.all_sports);
+        sizes = res.getStringArray(R.array.all_sizes);
     }
 
     // Pulls info about time or location. null otherwise
-    private void pullTimeLocation() {
+    private void pullLocation() {
         if (getIntent().getParcelableExtra("Location") != null)
             location = getIntent().getParcelableExtra("Location");
 
     }
 
+    // Creates game and puts into database
     private void writeNewGame() {
         // Unique Key for game
         Game_Class newGame = new Game_Class(sportPlay, hostStart, gameLocation,
@@ -164,5 +193,23 @@ public class MakeANewGame extends AppCompatActivity {
         Map<String, Object> postValues = newGame.toMap();
 
         ref.set(postValues);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        switch(adapterView.getId()){
+            case R.id.sport_list :
+                sportPlay = sports[i];
+                break;
+            case R.id.size_list :
+                if (sizes[i] == "10+") max = Integer.MAX_VALUE;
+                else max = Integer.parseInt(sizes[i]);
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
