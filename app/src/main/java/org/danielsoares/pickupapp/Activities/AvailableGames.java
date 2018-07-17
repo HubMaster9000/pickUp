@@ -17,8 +17,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import org.danielsoares.pickupapp.R;
+
+import javax.annotation.Nullable;
 
 
 public class AvailableGames extends AppCompatActivity implements View.OnClickListener {
@@ -28,6 +35,18 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
     private Spinner sizeDropDown;
     private FloatingActionButton newGameButton;
     private DatabaseReference mDatabase;
+    private DocumentReference ref = FirebaseFirestore.getInstance().document("Games/");
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ref.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

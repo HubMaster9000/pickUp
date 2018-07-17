@@ -2,7 +2,6 @@ package org.danielsoares.pickupapp.Models;
 
 import android.location.Location;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
