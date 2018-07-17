@@ -28,22 +28,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-<<<<<<< HEAD
-public class MakeANewGame extends AppCompatActivity implements View.OnClickListener {
+public class MakeANewGame extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private Button selectStartTimeButton;
     private Button locationButton;
     private Button createGameButton;
     private Button cancelGameButton;
-=======
-public class MakeANewGame extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
-    private Button selectStartTimeButton;
-    private Button locationButton;
-    private Button newGameButton;
     private Spinner selectSports;
     private Spinner selectSize;
->>>>>>> d32090bbe7daf3fd255ea4a8f173f97a3b411813
 
     private LatLng location;
 
@@ -69,11 +61,9 @@ public class MakeANewGame extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_a_new_game);
 
-<<<<<<< HEAD
         initViews();
         initListeners();
 
-=======
         setStartTime();
         // TODO: Victor: Make setEndTime() method. Refer to setStartTime(). Optimally: we just have one method: setTime, and we add a boolean to determine whether it is start or end time
 
@@ -93,7 +83,6 @@ public class MakeANewGame extends AppCompatActivity implements AdapterView.OnIte
         currentMinute = Calendar.MINUTE;
 
 
-        initialize();
         pullLocation();
 
         // If location is already selected
@@ -104,7 +93,6 @@ public class MakeANewGame extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void setStartTime() {
->>>>>>> d32090bbe7daf3fd255ea4a8f173f97a3b411813
         custom = new CustomDateTimePicker(this,
                 new CustomDateTimePicker.ICustomDateTimeListener() {
 
@@ -194,7 +182,6 @@ public class MakeANewGame extends AppCompatActivity implements AdapterView.OnIte
             case R.id.createGameButton:
                 // Make a new Game
                 writeNewGame();
-<<<<<<< HEAD
                 Intent submitGame = new Intent(getApplicationContext(), AvailableGames.class);
                 startActivity(submitGame);
                 finish();
@@ -207,11 +194,6 @@ public class MakeANewGame extends AppCompatActivity implements AdapterView.OnIte
                 break;
 
         }
-=======
-                Intent submit = new Intent(getApplicationContext(), AvailableGames.class);
-                startActivity(submit);
-            }
-        });
 
         selectSports = findViewById(R.id.sport_list);
         ArrayAdapter<CharSequence> adapterSports = ArrayAdapter.createFromResource(this,
@@ -228,7 +210,6 @@ public class MakeANewGame extends AppCompatActivity implements AdapterView.OnIte
         Resources res = getResources();
         sports = res.getStringArray(R.array.all_sports);
         sizes = res.getStringArray(R.array.all_sizes);
->>>>>>> d32090bbe7daf3fd255ea4a8f173f97a3b411813
     }
 
     // Pulls info about time or location. null otherwise
