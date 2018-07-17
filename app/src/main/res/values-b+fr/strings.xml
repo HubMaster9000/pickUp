@@ -80,4 +80,5 @@
     <string name="cancel">Annuler</string>
     <string name="players">Joueurs</string>
     <string name="capacity">Capacité</string>
+    <string name="select_capacity">Sélectionnez la taille du jeu</string>
 </resources>
