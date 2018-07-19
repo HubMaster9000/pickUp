@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "887608161531-cdlhdk9u9jfl3r31f4t92usdnetm22ko.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.danielsoares.pickupapp",
+            "certificate_hash": "f071cc81477addb531ea850b8335289ebf7caceb"
+          }
+        },
+        {
+          "client_id": "887608161531-bunp18oi90sluo5dsu656u78ja4moq2s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.danielsoares.pickupapp",
+            "certificate_hash": "cf93bfb6060c097512ebd036ac93ddf69188be19"
+          }
+        },
+        {
           "client_id": "887608161531-lnhji6bonnv086ukiijku0dtl0glrh2l.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "887608161531-lnhji6bonnv086ukiijku0dtl0glrh2l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

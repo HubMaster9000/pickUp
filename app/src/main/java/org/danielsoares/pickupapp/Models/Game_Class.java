@@ -2,6 +2,8 @@ package org.danielsoares.pickupapp.Models;
 
 import android.location.Location;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -10,14 +12,14 @@ import java.util.Queue;
 public class Game_Class implements Comparable<Game_Class> {
     private String sport;
     private String host;
-    private Location location;
+    private LatLng location;
     private Time startTime;
     private Time endTime;
     private Queue<Player_Class> players;     // infinite list of people in/coming to the game
     private int maxSize;                     // Game could be set to unlimited size, then set this
                                              // to Integer_Max
     // Initialize class
-    public Game_Class(String sportPlay, String hostStart, Location gameLocation, Time timeBegin, Time timeEnd,
+    public Game_Class(String sportPlay, String hostStart, LatLng gameLocation, Time timeBegin, Time timeEnd,
                       int max) {
         sport = sportPlay;
         host = hostStart;

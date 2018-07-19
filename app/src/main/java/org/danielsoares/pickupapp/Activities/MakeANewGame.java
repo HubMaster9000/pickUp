@@ -37,20 +37,16 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
     private Spinner selectSports;
     private Spinner selectSize;
 
-    private LatLng location;
-
     private CustomDateTimePicker custom;
     private int currentDay, currentMonth, currentYear, currentHour, currentMinute;
     boolean allowTime;
 
     private DocumentReference ref = FirebaseFirestore.getInstance().document("Games/");
 
-    private String[] sports, sizes;
-
     // Game info
     private String sportPlay;
     private String hostStart;
-    private Location gameLocation;
+    private LatLng gameLocation;
     private Time timeBegin;
     private Time timeEnd;
     private int max;
@@ -86,7 +82,7 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
         pullLocation();
 
         // If location is already selected
-        if (location != null) {
+        if (gameLocation != null) {
             locationButton.setBackgroundColor(Color.GREEN);
             locationButton.setText("Location Selected");
         }
@@ -196,26 +192,24 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
         }
 
         selectSports = findViewById(R.id.sport_list);
+        selectSports.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapterSports = ArrayAdapter.createFromResource(this,
                 R.array.all_sports, android.R.layout.simple_spinner_item);
         adapterSports.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectSports.setAdapter(adapterSports);
 
         selectSize = findViewById(R.id.size_list);
+        selectSize.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapterSize = ArrayAdapter.createFromResource(this,
                 R.array.all_sizes, android.R.layout.simple_spinner_item);
         adapterSize.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectSize.setAdapter(adapterSize);
-
-        Resources res = getResources();
-        sports = res.getStringArray(R.array.all_sports);
-        sizes = res.getStringArray(R.array.all_sizes);
     }
 
     // Pulls info about time or location. null otherwise
     private void pullLocation() {
         if (getIntent().getParcelableExtra("Location") != null)
-            location = getIntent().getParcelableExtra("Location");
+            gameLocation = getIntent().getParcelableExtra("Location");
 
     }
 
@@ -233,11 +227,12 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         switch(adapterView.getId()){
             case R.id.sport_list :
-                sportPlay = sports[i];
+                sportPlay = selectSports.getSelectedItem().toString();
                 break;
             case R.id.size_list :
-                if (sizes[i] == "10+") max = Integer.MAX_VALUE;
-                else max = Integer.parseInt(sizes[i]);
+                String selected = selectSize.getSelectedItem().toString();
+                if (selected == "10+") max = Integer.MAX_VALUE;
+                else max = Integer.parseInt(selected);
                 break;
         }
     }
