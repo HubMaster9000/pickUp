@@ -131,6 +131,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                 break;
             // Login with Google
             case R.id.googleLoginButton:
+                Toast.makeText(Login.this, "Google Button Clicked",
+                        Toast.LENGTH_SHORT).show();
                 signInWithGoogle();
                 break;
 
@@ -139,22 +141,32 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
 
     private void signInWithGoogle() {
+        Toast.makeText(Login.this, "signInWithGoogleStarted.",
+                Toast.LENGTH_SHORT).show();
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        Toast.makeText(Login.this, "signInWithGoogle Intent finished",
+                Toast.LENGTH_SHORT).show();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(Login.this, "starting onActivityResult",
+                Toast.LENGTH_SHORT).show();
         if (requestCode == RC_SIGN_IN){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
+                Toast.makeText(Login.this, "On onActivityResult try step",
+                        Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "On onActivityResult try step");
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             }
             catch (ApiException e) {
+                Toast.makeText(Login.this, "Failed on onActivityResult catch",
+                        Toast.LENGTH_SHORT).show();
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
                 Log.d(TAG, "On onActivityResult catch step");
@@ -165,6 +177,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+        Toast.makeText(Login.this, "starting firebaseAuthWithGoogle",
+                Toast.LENGTH_SHORT).show();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -172,6 +186,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            Toast.makeText(Login.this, "firebaseAuthWithGoogle onComplete successful",
+                                    Toast.LENGTH_SHORT).show();
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
@@ -181,6 +197,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                             startActivity(login);
                         }
                         else {
+                            Toast.makeText(Login.this, "firebaseAuthWithGoogle onComplete failed",
+                                    Toast.LENGTH_SHORT).show();
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                         }
