@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Sports?</string>
-    <string name="name">Noml</string>
+    <string name="name">Nom</string>
     <string name="email">Email</string>
     <string name="password">Mot de Passe</string>
     <string name="login">Login</string>
@@ -63,6 +63,7 @@
     <string name="location">Lieu</string>
     <string name="select_location">Sélectionnez un lieu</string>
     <string name="start_time">Heure de début</string>
+    <string name="end_time">Heure de fin</string>
     <string name="select_start_time">Sélectionnez une heure de début</string>
     <string name="add_game">Ajouter un Jeu</string>
     <string name="create_game">Créer un nouveau jeu</string>
@@ -76,4 +77,8 @@
     <string name="host">Hôte</string>
     <string name="remind_games">Rappelez-moi des jeux:</string>
     <string name="my_games">Mes Jeux</string>
+    <string name="cancel">Annuler</string>
+    <string name="players">Joueurs</string>
+    <string name="capacity">Capacité</string>
+    <string name="select_capacity">Sélectionnez la taille du jeu</string>
 </resources>
