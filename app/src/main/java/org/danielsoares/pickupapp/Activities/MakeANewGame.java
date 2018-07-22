@@ -19,7 +19,9 @@ import android.widget.Spinner;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
+import org.danielsoares.pickupapp.Models.GameLocation;
 import org.danielsoares.pickupapp.Models.Game_Class;
 import org.danielsoares.pickupapp.Models.Time;
 import org.danielsoares.pickupapp.R;
@@ -41,12 +43,12 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
     private int currentDay, currentMonth, currentYear, currentHour, currentMinute;
     boolean allowTime;
 
-    private DocumentReference ref = FirebaseFirestore.getInstance().document("Games/");
+    private FirebaseFirestore db;
 
     // Game info
     private String sportPlay;
     private String hostStart;
-    private LatLng gameLocation;
+    private GameLocation gameLocation;
     private Time timeBegin;
     private Time timeEnd;
     private int max;
@@ -59,6 +61,7 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
 
         initViews();
         initListeners();
+        initDatabase();
 
         setStartTime();
         // TODO: Victor: Make setEndTime() method. Refer to setStartTime(). Optimally: we just have one method: setTime, and we add a boolean to determine whether it is start or end time
@@ -144,6 +147,14 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void initDatabase() {
+        db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+        }
+
     /**
      * Initializes listeners
      */
@@ -209,7 +220,7 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
     // Pulls info about time or location. null otherwise
     private void pullLocation() {
         if (getIntent().getParcelableExtra("Location") != null)
-            gameLocation = getIntent().getParcelableExtra("Location");
+            gameLocation = (GameLocation) getIntent().getSerializableExtra("Location");
 
     }
 
@@ -220,8 +231,9 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
                 timeBegin, timeEnd, max);
         Map<String, Object> postValues = newGame.toMap();
 
-        ref.set(postValues);
-    }
+        db.collection("Games")
+                .add(postValues);
+        }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

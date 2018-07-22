@@ -65,14 +65,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
 
-
-        // [START customize_button]
-        // Set the dimensions of the sign-in button.
-        SignInButton signInButton = findViewById(R.id.googleLoginButton);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
-        signInButton.setColorScheme(SignInButton.COLOR_LIGHT);
-        // [END customize_button]
-
     }
 
     @Override
@@ -92,8 +84,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     private void initViews() {
 
         textViewLinkRegister = findViewById(R.id.textViewLinkRegister);
-        googleLoginButton = findViewById(R.id.googleLoginButton);
-
+        googleLoginButton = findViewById(R.id.googleButton);
         mEmailField = findViewById(R.id.field_email);
         mPasswordField = findViewById(R.id.field_password);
         emailSignInButton = findViewById(R.id.emailSignInButton);
@@ -130,7 +121,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                 finish();
                 break;
             // Login with Google
-            case R.id.googleLoginButton:
+            case R.id.googleButton:
                 Toast.makeText(Login.this, "Google Button Clicked",
                         Toast.LENGTH_SHORT).show();
                 signInWithGoogle();
