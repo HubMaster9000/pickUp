@@ -75,9 +75,9 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         sportsDropDown = findViewById(R.id.sportsSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> sportsAdapter = ArrayAdapter.createFromResource(this,
-                R.array.all_sports, android.R.layout.spinner_item);
+                R.array.all_sports, R.layout.spinner_item);
         // Specify the layout to use when the list of choices appears
-        sportsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sportsAdapter.setDropDownViewResource(R.layout.spinner_item);
         // Apply the adapter to the spinner
         sportsDropDown.setAdapter(sportsAdapter);
 
@@ -86,9 +86,9 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         distanceDropDown = findViewById(R.id.distanceSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> distanceAdapter = ArrayAdapter.createFromResource(this,
-                R.array.all_distances, android.R.layout.spinner_item);
+                R.array.all_distances, R.layout.spinner_item);
         // Specify the layout to use when the list of choices appears
-        distanceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        distanceAdapter.setDropDownViewResource(R.layout.spinner_item);
         // Apply the adapter to the spinner
         distanceDropDown.setAdapter(distanceAdapter);
 
@@ -97,9 +97,9 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         sizeDropDown = findViewById(R.id.sizeSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> sizeAdapter = ArrayAdapter.createFromResource(this,
-                R.array.all_sizes, android.R.layout.spinner_item);
+                R.array.all_sizes, R.layout.spinner_item);
         // Specify the layout to use when the list of choices appears
-        sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sizeAdapter.setDropDownViewResource(R.layout.spinner_item);
         // Apply the adapter to the spinner
         sizeDropDown.setAdapter(sizeAdapter);
 
