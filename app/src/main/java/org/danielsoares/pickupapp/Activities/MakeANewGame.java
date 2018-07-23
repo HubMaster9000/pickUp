@@ -19,7 +19,9 @@ import android.widget.Spinner;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
+import org.danielsoares.pickupapp.Models.GameLocation;
 import org.danielsoares.pickupapp.Models.Game_Class;
 import org.danielsoares.pickupapp.Models.Time;
 import org.danielsoares.pickupapp.R;
@@ -37,20 +39,16 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
     private Spinner selectSports;
     private Spinner selectSize;
 
-    private LatLng location;
-
     private CustomDateTimePicker custom;
     private int currentDay, currentMonth, currentYear, currentHour, currentMinute;
     boolean allowTime;
 
-    private DocumentReference ref = FirebaseFirestore.getInstance().document("Games/");
-
-    private String[] sports, sizes;
+    private FirebaseFirestore db;
 
     // Game info
     private String sportPlay;
     private String hostStart;
-    private Location gameLocation;
+    private GameLocation gameLocation;
     private Time timeBegin;
     private Time timeEnd;
     private int max;
@@ -63,6 +61,7 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
 
         initViews();
         initListeners();
+        initDatabase();
 
         setStartTime();
         // TODO: Victor: Make setEndTime() method. Refer to setStartTime(). Optimally: we just have one method: setTime, and we add a boolean to determine whether it is start or end time
@@ -86,7 +85,7 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
         pullLocation();
 
         // If location is already selected
-        if (location != null) {
+        if (gameLocation != null) {
             locationButton.setBackgroundColor(Color.GREEN);
             locationButton.setText("Location Selected");
         }
@@ -148,6 +147,14 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void initDatabase() {
+        db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+        }
+
     /**
      * Initializes listeners
      */
@@ -196,26 +203,24 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
         }
 
         selectSports = findViewById(R.id.sport_list);
+        selectSports.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapterSports = ArrayAdapter.createFromResource(this,
                 R.array.all_sports, android.R.layout.simple_spinner_item);
         adapterSports.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectSports.setAdapter(adapterSports);
 
         selectSize = findViewById(R.id.size_list);
+        selectSize.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapterSize = ArrayAdapter.createFromResource(this,
                 R.array.all_sizes, android.R.layout.simple_spinner_item);
         adapterSize.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectSize.setAdapter(adapterSize);
-
-        Resources res = getResources();
-        sports = res.getStringArray(R.array.all_sports);
-        sizes = res.getStringArray(R.array.all_sizes);
     }
 
     // Pulls info about time or location. null otherwise
     private void pullLocation() {
         if (getIntent().getParcelableExtra("Location") != null)
-            location = getIntent().getParcelableExtra("Location");
+            gameLocation = (GameLocation) getIntent().getSerializableExtra("Location");
 
     }
 
@@ -226,18 +231,20 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
                 timeBegin, timeEnd, max);
         Map<String, Object> postValues = newGame.toMap();
 
-        ref.set(postValues);
-    }
+        db.collection("Games")
+                .add(postValues);
+        }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         switch(adapterView.getId()){
             case R.id.sport_list :
-                sportPlay = sports[i];
+                sportPlay = selectSports.getSelectedItem().toString();
                 break;
             case R.id.size_list :
-                if (sizes[i] == "10+") max = Integer.MAX_VALUE;
-                else max = Integer.parseInt(sizes[i]);
+                String selected = selectSize.getSelectedItem().toString();
+                if (selected == "10+") max = Integer.MAX_VALUE;
+                else max = Integer.parseInt(selected);
                 break;
         }
     }

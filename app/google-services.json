@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "887608161531-bunp18oi90sluo5dsu656u78ja4moq2s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.danielsoares.pickupapp",
+            "certificate_hash": "cf93bfb6060c097512ebd036ac93ddf69188be19"
+          }
+        },
+        {
           "client_id": "887608161531-lnhji6bonnv086ukiijku0dtl0glrh2l.apps.googleusercontent.com",
           "client_type": 3
         }

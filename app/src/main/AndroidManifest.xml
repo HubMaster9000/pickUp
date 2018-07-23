@@ -62,7 +62,7 @@
             android:name=".Activities.AvailableGames$MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".Activities.ViewGame" />
-        <activity android:name=".Activities.MyGames"></activity>
+        <activity android:name=".Activities.MyGames" />
     </application>
 
 </manifest>

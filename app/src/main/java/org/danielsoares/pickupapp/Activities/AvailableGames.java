@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.danielsoares.pickupapp.Models.GameLocation;
 import org.danielsoares.pickupapp.R;
 
 import javax.annotation.Nullable;
@@ -255,6 +257,9 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         private Button submitButton;
         private Marker marker;
         private LatLng location;
+        private EditText inputLocationName;
+        private String locationName;
+        private GameLocation gameLocation;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -270,6 +275,9 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         }
 
         private void initial() {
+            inputLocationName = findViewById(R.id.gameName);
+            locationName = inputLocationName.getText().toString();
+
             submitButton = findViewById(R.id.submitButton);
             submitButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -277,9 +285,14 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
                         Toast.makeText(MapsActivity.this,
                                 "Select a location first", Toast.LENGTH_LONG).show();
                     }
+                    else if (locationName == null) {
+                        Toast.makeText(MapsActivity.this,
+                                "Enter Location Name First", Toast.LENGTH_LONG).show();
+                    }
                     else {
                         Intent sendLocation = new Intent(getApplicationContext(), MakeANewGame.class);
-                        sendLocation.putExtra("Location", location);
+                        gameLocation = new GameLocation(locationName, location);
+                        sendLocation.putExtra("Location", gameLocation);
                         startActivity(sendLocation);
                     }
                 }

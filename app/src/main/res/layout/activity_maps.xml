@@ -17,6 +17,12 @@
             android:layout_height="wrap_content"
             tools:context=".Activities.AvailableGames$MapsActivity" />
 
+        <EditText
+            android:id="@+id/gameName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name of Game Location, ie: Shaw Park"/>
+
         <Button
             android:id="@+id/submitButton"
             android:layout_width="match_parent"

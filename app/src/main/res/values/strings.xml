@@ -81,4 +81,5 @@
     <string name="players">Players</string>
     <string name="capacity">Capacity</string>
     <string name="select_capacity">Select game size</string>
+    <string name="title_activity_maps_ii">Map</string>
 </resources>
