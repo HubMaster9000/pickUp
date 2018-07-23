@@ -9,6 +9,7 @@
     <string name="no_account">Don\'t have an account?</string>
     <string name="title_activity_available__games">Available_Games</string>
     <string-array name="all_sports">
+        <item>All Sports</item>
         <item>Sports</item>
         <item>Soccer</item>
         <item>Football</item>
@@ -20,14 +21,14 @@
         <item>Tennis</item>
     </string-array>
     <string-array name="all_distances">
-        <item>Distances</item>
+        <item>Any Distance</item>
         <item>0 – 1 miles</item>
         <item>1 – 3 miles</item>
         <item>3 – 10 miles</item>
         <item>10+ miles</item>
     </string-array>
     <string-array name="all_sizes">
-        <item>Game Sizes</item>
+        <item>Any Size</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>

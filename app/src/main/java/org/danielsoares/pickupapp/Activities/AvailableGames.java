@@ -2,11 +2,16 @@ package org.danielsoares.pickupapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -16,37 +21,38 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.danielsoares.pickupapp.R;
 
 import javax.annotation.Nullable;
 
 
-public class AvailableGames extends AppCompatActivity implements View.OnClickListener {
+public class AvailableGames extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private Spinner sportsDropDown;
     private Spinner distanceDropDown;
     private Spinner sizeDropDown;
     private FloatingActionButton newGameButton;
     private DatabaseReference mDatabase;
-    private DocumentReference ref = FirebaseFirestore.getInstance().document("Games/");
+    private CollectionReference ref = FirebaseFirestore.getInstance().collection("Games");
+    private static final String TAG = "AvailableGames";
+    private String selectedSport = null;
+    private String selectedDistance = null;
+    private int selectedSize = 0;
+    private ListView listView;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        ref.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-
-            }
-        });
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,7 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
 
         initViews();
         initListeners();
+        getGames();
     }
 
 
@@ -62,11 +69,46 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
      * Initializes views
      */
     private void initViews() {
+        //POPULATES SPORTS SPINNER
+        sportsDropDown = findViewById(R.id.sportsSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> sportsAdapter = ArrayAdapter.createFromResource(this,
+                R.array.all_sports, android.R.layout.spinner_item);
+        // Specify the layout to use when the list of choices appears
+        sportsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        sportsDropDown.setAdapter(sportsAdapter);
 
-      //  sportsDropDown = findViewById(R.id.sportsSpinner);
-      //  distanceDropDown = findViewById(R.id.distanceSpinner);
-      //  sizeDropDown = findViewById(R.id.sizeSpinner);
+
+        //POPULATES DISTANCE SPINNER
+        distanceDropDown = findViewById(R.id.distanceSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> distanceAdapter = ArrayAdapter.createFromResource(this,
+                R.array.all_distances, android.R.layout.spinner_item);
+        // Specify the layout to use when the list of choices appears
+        distanceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        distanceDropDown.setAdapter(distanceAdapter);
+
+
+        //POPULATES SIZE SPINNER
+        sizeDropDown = findViewById(R.id.sizeSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> sizeAdapter = ArrayAdapter.createFromResource(this,
+                R.array.all_sizes, android.R.layout.spinner_item);
+        // Specify the layout to use when the list of choices appears
+        sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        sizeDropDown.setAdapter(sizeAdapter);
+
+
+        //FIND NEW GAME BUTTON
         newGameButton = findViewById(R.id.newGameButton);
+
+        //FIND LIST VIEW
+        listView = findViewById(R.id.listView);
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, myStringArray);
 
     }
 
@@ -76,11 +118,11 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
      */
     private void initListeners() {
         // Sports Spinner
-       // sportsDropDown.setOnClickListener(this);
+        sportsDropDown.setOnItemSelectedListener(this);
         // Distance Spinner
-      //  distanceDropDown.setOnClickListener(this);
+        distanceDropDown.setOnItemSelectedListener(this);
         // Size Spinner
-      //  sizeDropDown.setOnClickListener(this);
+        sizeDropDown.setOnItemSelectedListener(this);
         // New Game
         newGameButton.setOnClickListener(this);
 
@@ -88,24 +130,11 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
 
 
     /**
-     * Listens the click on view
+     * Listens to the click on view
      */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            // Sport Spinner
-          //  case R.id.sportsSpinner:
-                //Something with the spinner
-          //      break;
-            // Distance Spinner
-          //  case R.id.distanceSpinner:
-                //Something with the spinner
-         //       break;
-            // Size Spinner
-         //   case R.id.sizeSpinner:
-                //Something with the spinner
-          //      break;
-            // New Game
             case R.id.newGameButton:
                 // Make a new Game
                 Intent makeNewGameIntent = new Intent(getApplicationContext(), MakeANewGame.class);
@@ -114,6 +143,111 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
 
         }
     }
+
+    /**
+     * Listens to the selection of spinners
+     */
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        switch (parent.getId()) {
+            case R.id.sportSpinner:
+                // Filter By Sport
+                selectedSport = sportsDropDown.getSelectedItem().toString();
+                filterGames();
+                break;
+            case R.id.distanceSpinner:
+                // Filter By Distance
+                selectedDistance = distanceDropDown.getSelectedItem().toString();
+                filterGames();
+                break;
+            case R.id.sizeSpinner:
+                // Filter By Size
+                selectedSize = Integer.parseInt(sizeDropDown.getSelectedItem().toString());
+                filterGames();
+                break;
+
+        }
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        getGames();
+    }
+
+    private void getGames() {
+        ref
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void filterGames() {
+        if (selectedSport != null) {
+            if (selectedDistance != null && selectedSize != 0) {
+                filterByAll(selectedSport, selectedDistance, selectedSize);
+            } else if (selectedDistance != null) {
+                filterBySportAndDistance(selectedSport, selectedDistance);
+            } else if (selectedSize != 0) {
+                filterBySportAndSize(selectedSport, selectedSize);
+            } else {
+                filterBySport(selectedSport);
+            }
+
+        } else if (selectedDistance != null) {
+            if (selectedSize != 0) {
+                filterByDistanceAndSize(selectedDistance, selectedSize);
+            } else {
+                filterByDistance(selectedDistance);
+            }
+        } else {
+            filterBySize(selectedSize);
+        }
+
+    }
+
+    private void filterByAll(String selectedSport, String selectedDistance, int selectedSize) {
+        Query allQuery = ref.whereEqualTo("sport", selectedSport).whereEqualTo("distance", selectedDistance).whereEqualTo("size", selectedSize);
+    }
+
+    private void filterBySportAndDistance(String selectedSport, String selectedDistance) {
+        Query sportDistanceQuery = ref.whereEqualTo("sport", selectedSport).whereEqualTo("distance", selectedDistance);
+    }
+
+    private void filterBySportAndSize(String selectedSport, int selectedSize) {
+        Query sportSizeQuery = ref.whereEqualTo("sport", selectedSport).whereEqualTo("size", selectedSize);
+    }
+
+    private void filterBySport(String selectedSport) {
+        Query sportQuery = ref.whereEqualTo("sport", selectedSport);
+    }
+
+    private void filterByDistanceAndSize(String selectedDistance, int selectedSize) {
+        Query distanceSizeQuery = ref.whereEqualTo("distance", selectedDistance).whereEqualTo("size", selectedSize);
+    }
+
+    private void filterByDistance(String selectedDistance) {
+        Query distanceQuery = ref.whereEqualTo("distance", selectedDistance);
+    }
+
+    private void filterBySize(int selectedSize) {
+        Query sizeQuery = ref.whereEqualTo("size", selectedSize);
+    }
+
+
+
+
+
+
 
     public static class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 

@@ -9,7 +9,7 @@
     <string name="no_account">Não tem uma conta?</string>
     <string name="title_activity_available__games">Available_Games</string>
     <string-array name="all_sports">
-        <item>Esportes</item>
+        <item>Todos os Esportes</item>
         <item>Futebol</item>
         <item>Futebol Americano</item>
         <item>Ultimate Frisbee</item>
@@ -20,14 +20,14 @@
         <item>Tênis</item>
     </string-array>
     <string-array name="all_distances">
-        <item>Distâncias</item>
+        <item>Qualquer Distância</item>
         <item>0 – 1 milhas</item>
         <item>1 – 3 milhas</item>
         <item>3 – 10 milhas</item>
         <item>10+ milhas</item>
     </string-array>
     <string-array name="all_sizes">
-        <item>Tamanhos de Jogo</item>
+        <item>Qualquer Tamanho</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>

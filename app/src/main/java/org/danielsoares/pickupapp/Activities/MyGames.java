@@ -1,26 +1,42 @@
 package org.danielsoares.pickupapp.Activities;
 
         import android.os.Bundle;
+        import android.support.annotation.NonNull;
         import android.support.design.widget.FloatingActionButton;
         import android.support.v7.app.AppCompatActivity;
+        import android.util.Log;
         import android.view.View;
+        import android.widget.AdapterView;
+        import android.widget.ArrayAdapter;
+        import android.widget.ListView;
         import android.widget.Spinner;
 
+        import com.google.android.gms.tasks.OnCompleteListener;
+        import com.google.android.gms.tasks.Task;
         import com.google.firebase.auth.AuthResult;
         import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.auth.FirebaseUser;
         import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.firestore.CollectionReference;
+        import com.google.firebase.firestore.FirebaseFirestore;
+        import com.google.firebase.firestore.Query;
+        import com.google.firebase.firestore.QueryDocumentSnapshot;
+        import com.google.firebase.firestore.QuerySnapshot;
 
         import org.danielsoares.pickupapp.R;
 
 
-public class MyGames extends AppCompatActivity implements View.OnClickListener {
+public class MyGames extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Spinner sportsDropDown;
-    private Spinner distanceDropDown;
-    private Spinner sizeDropDown;
     private FloatingActionButton newGameButton;
     private DatabaseReference mDatabase;
+    private String selectedSport = null;
+    private CollectionReference ref = FirebaseFirestore.getInstance().collection("MyGames");
+    private static final String TAG = "MyGames";
+    private ListView listView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +45,7 @@ public class MyGames extends AppCompatActivity implements View.OnClickListener {
 
         initViews();
         initListeners();
+        getGames();
     }
 
 
@@ -37,11 +54,18 @@ public class MyGames extends AppCompatActivity implements View.OnClickListener {
      */
     private void initViews() {
 
-       // sportsDropDown = findViewById(R.id.sportSpinner);
-       // distanceDropDown = findViewById(R.id.distanceSpinner);
-      //  sizeDropDown = findViewById(R.id.sizeSpinner);
-        newGameButton = findViewById(R.id.newGameButton);
+        //POPULATES SPORTS SPINNER
+        sportsDropDown = findViewById(R.id.sportsSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> sportsAdapter = ArrayAdapter.createFromResource(this,
+                R.array.all_sports, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        sportsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        sportsDropDown.setAdapter(sportsAdapter);
 
+        //FIND LIST VIEW
+        listView = findViewById(R.id.listView);
     }
 
 
@@ -50,41 +74,47 @@ public class MyGames extends AppCompatActivity implements View.OnClickListener {
      */
     private void initListeners() {
         // Sports Spinner
-       // sportsDropDown.setOnClickListener(this);
-        // Distance Spinner
-       // distanceDropDown.setOnClickListener(this);
-        // Size Spinner
-      //  sizeDropDown.setOnClickListener(this);
-        // New Game
-        newGameButton.setOnClickListener(this);
-
+        sportsDropDown.setOnItemSelectedListener(this);
     }
 
-
     /**
-     * Listens the click on view
+     * Listens to the selection of spinners
      */
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            // Sport Spinner
-          //  case R.id.sportSpinner:
-                //Something with the spinner
-         //       break;
-            // Distance Spinner
-        //    case R.id.distanceSpinner:
-                //Something with the spinner
-         //       break;
-            // Size Spinner
-        //    case R.id.sizeSpinner:
-                //Something with the spinner
-         //       break;
-            // New Game
-            case R.id.newGameButton:
-                // Make a new Game
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        switch (parent.getId()) {
+            case R.id.sportSpinner:
+                // Filter By Sport
+                selectedSport = sportsDropDown.getSelectedItem().toString();
+                filterGames();
                 break;
-
         }
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        getGames();
+    }
+
+    private void getGames() {
+        ref
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void filterGames() {
+        Query sportQuery = ref.whereEqualTo("sport", selectedSport);
     }
 
 }
