@@ -109,8 +109,9 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
 
         //FIND LIST VIEW
         listView = findViewById(R.id.listView);
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, myStringArray);
+        // TODO: Daniel: Fix commented line below
+        /* ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, myStringArray); */
 
     }
 
