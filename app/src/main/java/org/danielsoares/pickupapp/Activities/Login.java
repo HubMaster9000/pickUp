@@ -45,6 +45,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     private EditText mPasswordField;
     private Button emailSignInButton;
 
+    private FirebaseAuth.AuthStateListener authStateListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,19 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
         initViews();
         initListeners();
+
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null) {
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                    // SENDS TO AVAILABLE GAMES ACTIVITY
+                    Intent login = new Intent(getApplicationContext(), AvailableGames.class);
+                    startActivity(login);
+                }
+            }
+        };
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -67,12 +82,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     @Override
     protected void onStart() {
         super.onStart();
-        // [START on_start_sign_in]
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        // [END on_start_sign_in]
 
+        mAuth.addAuthStateListener(authStateListener);
     }
 
     /**
