@@ -111,6 +111,7 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         listView = findViewById(R.id.listView);
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, myStringArray);
+        listView.setAdapter(listViewAdapter);
 
     }
 
