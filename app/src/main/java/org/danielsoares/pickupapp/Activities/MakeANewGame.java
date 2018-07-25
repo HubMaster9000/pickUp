@@ -229,10 +229,9 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
         // Unique Key for game
         Game_Class newGame = new Game_Class(sportPlay, hostStart, gameLocation,
                 timeBegin, timeEnd, max);
-        Map<String, Object> postValues = newGame.toMap();
 
         db.collection("Games")
-                .add(postValues);
+                .add(newGame);
         }
 
     @Override
