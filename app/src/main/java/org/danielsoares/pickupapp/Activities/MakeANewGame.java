@@ -249,8 +249,8 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.size_list :
                 String selected = selectSize.getSelectedItem().toString();
-                String tenPlus = getResources().getStringArray(R.array.all_sizes)[11];
-                if (selected == "10+") max = Integer.MAX_VALUE;
+                String tenPlus = getResources().getStringArray(R.array.all_sizes)[10];
+                if (selected == tenPlus) max = Integer.MAX_VALUE;
                 else max = Integer.parseInt(selected);
                 break;
         }
