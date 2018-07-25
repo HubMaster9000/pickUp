@@ -81,7 +81,8 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         // Apply the adapter to the spinner
         sportsDropDown.setAdapter(sportsAdapter);
 
-
+        // TODO: Figure out how to find distance
+        /**
         //POPULATES DISTANCE SPINNER
         distanceDropDown = findViewById(R.id.distanceSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -91,6 +92,7 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         distanceAdapter.setDropDownViewResource(R.layout.spinner_item);
         // Apply the adapter to the spinner
         distanceDropDown.setAdapter(distanceAdapter);
+         */
 
 
         //POPULATES SIZE SPINNER
@@ -123,7 +125,8 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         // Sports Spinner
         sportsDropDown.setOnItemSelectedListener(this);
         // Distance Spinner
-        distanceDropDown.setOnItemSelectedListener(this);
+        // TODO: Figure out how to find distance
+        //distanceDropDown.setOnItemSelectedListener(this);
         // Size Spinner
         sizeDropDown.setOnItemSelectedListener(this);
         // New Game
@@ -159,14 +162,23 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
                 selectedSport = sportsDropDown.getSelectedItem().toString();
                 filterGames();
                 break;
+            // TODO: Figure out how to find distance
+            /**
             case R.id.distanceSpinner:
                 // Filter By Distance
                 selectedDistance = distanceDropDown.getSelectedItem().toString();
                 filterGames();
                 break;
+             */
             case R.id.sizeSpinner:
                 // Filter By Size
-                selectedSize = Integer.parseInt(sizeDropDown.getSelectedItem().toString());
+                String selected = sizeDropDown.getSelectedItem().toString();
+                if (selected == "10+") {
+                    selectedSize = Integer.MAX_VALUE;
+                    Toast.makeText(AvailableGames.this, "penis",
+                    Toast.LENGTH_SHORT).show();
+                }
+                else { selectedSize = Integer.parseInt(selected);}
                 filterGames();
                 break;
 
@@ -196,35 +208,40 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
 
     private void filterGames() {
         if (selectedSport != null) {
-            if (selectedDistance != null && selectedSize != 0) {
+            // TODO: Figure out how to find distance
+            /**
+             if (selectedDistance != null && selectedSize != 0) {
                 filterByAll(selectedSport, selectedDistance, selectedSize);
             } else if (selectedDistance != null) {
                 filterBySportAndDistance(selectedSport, selectedDistance);
-            } else if (selectedSize != 0) {
+            } */ if (selectedSize != 0) {
                 filterBySportAndSize(selectedSport, selectedSize);
             } else {
                 filterBySport(selectedSport);
             }
 
-        } else if (selectedDistance != null) {
+        }
+        // TODO: Figure out how to find distance
+        /**
+        else if (selectedDistance != null) {
             if (selectedSize != 0) {
                 filterByDistanceAndSize(selectedDistance, selectedSize);
             } else {
                 filterByDistance(selectedDistance);
-            }
-        } else {
+            } */
+        else {
             filterBySize(selectedSize);
         }
 
     }
 
-    private void filterByAll(String selectedSport, String selectedDistance, int selectedSize) {
+    /** private void filterByAll(String selectedSport, String selectedDistance, int selectedSize) {
         Query allQuery = ref.whereEqualTo("sport", selectedSport).whereEqualTo("distance", selectedDistance).whereEqualTo("size", selectedSize);
     }
 
     private void filterBySportAndDistance(String selectedSport, String selectedDistance) {
         Query sportDistanceQuery = ref.whereEqualTo("sport", selectedSport).whereEqualTo("distance", selectedDistance);
-    }
+    }*/
 
     private void filterBySportAndSize(String selectedSport, int selectedSize) {
         Query sportSizeQuery = ref.whereEqualTo("sport", selectedSport).whereEqualTo("size", selectedSize);
@@ -234,13 +251,13 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         Query sportQuery = ref.whereEqualTo("sport", selectedSport);
     }
 
-    private void filterByDistanceAndSize(String selectedDistance, int selectedSize) {
+    /** private void filterByDistanceAndSize(String selectedDistance, int selectedSize) {
         Query distanceSizeQuery = ref.whereEqualTo("distance", selectedDistance).whereEqualTo("size", selectedSize);
     }
 
     private void filterByDistance(String selectedDistance) {
         Query distanceQuery = ref.whereEqualTo("distance", selectedDistance);
-    }
+    }*/
 
     private void filterBySize(int selectedSize) {
         Query sizeQuery = ref.whereEqualTo("size", selectedSize);
