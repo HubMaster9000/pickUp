@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -54,6 +55,7 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
     private String selectedDistance = null;
     private int selectedSize = 0;
     private ListView listView;
+    private FirebaseUser user;
 
 
     @Override
@@ -113,6 +115,7 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         /* ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, myStringArray); */
 
+        user = getIntent().getParcelableExtra("user");
     }
 
 
@@ -141,6 +144,7 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
             case R.id.newGameButton:
                 // Make a new Game
                 Intent makeNewGameIntent = new Intent(getApplicationContext(), MakeANewGame.class);
+                makeNewGameIntent.putExtra("user", user);
                 startActivity(makeNewGameIntent);
                 break;
 

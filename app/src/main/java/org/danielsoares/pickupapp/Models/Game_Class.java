@@ -13,14 +13,14 @@ import java.util.Queue;
 public class Game_Class implements Comparable<Game_Class>, Serializable {
     private String sport;
     private String host;
-    private LatLng location;
+    private GameLocation location;
     private Time startTime;
     private Time endTime;
     private Queue<Player_Class> players;     // infinite list of people in/coming to the game
     private int maxSize;                     // Game could be set to unlimited size, then set this
                                              // to Integer_Max
     // Initialize class
-    public Game_Class(String sportPlay, String hostStart, LatLng gameLocation, Time timeBegin, Time timeEnd,
+    public Game_Class(String sportPlay, String hostStart, GameLocation gameLocation, Time timeBegin, Time timeEnd,
                       int max) {
         sport = sportPlay;
         host = hostStart;
@@ -31,7 +31,7 @@ public class Game_Class implements Comparable<Game_Class>, Serializable {
         maxSize = max;
     }
 
-    public Game_Class(String sportPlay, String hostStart, GameLocation gameLocation, Time timeBegin, Time timeEnd, int max) {}
+    public Game_Class() {}
 
     // Add a player to the game
     // returns True if below max capacity, False otherwise
@@ -56,7 +56,7 @@ public class Game_Class implements Comparable<Game_Class>, Serializable {
 
     // Distance from game to player
     public double distanceTo(Location player) {
-        return 0.0;
+        return location.distanceTo(player);
     }
 
     // Allows us to sort by starting time

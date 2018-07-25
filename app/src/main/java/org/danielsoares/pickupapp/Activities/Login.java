@@ -220,6 +220,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                         if (task.isSuccessful()) {
                             // Sign in success, go to Available Games
                             Intent loginIntent = new Intent(getApplicationContext(), AvailableGames.class);
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            loginIntent.putExtra("user", user);
                             startActivity(loginIntent);
                             finish();
                         } else {

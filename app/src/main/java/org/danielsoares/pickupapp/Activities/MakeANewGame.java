@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
@@ -28,6 +29,7 @@ import org.danielsoares.pickupapp.R;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MakeANewGame extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -44,6 +46,7 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
     boolean allowTime;
 
     private FirebaseFirestore db;
+    private FirebaseUser user;
 
     // Game info
     private String sportPlay;
@@ -144,6 +147,8 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
         locationButton = findViewById(R.id.locationButton);
         createGameButton = findViewById(R.id.createGameButton);
         cancelGameButton = findViewById(R.id.cancelGameButton);
+        user = getIntent().getParcelableExtra("user");
+        hostStart = user.getDisplayName();
 
     }
 
@@ -230,8 +235,10 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
         Game_Class newGame = new Game_Class(sportPlay, hostStart, gameLocation,
                 timeBegin, timeEnd, max);
 
+        Map<String, Object> data = newGame.toMap();
+
         db.collection("Games")
-                .add(newGame);
+                .add(data);
         }
 
     @Override
@@ -242,6 +249,7 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.size_list :
                 String selected = selectSize.getSelectedItem().toString();
+                String tenPlus = getResources().getStringArray(R.array.all_sizes)[11];
                 if (selected == "10+") max = Integer.MAX_VALUE;
                 else max = Integer.parseInt(selected);
                 break;
