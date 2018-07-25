@@ -58,14 +58,18 @@ public class MyGames extends AppCompatActivity implements AdapterView.OnItemSele
         sportsDropDown = findViewById(R.id.sportsSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> sportsAdapter = ArrayAdapter.createFromResource(this,
-                R.array.all_sports, android.R.layout.simple_spinner_item);
+                R.array.all_sports, R.layout.spinner_item);
         // Specify the layout to use when the list of choices appears
-        sportsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sportsAdapter.setDropDownViewResource(R.layout.spinner_item);
         // Apply the adapter to the spinner
         sportsDropDown.setAdapter(sportsAdapter);
 
         //FIND LIST VIEW
         listView = findViewById(R.id.listView);
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, myStringArray);
+        listView.setAdapter(listViewAdapter);
+
     }
 
 
