@@ -221,6 +221,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                             // Sign in success, go to Available Games
                             Intent loginIntent = new Intent(getApplicationContext(), AvailableGames.class);
                             FirebaseUser user = mAuth.getCurrentUser();
+                            if (user == null) {
+                                Toast.makeText(Login.this, "User is null",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                             loginIntent.putExtra("user", user);
                             startActivity(loginIntent);
                             finish();
