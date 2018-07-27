@@ -118,6 +118,10 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         listView.setAdapter(listViewAdapter);
 
         user = getIntent().getParcelableExtra("user");
+        if (user == null) {
+            Toast.makeText(Login.this, "user is null",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
 
