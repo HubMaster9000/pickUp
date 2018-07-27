@@ -63,6 +63,7 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".Activities.ViewGame" />
         <activity android:name=".Activities.MyGames" />
+        <activity android:name=".Activities.GameCardView"></activity>
     </application>
 
 </manifest>

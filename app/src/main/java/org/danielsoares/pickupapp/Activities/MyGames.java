@@ -66,9 +66,9 @@ public class MyGames extends AppCompatActivity implements AdapterView.OnItemSele
 
         //FIND LIST VIEW
         listView = findViewById(R.id.listView);
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(this,
+        /*ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, myStringArray);
-        listView.setAdapter(listViewAdapter);
+        listView.setAdapter(listViewAdapter);*/
 
     }
 
