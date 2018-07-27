@@ -119,7 +119,7 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
 
         user = getIntent().getParcelableExtra("user");
         if (user == null) {
-            Toast.makeText(Login.this, "user is null",
+            Toast.makeText(AvailableGames.this, "user is null",
                     Toast.LENGTH_SHORT).show();
         }
     }
