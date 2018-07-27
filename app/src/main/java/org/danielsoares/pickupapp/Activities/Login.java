@@ -64,6 +64,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
                     // SENDS TO AVAILABLE GAMES ACTIVITY
                     Intent login = new Intent(getApplicationContext(), AvailableGames.class);
+                    login.putExtra("user", user);
                     startActivity(login);
                 }
             }
