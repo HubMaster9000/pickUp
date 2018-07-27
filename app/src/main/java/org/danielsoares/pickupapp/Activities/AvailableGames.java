@@ -183,10 +183,14 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
                 String selected = sizeDropDown.getSelectedItem().toString();
                 if (selected == "10+") {
                     selectedSize = Integer.MAX_VALUE;
-                    Toast.makeText(AvailableGames.this, "penis",
+                    Toast.makeText(AvailableGames.this, "clicked 10+",
                     Toast.LENGTH_SHORT).show();
                 }
-                else { selectedSize = Integer.parseInt(selected);}
+                else {
+                    // selectedSize = Integer.parseInt(selected);
+                    Toast.makeText(AvailableGames.this, "did not click 10+",
+                            Toast.LENGTH_SHORT).show();
+                }
                 filterGames();
                 break;
 

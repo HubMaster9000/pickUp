@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseUser;
@@ -210,15 +211,15 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
         selectSports = findViewById(R.id.sport_list);
         selectSports.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapterSports = ArrayAdapter.createFromResource(this,
-                R.array.all_sports, android.R.layout.simple_spinner_item);
-        adapterSports.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.all_sports, R.layout.spinner_item);
+        adapterSports.setDropDownViewResource(R.layout.spinner_item);
         selectSports.setAdapter(adapterSports);
 
         selectSize = findViewById(R.id.size_list);
         selectSize.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapterSize = ArrayAdapter.createFromResource(this,
-                R.array.all_sizes, android.R.layout.simple_spinner_item);
-        adapterSize.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.all_sizes, R.layout.spinner_item);
+        adapterSize.setDropDownViewResource(R.layout.spinner_item);
         selectSize.setAdapter(adapterSize);
     }
 
@@ -250,6 +251,8 @@ public class MakeANewGame extends AppCompatActivity implements View.OnClickListe
             case R.id.size_list :
                 String selected = selectSize.getSelectedItem().toString();
                 String tenPlus = getResources().getStringArray(R.array.all_sizes)[10];
+                Toast.makeText(this, tenPlus,
+                        Toast.LENGTH_SHORT).show();
                 if (selected == tenPlus) max = Integer.MAX_VALUE;
                 else max = Integer.parseInt(selected);
                 break;
