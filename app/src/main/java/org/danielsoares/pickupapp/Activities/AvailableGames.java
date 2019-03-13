@@ -1,11 +1,15 @@
 package org.danielsoares.pickupapp.Activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,37 +19,33 @@ import android.widget.ListView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
-import org.danielsoares.pickupapp.Models.GameLocation;
+import org.danielsoares.pickupapp.GameRecyclerViewAdapter;
+import org.danielsoares.pickupapp.IMakeANewGame;
+import org.danielsoares.pickupapp.Models.Game;
 import org.danielsoares.pickupapp.R;
 
-import javax.annotation.Nullable;
+import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AvailableGames extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class AvailableGames extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, IMakeANewGame, SwipeRefreshLayout.OnRefreshListener {
 
     private Spinner sportsDropDown;
-    private Spinner distanceDropDown;
+    //private Spinner distanceDropDown;
     private Spinner sizeDropDown;
     private FloatingActionButton newGameButton;
     private DatabaseReference mDatabase;
@@ -54,8 +54,19 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
     private String selectedSport = null;
     private String selectedDistance = null;
     private int selectedSize = 0;
-    private ListView listView;
-    private FirebaseUser user;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private CircleImageView profilePicImageView;
+    private String userName;
+    private Uri profilePic = user.getPhotoUrl();
+
+    private RecyclerView mRecyclerView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
+    //views
+    private View mParentLayout;
+    private ArrayList<Game> mGames = new ArrayList<>();
+    private GameRecyclerViewAdapter mGameRecyclerViewAdapter;
+    private DocumentSnapshot mLastQueriedDocument;
 
 
     @Override
@@ -111,17 +122,25 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         //FIND NEW GAME BUTTON
         newGameButton = findViewById(R.id.newGameButton);
 
-        //FIND LIST VIEW
-        listView = findViewById(R.id.listView);
-        /*ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, myStringArray);
-        listView.setAdapter(listViewAdapter);*/
 
-        user = getIntent().getParcelableExtra("user");
-        if (user == null) {
-            Toast.makeText(AvailableGames.this, "user is null",
-                    Toast.LENGTH_SHORT).show();
+        //FIND PROFILE PIC ICON
+        profilePicImageView = (CircleImageView) findViewById(R.id.account_Image);
+
+        userName = user.getDisplayName();
+        if (userName.length() < 1) {
+            Intent editProfile = new Intent(getApplicationContext(), EditProfile.class);
+            startActivity(editProfile);
         }
+
+        if (profilePic != null) {
+            Picasso.get().load(profilePic).into(profilePicImageView);
+        }
+
+        //FIND VIEWS
+        mParentLayout = findViewById(android.R.id.content);
+        mRecyclerView = findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        initRecyclerView();
     }
 
 
@@ -138,7 +157,193 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
         sizeDropDown.setOnItemSelectedListener(this);
         // New Game
         newGameButton.setOnClickListener(this);
+        // Profile Pic
+        profilePicImageView.setOnClickListener(this);
 
+    }
+
+    @Override
+    public void onRefresh() {
+        getGames();
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    //POPULATE RECYCLER VIEW WITH GAMES
+    private void getGames() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        //Initial condition, no spinners selected
+        if (selectedSport == "All Sports" && selectedSize == 100) {
+            CollectionReference gamesCollectionRef = db.collection("games");
+
+            Query allGameQuery = null;
+            if (mLastQueriedDocument != null) {
+                //repopulates on refresh
+                allGameQuery = gamesCollectionRef
+                        .orderBy("startTimeHour", Query.Direction.ASCENDING)
+                        //.orderBy("startTimeMinute", Query.Direction.ASCENDING)
+                        .startAfter(mLastQueriedDocument);
+            } else {
+                //initial population
+                allGameQuery = gamesCollectionRef
+                        //.orderBy("startTimeHour", Query.Direction.ASCENDING)
+                        .orderBy("startTimeMinute", Query.Direction.ASCENDING);
+            }
+            allGameQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Game game = document.toObject(Game.class);
+                            mGames.add(game);
+                        }
+
+                        if (task.getResult().size() != 0) {
+                            mLastQueriedDocument = task.getResult().getDocuments().get(task.getResult().size() - 1);
+                        }
+                        mGameRecyclerViewAdapter.notifyDataSetChanged();
+
+                    } else {
+                        Toast.makeText(AvailableGames.this, "Query Failed.1",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+        //Filters games based off of sport
+        else if (selectedSport != "All Sports" && selectedSize == 100) {
+            CollectionReference gamesCollectionRef = db.collection("games");
+
+            Query filteredBySportQuery = null;
+            if (mLastQueriedDocument != null) {
+                //repopulates on refresh
+                filteredBySportQuery = gamesCollectionRef
+                        .whereEqualTo("sport", selectedSport)
+                        .orderBy("startTimeHour", Query.Direction.ASCENDING)
+                        .orderBy("startTimeMinute", Query.Direction.ASCENDING)
+                        .startAfter(mLastQueriedDocument);
+            } else {
+                //initial population
+                filteredBySportQuery = gamesCollectionRef
+                        .whereEqualTo("sport", selectedSport)
+                        .orderBy("startTimeHour", Query.Direction.ASCENDING)
+                        .orderBy("startTimeMinute", Query.Direction.ASCENDING);
+            }
+             filteredBySportQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                 @Override
+                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                     if (task.isSuccessful()) {
+                         for (QueryDocumentSnapshot document : task.getResult()) {
+                             Game game = document.toObject(Game.class);
+                             mGames.add(game);
+                         }
+
+                         if (task.getResult().size() != 0) {
+                             mLastQueriedDocument = task.getResult().getDocuments().get(task.getResult().size() - 1);
+                         }
+                         mGameRecyclerViewAdapter.notifyDataSetChanged();
+
+                     } else {
+                         Toast.makeText(AvailableGames.this, "Query Failed.2",
+                                 Toast.LENGTH_SHORT).show();
+                     }
+                 }
+             });
+        }
+
+        //Filters games based off of size
+        else if (selectedSize != 100 && selectedSport == "All Sports") {
+            CollectionReference gamesCollectionRef = db.collection("games");
+
+            Query filteredBySizeQuery = null;
+            if (mLastQueriedDocument != null) {
+                //repopulates on refresh
+                filteredBySizeQuery = gamesCollectionRef
+                        .whereEqualTo("maxSize", selectedSize)
+                        .orderBy("startTimeHour", Query.Direction.ASCENDING)
+                        .orderBy("startTimeMinute", Query.Direction.ASCENDING)
+                        .startAfter(mLastQueriedDocument);
+            } else {
+                //initial population
+                filteredBySizeQuery = gamesCollectionRef
+                        .whereEqualTo("maxSize", selectedSize)
+                        .orderBy("startTimeHour", Query.Direction.ASCENDING)
+                        .orderBy("startTimeMinute", Query.Direction.ASCENDING);
+            }
+            filteredBySizeQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Game game = document.toObject(Game.class);
+                            mGames.add(game);
+                        }
+
+                        if (task.getResult().size() != 0) {
+                            mLastQueriedDocument = task.getResult().getDocuments().get(task.getResult().size() - 1);
+                        }
+                        mGameRecyclerViewAdapter.notifyDataSetChanged();
+
+                    } else {
+                        Toast.makeText(AvailableGames.this, "Query Failed.3",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+        //Filters games based off of sport and size
+        else if (selectedSize != 100 && selectedSport != "All Sports") {
+            CollectionReference gamesCollectionRef = db.collection("games");
+
+            Query filteredByBothQuery = null;
+            if (mLastQueriedDocument != null) {
+                //repopulates on refresh
+                filteredByBothQuery = gamesCollectionRef
+                        .whereEqualTo("sport", selectedSport)
+                        .whereEqualTo("maxSize", selectedSize)
+                        .orderBy("startTimeHour", Query.Direction.ASCENDING)
+                        .orderBy("startTimeMinute", Query.Direction.ASCENDING)
+                        .startAfter(mLastQueriedDocument);
+            } else {
+                //initial population
+                filteredByBothQuery = gamesCollectionRef
+                        .whereEqualTo("sport", selectedSport)
+                        .whereEqualTo("maxSize", selectedSize)
+                        .orderBy("startTimeHour", Query.Direction.ASCENDING)
+                        .orderBy("startTimeMinute", Query.Direction.ASCENDING);
+            }
+            filteredByBothQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Game game = document.toObject(Game.class);
+                            mGames.add(game);
+                        }
+
+                        if (task.getResult().size() != 0) {
+                            mLastQueriedDocument = task.getResult().getDocuments().get(task.getResult().size() - 1);
+                        }
+                        mGameRecyclerViewAdapter.notifyDataSetChanged();
+
+                    } else {
+                        Toast.makeText(AvailableGames.this, "Query Failed.4",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+    //Displays games
+    private void initRecyclerView(){
+        if(mGameRecyclerViewAdapter == null){
+            mGameRecyclerViewAdapter = new GameRecyclerViewAdapter(this, mGames);
+        }
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mGameRecyclerViewAdapter);
     }
 
 
@@ -154,6 +359,12 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
                 makeNewGameIntent.putExtra("user", user);
                 startActivity(makeNewGameIntent);
                 break;
+            case R.id.account_Image:
+                // Go to Settings
+                Intent goToProfileIntent = new Intent(getApplicationContext(), ProfilePage.class);
+                goToProfileIntent.putExtra("user", user);
+                startActivity(goToProfileIntent);
+                break;
 
         }
     }
@@ -162,199 +373,40 @@ public class AvailableGames extends AppCompatActivity implements View.OnClickLis
      * Listens to the selection of spinners
      */
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        switch (parent.getId()) {
-            case R.id.sportSpinner:
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        switch(adapterView.getId()){
+            case R.id.sportsSpinner:
                 // Filter By Sport
-                selectedSport = sportsDropDown.getSelectedItem().toString();
-                filterGames();
+                selectedSport =  sportsDropDown.getSelectedItem().toString();
+                mGames.clear();
+                mGameRecyclerViewAdapter.notifyDataSetChanged();
+                getGames();
                 break;
             // TODO: Figure out how to find distance
             /**
-            case R.id.distanceSpinner:
-                // Filter By Distance
-                selectedDistance = distanceDropDown.getSelectedItem().toString();
-                filterGames();
-                break;
+             case R.id.distanceSpinner:
+             // Filter By Distance
+             selectedDistance = distanceDropDown.getSelectedItem().toString();
+             filterGames();
+             break;
              */
             case R.id.sizeSpinner:
                 // Filter By Size
                 String selected = sizeDropDown.getSelectedItem().toString();
-                if (selected == "10+") {
-                    selectedSize = Integer.MAX_VALUE;
-                    Toast.makeText(AvailableGames.this, "clicked 10+",
-                    Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    // selectedSize = Integer.parseInt(selected);
-                    Toast.makeText(AvailableGames.this, "did not click 10+",
-                            Toast.LENGTH_SHORT).show();
-                }
-                filterGames();
+                selectedSize = Integer.parseInt(selected);
+                mGames.clear();
+                mGameRecyclerViewAdapter.notifyDataSetChanged();
+                getGames();
                 break;
-
         }
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
-        getGames();
     }
 
-    private void getGames() {
-        ref
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-    }
-
-    private void filterGames() {
-        if (selectedSport != null) {
-            // TODO: Figure out how to find distance
-            /**
-             if (selectedDistance != null && selectedSize != 0) {
-                filterByAll(selectedSport, selectedDistance, selectedSize);
-            } else if (selectedDistance != null) {
-                filterBySportAndDistance(selectedSport, selectedDistance);
-            } */ if (selectedSize != 0) {
-                filterBySportAndSize(selectedSport, selectedSize);
-            } else {
-                filterBySport(selectedSport);
-            }
-
-        }
-        // TODO: Figure out how to find distance
-        /**
-        else if (selectedDistance != null) {
-            if (selectedSize != 0) {
-                filterByDistanceAndSize(selectedDistance, selectedSize);
-            } else {
-                filterByDistance(selectedDistance);
-            } */
-        else {
-            filterBySize(selectedSize);
-        }
-
-    }
-
-    /** private void filterByAll(String selectedSport, String selectedDistance, int selectedSize) {
-        Query allQuery = ref.whereEqualTo("sport", selectedSport).whereEqualTo("distance", selectedDistance).whereEqualTo("size", selectedSize);
-    }
-
-    private void filterBySportAndDistance(String selectedSport, String selectedDistance) {
-        Query sportDistanceQuery = ref.whereEqualTo("sport", selectedSport).whereEqualTo("distance", selectedDistance);
-    }*/
-
-    private void filterBySportAndSize(String selectedSport, int selectedSize) {
-        Query sportSizeQuery = ref.whereEqualTo("sport", selectedSport).whereEqualTo("size", selectedSize);
-    }
-
-    private void filterBySport(String selectedSport) {
-        Query sportQuery = ref.whereEqualTo("sport", selectedSport);
-    }
-
-    /** private void filterByDistanceAndSize(String selectedDistance, int selectedSize) {
-        Query distanceSizeQuery = ref.whereEqualTo("distance", selectedDistance).whereEqualTo("size", selectedSize);
-    }
-
-    private void filterByDistance(String selectedDistance) {
-        Query distanceQuery = ref.whereEqualTo("distance", selectedDistance);
-    }*/
-
-    private void filterBySize(int selectedSize) {
-        Query sizeQuery = ref.whereEqualTo("size", selectedSize);
+    @Override
+    public void createNewGame(String sport, String host, int startTimeHour, int startTimeMinute, int endTimeHour, int endTimeMinute, int maxSize,  String location) {
     }
 
 
-
-
-
-
-
-    public static class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
-        private GoogleMap mMap;
-        private Button submitButton;
-        private Marker marker;
-        private LatLng location;
-        private EditText inputLocationName;
-        private String locationName;
-        private GameLocation gameLocation;
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_maps);
-
-            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.map);
-            mapFragment.getMapAsync(this);
-
-            initial();
-        }
-
-        private void initial() {
-            inputLocationName = findViewById(R.id.gameName);
-            locationName = inputLocationName.getText().toString();
-
-            submitButton = findViewById(R.id.submitButton);
-            submitButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    if (marker == null) {
-                        Toast.makeText(MapsActivity.this,
-                                "Select a location first", Toast.LENGTH_LONG).show();
-                    }
-                    else if (locationName == null) {
-                        Toast.makeText(MapsActivity.this,
-                                "Enter Location Name First", Toast.LENGTH_LONG).show();
-                    }
-                    else {
-                        Intent sendLocation = new Intent(getApplicationContext(), MakeANewGame.class);
-                        gameLocation = new GameLocation(locationName, location);
-                        sendLocation.putExtra("Location", gameLocation);
-                        startActivity(sendLocation);
-                    }
-                }
-            });
-        }
-
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera. In this case,
-         * we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to install
-         * it inside the SupportMapFragment. This method will only be triggered once the user has
-         * installed Google Play services and returned to the app.
-         */
-        @Override
-        public void onMapReady(GoogleMap googleMap) {
-            mMap = googleMap;
-
-            // Adds marker at touched point
-            mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                @Override
-                public void onMapClick(LatLng point) {
-                    marker = mMap.addMarker(new MarkerOptions()
-                            .position(point)
-                            .title("New Game"));
-                    marker.setVisible(true);
-                    location = point;
-                }
-            });
-        }
-
-
-    }
 }

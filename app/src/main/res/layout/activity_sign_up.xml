@@ -7,7 +7,7 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="20dp"
-    android:background="@android:color/holo_blue_bright"
+    android:background="@color/startBlue"
     tools:context=".Activities.SignUp"
     android:orientation="vertical">
 
@@ -82,7 +82,7 @@
             android:layout_gravity="bottom|start"
             android:layout_marginEnd="10dp"
             android:text="@string/already_have_account"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_marginRight="10dp" />
 
         <TextView
@@ -92,6 +92,6 @@
             android:layout_gravity="bottom|end"
             android:text="@string/login"
             android:textColor="@color/titleGreen"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

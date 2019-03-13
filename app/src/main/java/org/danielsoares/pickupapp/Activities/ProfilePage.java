@@ -5,61 +5,77 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import org.danielsoares.pickupapp.R;
 
-public class ProfilePage extends AppCompatActivity {
+import de.hdodenhof.circleimageview.CircleImageView;
 
-    private ImageView editInfoButton = findViewById(R.id.edit_info_button);
-    private TextView editInfoText = findViewById(R.id.edit_info_text);
+public class ProfilePage extends AppCompatActivity implements View.OnClickListener {
+
+    private Button editInfoButton;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private String email = user.getEmail();
+    private String displayName = user.getDisplayName();
+    private CircleImageView profilePicImageView;
+    private TextView emailTextView;
+    private TextView displayNameTextView;
+    private Uri profilePic = user.getPhotoUrl();
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
 
-        // Intent intent = getIntent();
-        // String value = intent.getStringExtra("key"); //if it's a string you stored.
+        initViews();
+        initListeners();
+    }
 
-        editInfoButton.setOnClickListener(new View.OnClickListener() {
+    private void initViews() {
+        editInfoButton = findViewById(R.id.edit_info_button);
+        emailTextView = findViewById(R.id.email);
+        displayNameTextView = findViewById(R.id.displayName);
+        emailTextView.setText(email);
+        displayNameTextView.setText(displayName);
+        backButton = findViewById(R.id.back_button);
+        profilePicImageView = (CircleImageView) findViewById(R.id.imageView_account_profile);
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfilePage.this, EditProfile.class);
-                // intent.putExtra("key",value);
-                ProfilePage.this.startActivity(intent);
-            }
-        });
+        if (profilePic != null) {
+            Picasso.get().load(profilePic).into(profilePicImageView);
+        }
 
-        editInfoText.setOnClickListener(new View.OnClickListener() {
+    }
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfilePage.this, EditProfile.class);
-                ProfilePage.this.startActivity(intent);
-            }
-        });
+    private void initListeners() {
 
-        //Access Firebase user
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
+        editInfoButton.setOnClickListener(this);
+        backButton.setOnClickListener(this);
 
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
+    }
 
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            String uid = user.getUid();
+    /**
+     * Listens the click on view
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.edit_info_button:
+                // Go to Settings
+                Intent editProfileIntent = new Intent(getApplicationContext(), EditProfile.class);
+                startActivity(editProfileIntent);
+                break;
+            case R.id.back_button:
+                // Go to Available Games
+                Intent availableGamesIntent = new Intent(getApplicationContext(), AvailableGames.class);
+                startActivity(availableGamesIntent);
+                break;
+
         }
     }
 

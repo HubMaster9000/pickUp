@@ -42,7 +42,6 @@
             android:label="@string/title_activity_edit_profile"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activities.MakeANewGame" />
-        <activity android:name=".Activities.Pick_Time" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -65,5 +64,7 @@
         <activity android:name=".Activities.MyGames" />
         <activity android:name=".Activities.GameCardView"></activity>
     </application>
+    
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
 
 </manifest>

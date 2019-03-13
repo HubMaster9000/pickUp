@@ -27,6 +27,7 @@
         <item>10+ miles</item>
     </string-array>
     <string-array name="all_sizes">
+        <item>100</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
@@ -36,7 +37,6 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
-        <item>10+</item>
     </string-array>
     <string name="already_have_account">Vous avez déjà un compte?</string>
     <string name="title_activity_profile_page">profile_page</string>
@@ -64,6 +64,7 @@
     <string name="start_time">Heure de début</string>
     <string name="end_time">Heure de fin</string>
     <string name="select_start_time">Sélectionnez une heure de début</string>
+    <string name="select_end_time">Sélectionnez une heure de fin</string>
     <string name="add_game">Ajouter un Jeu</string>
     <string name="create_game">Créer un nouveau jeu</string>
     <string name="games">Jeu</string>
@@ -80,4 +81,8 @@
     <string name="players">Joueurs</string>
     <string name="capacity">Capacité</string>
     <string name="select_capacity">Sélectionnez la taille du jeu</string>
+    <string name="title_activity_maps_ii">Carte</string>
+    <string name="enter_location">Entrez l\'emplacement du Jeu:</string>
+    <string name="edit">Modifier</string>
+    <string name="back">Retour</string>
 </resources>

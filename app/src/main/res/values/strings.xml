@@ -9,7 +9,6 @@
     <string name="no_account">Don\'t have an account?</string>
     <string name="title_activity_available__games">Available_Games</string>
     <string-array name="all_sports">
-        <item>All Sports</item>
         <item>Soccer</item>
         <item>Football</item>
         <item>Ultimate Frisbee</item>
@@ -27,6 +26,7 @@
         <item>10+ miles</item>
     </string-array>
     <string-array name="all_sizes">
+        <item>100</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
@@ -36,7 +36,6 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
-        <item>10+</item>
     </string-array>
     <string name="already_have_account">Already have an account?</string>
     <string name="title_activity_profile_page">profile_page</string>
@@ -63,6 +62,7 @@
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
     <string name="select_start_time">Select a Start Time</string>
+    <string name="select_end_time">Select an End Time</string>
     <string name="add_game">Add Game</string>
     <string name="create_game">Create a New Game</string>
     <string name="games">Games</string>
@@ -81,4 +81,7 @@
     <string name="capacity">Capacity</string>
     <string name="select_capacity">Select game size</string>
     <string name="title_activity_maps_ii">Map</string>
+    <string name="enter_location">Enter Game Location:</string>
+    <string name="edit">Edit</string>
+    <string name="back">Back</string>
 </resources>

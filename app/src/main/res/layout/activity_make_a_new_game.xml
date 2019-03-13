@@ -7,7 +7,7 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="20dp"
-    android:background="@android:color/holo_blue_bright"
+    android:background="@color/startBlue"
     tools:context=".Activities.MakeANewGame"
     android:orientation="vertical">
 
@@ -18,8 +18,7 @@
         android:layout_height="wrap_content"
         android:text="@string/create_game"
         android:textSize="38sp"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/titleGreen"/>
+        android:layout_marginBottom="40dp"/>
 
 
     <!-- Select Sport -->
@@ -27,11 +26,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/select_sport"
-        android:textSize="18sp" />
+        android:textSize="22sp"
+        android:textColor="@color/grayLight"/>
 
     <Spinner
-        android:id="@+id/sport_list"
-        android:layout_width="wrap_content"
+        android:id="@+id/setSportSpinner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </Spinner>
 
@@ -40,11 +40,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/select_capacity"
-        android:textSize="18sp" />
+        android:textSize="22sp"
+        android:textColor="@color/grayLight"/>
 
     <Spinner
-        android:id="@+id/size_list"
-        android:layout_width="wrap_content"
+        android:id="@+id/setSizeSpinner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </Spinner>
 
@@ -53,15 +54,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/start_time"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"/>
+        android:textSize="22sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/grayLight"/>
 
     <Button
         android:id="@+id/SelectStartTimeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/silver"
+        android:background="@color/selectButton"
         android:text="@string/select_start_time"
         android:textSize="16sp"
         android:textColor="@android:color/background_light" />
@@ -71,37 +73,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/end_time"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"/>
+        android:textSize="22sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/grayLight"/>
 
     <Button
         android:id="@+id/SelectEndTimeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/silver"
-        android:text="@string/select_start_time"
+        android:background="@color/selectButton"
+        android:text="@string/select_end_time"
         android:textSize="16sp"
         android:textColor="@android:color/background_light" />
-
 
     <!-- Select Location -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/location"
-        android:textSize="18sp"/>
+        android:text="@string/enter_location"
+        android:textSize="22sp"
+        android:textColor="@color/grayLight"/>
 
-    <Button
-        android:id="@+id/locationButton"
+    <!-- Enter Location here -->
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/silver"
-        android:text="@string/select_location"
-        android:textSize="16sp"
-        android:textColor="@android:color/background_light" />
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:id="@+id/field_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/location"
+            android:textColor="@color/white"
+            android:maxLines="1"/>
+    </android.support.design.widget.TextInputLayout>
+
 
 
     <!-- Add Game -->
@@ -115,8 +125,9 @@
             android:id="@+id/createGameButton"
             android:layout_width="120dp"
             android:layout_height="40dp"
-            android:background="@color/silver"
+            android:background="@color/greenButton"
             android:text="@string/add_game"
+            android:layout_gravity="bottom|center_horizontal"
             android:textColor="@android:color/background_light"
             android:textSize="16sp"
             android:layout_marginRight="10dp"/>
@@ -124,6 +135,7 @@
             android:id="@+id/cancelGameButton"
             android:layout_width="120dp"
             android:layout_height="40dp"
+            android:layout_gravity="bottom|center_horizontal"
             android:background="@color/warningRed"
             android:text="@string/cancel"
             android:textColor="@android:color/background_light"

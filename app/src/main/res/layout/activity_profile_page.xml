@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.ProfilePage"
-    android:background="@android:color/holo_blue_bright"
+    android:background="@color/startBlue"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -27,24 +27,25 @@
                 android:layout_height="120dp"
                 android:layout_gravity="center"
                 android:paddingTop="10dp"
-                android:src="@drawable/youngtiger"
+                android:src="@drawable/profile_icon"
                 app:civ_border_color="#FFFFFF"
                 app:civ_border_width="2dp" />
 
             <!-- Username -->
             <TextView
+                android:id="@+id/displayName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="Dumb Taiga"
-                android:textColor="@color/titleGreen"
-                android:textSize="21sp"
+                android:text="@string/username"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="25sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
 
-        <!-- Social Info -->
+        <!--
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="90dp"
@@ -60,7 +61,6 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <!-- Games -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -85,7 +85,6 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Followers -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -110,7 +109,6 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Following -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -138,6 +136,7 @@
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
+        -->
 
     </RelativeLayout>
 
@@ -148,7 +147,7 @@
         android:orientation="vertical"
         android:layout_gravity="center">
 
-        <!-- Follow -->
+        <!-- Follow
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -166,6 +165,7 @@
                 android:text="@string/follow">
             </Button>
         </LinearLayout>
+         -->
 
 
         <!-- Email -->
@@ -175,24 +175,28 @@
             android:paddingRight="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="25dp">
+            android:paddingLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/ic_email_black_24dp"/>
             <TextView
+                android:id="@+id/email"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="20dp"
                 android:paddingRight="20dp"
-                android:text="taigabiomeworstbiome@gmail.com"
+                android:textSize="20dp"
+                android:text="@string/email"
                 android:paddingLeft="20dp" />
         </LinearLayout>
 
 
-        <!-- Location -->
+        <!-- Location
         <LinearLayout
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
@@ -212,12 +216,13 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="20dp"
                 android:paddingRight="20dp"
-                android:text="Bumblefuck"
+                android:text="@string/location"
                 android:paddingLeft="20dp" />
         </LinearLayout>
+         -->
 
 
-        <!-- Add to Group -->
+        <!-- Add to Group
         <LinearLayout
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
@@ -240,9 +245,9 @@
                 android:paddingRight="20dp"
                 android:text="Add To Group"/>
         </LinearLayout>
+         -->
 
-
-        <!-- Show Comments -->
+        <!-- Show Comments
         <LinearLayout
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
@@ -265,32 +270,37 @@
                 android:paddingRight="20dp"
                 android:text="Show All Comments"/>
         </LinearLayout>
-
+         -->
 
         <!-- Edit Profile -->
         <LinearLayout
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingStart="25dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp">
+            <!-- Edit -->
+            <Button
                 android:id="@+id/edit_info_button"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/ic_edit_black_24dp"/>
-            <TextView
-                android:id="@+id/edit_info_text"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/edit_profile"/>
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/greenButton"
+                android:text="@string/edit"
+                android:textColor="@android:color/background_light"
+                android:textSize="16sp"
+                android:layout_marginRight="10dp"/>
+            <!-- Back -->
+            <Button
+                android:id="@+id/back_button"
+                android:layout_width="120dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_height="40dp"
+                android:background="@color/warningRed"
+                android:text="@string/back"
+                android:textColor="@android:color/background_light"
+                android:textSize="16sp" />
         </LinearLayout>
         </LinearLayout>
     </LinearLayout>
