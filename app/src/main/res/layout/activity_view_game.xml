@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    android:background="@color/startBlue"
+    tools:context=".Activities.ViewGame"
+    android:orientation="vertical">
+
+
+    <!-- Sport Name -->
+    <TextView
+        android:id="@+id/gameName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name of Game"
+        android:textSize="38sp"
+        android:layout_marginBottom="30dp"
+        android:textColor="@color/titleGreen"/>
+
+
+    <!-- Sport -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sport"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/sportName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="name of sport"/>
+
+
+    <!-- Host -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/host"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/hostName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="name of host"/>
+
+
+    <!-- Start Time -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_time"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/startTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="time game starts" />
+
+
+    <!-- Location -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/location"
+        android:textSize="18sp"/>
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/gameOnMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <!-- Join Game -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+        <Button
+            android:id="@+id/joinGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@color/loginGreen"
+            android:text="@string/join_game"
+            android:textColor="@android:color/background_light" />
+    </RelativeLayout>
+
+</LinearLayout>

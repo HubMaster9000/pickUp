@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile_page"
-    android:background="@color/graylight"
+    tools:context=".Activities.ProfilePage"
+    android:background="@color/startBlue"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -14,39 +14,48 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:background="@drawable/gradientbackground"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/youngtiger" />
+            <!-- Profile Picture -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView_account_profile"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:paddingTop="10dp"
+                android:src="@drawable/profile_icon"
+                app:civ_border_color="#FFFFFF"
+                app:civ_border_width="2dp" />
 
+            <!-- Username -->
             <TextView
+                android:id="@+id/displayName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="Dumb Taiga"
-                android:textColor="#fff"
-                android:textSize="21sp"
+                android:text="@string/username"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="25sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
+
+        <!--
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="65dp"
+            android:layout_height="90dp"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="160dp">
 
             <LinearLayout
+                android:baselineAligned="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
@@ -63,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Games"
+                        android:text="@string/games"
                         android:textSize="20sp" />
 
                     <TextView
@@ -71,7 +80,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:text="69"
-                        android:textColor="@color/startblue"
+                        android:textColor="@color/startBlue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -87,7 +96,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Followers"
+                        android:text="@string/followers"
                         android:textSize="20sp" />
 
                     <TextView
@@ -95,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:text="0"
-                        android:textColor="@color/startblue"
+                        android:textColor="@color/startBlue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -111,7 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Following"
+                        android:text="@string/following"
                         android:textSize="20sp" />
 
                     <TextView
@@ -119,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:text="123"
-                        android:textColor="@color/startblue"
+                        android:textColor="@color/startBlue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -127,39 +136,75 @@
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
+        -->
 
     </RelativeLayout>
 
+    <!-- Body -->
     <LinearLayout
         android:layout_width="360dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp">
+        android:layout_gravity="center">
+
+        <!-- Follow
         <LinearLayout
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+            <Button
+                android:id="@+id/follow_button"
+                android:textColor="#fff"
+                android:background="@drawable/buttongradient"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/follow">
+            </Button>
+        </LinearLayout>
+         -->
+
+
+        <!-- Email -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingStart="25dp"
+            android:paddingRight="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
             <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/ic_email_black_24dp"/>
             <TextView
+                android:id="@+id/email"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:text="taigabiomeworstbiome@gmail.com"/>
+                android:paddingStart="20dp"
+                android:paddingRight="20dp"
+                android:textSize="20dp"
+                android:text="@string/email"
+                android:paddingLeft="20dp" />
         </LinearLayout>
 
+
+        <!-- Location
         <LinearLayout
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
+            android:paddingStart="25dp"
+            android:paddingRight="25dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingLeft="25dp">
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
@@ -169,14 +214,21 @@
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:text="Bumblefuck"/>
+                android:paddingStart="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/location"
+                android:paddingLeft="20dp" />
         </LinearLayout>
+         -->
 
+
+        <!-- Add to Group
         <LinearLayout
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
+            android:paddingStart="25dp"
             android:paddingLeft="25dp"
+            android:paddingRight="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -188,14 +240,20 @@
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="20dp"
                 android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:text="Add To Group"/>
         </LinearLayout>
+         -->
 
+        <!-- Show Comments
         <LinearLayout
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
+            android:paddingStart="25dp"
             android:paddingLeft="25dp"
+            android:paddingRight="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -207,37 +265,42 @@
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="20dp"
                 android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:text="Show All Comments"/>
         </LinearLayout>
+         -->
 
+        <!-- Edit Profile -->
         <LinearLayout
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
-            android:paddingLeft="25dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/ic_edit_black_24dp"/>
-            <TextView
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:text="Edit Info"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp">
+            <!-- Edit -->
+            <Button
+                android:id="@+id/edit_info_button"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/greenButton"
+                android:text="@string/edit"
+                android:textColor="@android:color/background_light"
+                android:textSize="16sp"
+                android:layout_marginRight="10dp"/>
+            <!-- Back -->
+            <Button
+                android:id="@+id/back_button"
+                android:layout_width="120dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_height="40dp"
+                android:background="@color/warningRed"
+                android:text="@string/back"
+                android:textColor="@android:color/background_light"
+                android:textSize="16sp" />
+        </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-    <Button
-        android:textColor="#fff"
-        android:background="@drawable/buttongradient"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Follow Me"/>
-
-</LinearLayout>

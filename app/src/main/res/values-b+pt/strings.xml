@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">Sports?</string>
+    <string name="name">Nome</string>
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="login">Entrar</string>
+    <string name="title_activity_home">Inicio</string>
+    <string name="sign_up">Registrar</string>
+    <string name="no_account">Não tem uma conta?</string>
+    <string name="title_activity_available__games">Available_Games</string>
+    <string-array name="all_sports">
+        <item>Todos os Esportes</item>
+        <item>Futebol</item>
+        <item>Futebol Americano</item>
+        <item>Ultimate Frisbee</item>
+        <item>Basquetebol</item>
+        <item>Lacrosse</item>
+        <item>Voleibol</item>
+        <item>Spikeball</item>
+        <item>Tênis</item>
+    </string-array>
+    <string-array name="all_distances">
+        <item>Qualquer Distância</item>
+        <item>0 – 1 milhas</item>
+        <item>1 – 3 milhas</item>
+        <item>3 – 10 milhas</item>
+        <item>10+ milhas</item>
+    </string-array>
+    <string-array name="all_sizes">
+        <item>100</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string name="already_have_account">Já tem uma conta?</string>
+    <string name="title_activity_profile_page">profile_page</string>
+    <string name="title_activity_edit_profile">edit_profile</string>
+    <string name="title_activity_navigation__drawer">Navigation_Drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="action_settings">Configurações</string>
+    <string name="error_message_name">Digite o nome completo</string>
+    <string name="error_message_email">Digite o email válido</string>
+    <string name="error_message_password">Digite a senha</string>
+    <string name="success_message">Registro bem sucedido</string>
+    <string name="error_email_exists">Email já existe</string>
+    <string name="error_password_match">Senhas não combinam</string>
+    <string name="error_valid_email_password">Email ou senha incorretos</string>
+    <string name="text_hello">Olá,</string>
+    <string name="title_activity_maps">Mapa</string>
+    <string name="web_client_id">887608161531-6qhoa2v143ggji2dcrk4pi02f4c37t3a.apps.googleusercontent.com</string>
+    <string name="edit_profile">Editar Perfil</string>
+    <string name="select_sport">Selecione um esporte</string>
+    <string name="save">Savar</string>
+    <string name="username">Usuário</string>
+    <string name="location">Localização</string>
+    <string name="select_location">Selecione um local</string>
+    <string name="start_time">Hora de início</string>
+    <string name="end_time">Hora que termina</string>
+    <string name="select_start_time">Selecione uma hora de início</string>
+    <string name="select_end_time">Selecione um horário de término</string>
+    <string name="add_game">Adicionar Jogo</string>
+    <string name="create_game">Crie um novo jogo</string>
+    <string name="games">Jogos</string>
+    <string name="followers">Seguidores</string>
+    <string name="following">Seguido</string>
+    <string name="sport">Esporte</string>
+    <string name="join_game">Entrar no jogo</string>
+    <string name="leave_game">Deixar o jogo</string>
+    <string name="follow">Segue</string>
+    <string name="host">Anfitrião</string>
+    <string name="remind_games">Lembre-me de jogos:</string>
+    <string name="my_games">Meus Jogos</string>
+    <string name="cancel">Cancelar</string>
+    <string name="players">Jogadoras</string>
+    <string name="capacity">Capacidade</string>
+    <string name="select_capacity">Selecione o tamanho do jogo</string>
+    <string name="title_activity_maps_ii">Mapa</string>
+    <string name="enter_location">Entre no Local do Jogo:</string>
+    <string name="edit">Editar</string>
+    <string name="back">Atrás</string>
+</resources>

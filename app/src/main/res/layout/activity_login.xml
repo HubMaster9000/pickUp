@@ -1,97 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/light_blue_background"
-    tools:context=".Login">
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    android:background="@color/startBlue"
+    tools:context=".Activities.Login"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="95dp"
-        android:text="@string/app_name"
-        android:textColor="#bef183"
-        android:textSize="38sp" />
+
+    <!-- Logo -->
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/transparent_app_icon" />
+
 
     <!-- Enter email here -->
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="213dp"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutEmail"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="202dp"
-        android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:textColor="@android:color/holo_blue_bright"
-        android:background="@null" />
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:id="@+id/field_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:maxLines="1"/>
+    </android.support.design.widget.TextInputLayout>
+
 
     <!-- Enter Password here -->
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="213dp"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayoutPassword"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:textColor="@android:color/holo_blue_bright"
-        android:background="@null" />
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:id="@+id/field_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:maxLines="1"/>
+    </android.support.design.widget.TextInputLayout>
+
 
     <!-- Login Button -->
     <Button
-        android:id="@+id/loginButton"
-        android:layout_width="213dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="165dp"
-        android:background="#8bc34a"
+        android:id="@+id/emailSignInButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@color/loginGreen"
         android:text="@string/login"
-        android:textColor="@android:color/background_light" />
+        android:textColor="@android:color/background_light"
+        android:textSize="16sp" />
 
-    <!-- Google Login Button -->
+    <!-- Google Login Button-->
     <com.google.android.gms.common.SignInButton
-        android:id="@+id/googleLoginButton"
-        android:layout_width="213dp"
-        android:layout_height="38dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="117dp" />
+        android:id="@+id/googleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
 
-    <!-- Sign Up Link -->
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:gravity="bottom|center"
-        android:layout_marginBottom="5dp">
-
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
+        <!-- Sign Up Link -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="85dp"
+            android:layout_gravity="bottom|start"
+            android:layout_marginEnd="10dp"
             android:text="@string/no_account"
-            android:textColor="@android:color/holo_blue_bright"
-            android:textSize="13sp" />
+            android:textSize="18sp"
+            android:layout_marginRight="10dp" />
 
         <TextView
-            android:id="@+id/signUp"
+            android:id="@+id/textViewLinkRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="97dp"
+            android:layout_gravity="bottom"
             android:text="@string/sign_up"
-            android:textColor="#bef183"
-            android:textSize="13sp" />
-    </RelativeLayout>
-</RelativeLayout>
+            android:textColor="@color/titleGreen"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

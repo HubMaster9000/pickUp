@@ -4,8 +4,16 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ffffff</color>
 
-    <color name="graylight">#fafafa</color>
-    <color name="startblue">#09c6df</color>
-    <color name="endblue">#0bcce6</color>
+    <color name="grayLight">#fafafa</color>
+    <color name="startBlue">#0CAADC</color>
+    <color name="endBlue">#0bcce6</color>
     <color name="colorAccent2">#FF4081</color>
+    <color name="loginGreen">#8bc34a</color>
+    <color name="titleGreen">#45CB85</color>
+    <color name="white">#FFFFFF</color>
+    <color name="silver">#BEBEBE</color>
+    <color name="completedGreen">#2ABF52</color>
+    <color name="warningRed">#EA526F</color>
+    <color name="greenButton">#8bc34a</color>
+    <color name="selectButton">#1481BA</color>
 </resources>

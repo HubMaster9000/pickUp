@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">Sports?</string>
+    <string name="name">Nombre</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Login</string>
+    <string name="title_activity_home">Inicio</string>
+    <string name="sign_up">Regístrate</string>
+    <string name="no_account">¿No tienes una cuenta?</string>
+    <string name="title_activity_available__games">Available_Games</string>
+    <string-array name="all_sports">
+        <item>Todos los Deportes</item>
+        <item>Fútbol</item>
+        <item>Fútbol Americano</item>
+        <item>Ultimate Frisbee</item>
+        <item>Baloncesto</item>
+        <item>Lacrosse</item>
+        <item>Voleibol</item>
+        <item>Spikeball</item>
+        <item>Tenis</item>
+    </string-array>
+    <string-array name="all_distances">
+        <item>Cualquier Distancias</item>
+        <item>0 – 1 millas</item>
+        <item>1 – 3 millas</item>
+        <item>3 – 10 millas</item>
+        <item>10+ millas</item>
+    </string-array>
+    <string-array name="all_sizes">
+        <item>100</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+    <string name="already_have_account">¿Ya tienes una cuenta?</string>
+    <string name="title_activity_profile_page">profile_page</string>
+    <string name="title_activity_edit_profile">edit_profile</string>
+    <string name="title_activity_navigation__drawer">Navigation_Drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="action_settings">Configuraciones</string>
+    <string name="error_message_name">Ingrese el nombre completo</string>
+    <string name="error_message_email">Ingrese un email valido</string>
+    <string name="error_message_password">Introducir la contraseña</string>
+    <string name="success_message">Registro exitoso</string>
+    <string name="error_email_exists">El Email ya existe</string>
+    <string name="error_password_match">Las contraseñas no coinciden</string>
+    <string name="error_valid_email_password">Correo o contraseña equivocada</string>
+    <string name="text_hello">Hola,</string>
+    <string name="title_activity_maps">Mapa</string>
+    <string name="web_client_id">887608161531-6qhoa2v143ggji2dcrk4pi02f4c37t3a.apps.googleusercontent.com</string>
+    <string name="edit_profile">Editar Perfil</string>
+    <string name="select_sport">Selecciona un deporte</string>
+    <string name="save">Salvar</string>
+    <string name="username">Usuario</string>
+    <string name="location">Ubicación</string>
+    <string name="select_location">Selecciona una ubicación</string>
+    <string name="start_time">Hora de Inicio</string>
+    <string name="end_time">Hora de Finalización</string>
+    <string name="select_start_time">Selecciona una Hora de Inicio</string>
+    <string name="select_end_time">Seleccione una hora de finalización</string>
+    <string name="add_game">Agregar Juego</string>
+    <string name="create_game">Crea un nuevo juego</string>
+    <string name="games">Juegos</string>
+    <string name="followers">Seguidores</string>
+    <string name="following">Siguiendo</string>
+    <string name="sport">Deporte</string>
+    <string name="join_game">Juntar el Juego</string>
+    <string name="leave_game">Abandonar el Juego</string>
+    <string name="follow">Seguir</string>
+    <string name="host">Anfitrión</string>
+    <string name="remind_games">Recuérdame de Juegos:</string>
+    <string name="my_games">Mis Juegos</string>
+    <string name="cancel">Cancelar</string>
+    <string name="players">Jugadores</string>
+    <string name="capacity">Capacidad</string>
+    <string name="select_capacity">Seleccionar tamaño del juego</string>
+    <string name="title_activity_maps_ii">Mapa</string>
+    <string name="enter_location">Introduce la Ubicación del Juego:</string>
+    <string name="edit">Editar</string>
+    <string name="back">Atrás</string>
+</resources>
